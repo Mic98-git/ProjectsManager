@@ -1,5 +1,6 @@
 package it.uniroma3.siw.sping.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -15,7 +16,7 @@ public class Tag {
 	private String description;
 	
 	@ManyToMany
-	private List<Task> tasks;
+	private List<Task> tasks = new ArrayList<>();
 
 	public String getName() {
 		return name;

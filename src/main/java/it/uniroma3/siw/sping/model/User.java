@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -29,6 +30,7 @@ public class User {
 	private List<Project> visibleProjects = new ArrayList<>();
 	
 	@OneToMany
+	@JoinColumn(name = "owner_id")
 	private List<Project> projects = new ArrayList<>();
 	
 	
