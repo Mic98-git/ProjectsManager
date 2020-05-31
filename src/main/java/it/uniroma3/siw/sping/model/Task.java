@@ -25,6 +25,10 @@ public class Task {
 	
 	@ManyToMany(mappedBy = "tasks")
 	private List<Tag> tags = new ArrayList<>();
+
+	@OneToMany
+	@JoinColumn(name = "task_id")
+	private List<Comment> comments = new ArrayList<>();
 	
 	public Long getId() {
 		return id;
@@ -82,9 +86,6 @@ public class Task {
 		this.comments = comments;
 	}
 
-	@OneToMany
-	@JoinColumn(name = "task_id")
-	private List<Comment> comments = new ArrayList<>();
 	
 	
 

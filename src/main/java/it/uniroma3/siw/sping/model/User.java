@@ -99,6 +99,9 @@ public class User {
 		this.visibleProjects = visibleProjects;
 	}
 
+	@OneToMany
+	@JoinColumn(name = "task_id")
+	private List<Comment> comments = new ArrayList<>();
 	public List<Project> getProjects() {
 		return projects;
 	}
