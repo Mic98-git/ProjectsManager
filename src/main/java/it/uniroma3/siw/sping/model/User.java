@@ -32,7 +32,7 @@ public class User {
 	private List<Project> visibleProjects = new ArrayList<>();
 	
 	@OneToMany
-	@JoinColumn(name="proprietary_id")
+	@JoinColumn(name = "owner_id")
 	private List<Project> projects = new ArrayList<>();
 	
 	

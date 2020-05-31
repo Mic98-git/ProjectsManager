@@ -22,8 +22,10 @@ public class Task {
 
 	@ManyToOne
 	private Project project;
-	@ManyToMany
+	
+	@ManyToMany(mappedBy = "tasks")
 	private List<Tag> tags = new ArrayList<>();
+	
 	@OneToMany
 	@JoinColumn(name = "task_id")
 	private List<Comment> comments = new ArrayList<>();

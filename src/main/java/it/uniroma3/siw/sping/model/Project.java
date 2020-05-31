@@ -1,12 +1,14 @@
 package it.uniroma3.siw.sping.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -22,13 +24,14 @@ public class Project {
 	private LocalDateTime dateOfStart;
 	
 	@OneToMany
-	private List<Tag> tags;
+	@JoinColumn(name = "project_id")
+	private List<Tag> tags = new ArrayList<>();
 	
-	@OneToMany
-	private List<Task> projectTasks;
+	@OneToMany(mappedBy = "project")
+	private List<Task> projectTasks = new ArrayList<>();
 	
-	@ManyToMany
-	private List<User> visibleUsers;
+	@ManyToMany(mappedBy = "visibleProjects")
+	private List<User> visibleUsers = new ArrayList<>();
 
 	public long getId() {
 		return id;
