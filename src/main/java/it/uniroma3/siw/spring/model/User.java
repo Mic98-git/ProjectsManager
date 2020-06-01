@@ -38,6 +38,10 @@ public class User {
 	@JoinColumn(name = "owner_id")
 	private List<Project> projects = new ArrayList<>();
 
+	@OneToMany
+	@JoinColumn(name = "task_id")
+	private List<Comment> comments = new ArrayList<>();
+
 	public Long getId() {
 		return id;
 	}
@@ -102,9 +106,6 @@ public class User {
 		this.visibleProjects = visibleProjects;
 	}
 
-	@OneToMany
-	@JoinColumn(name = "task_id")
-	private List<Comment> comments = new ArrayList<>();
 	public List<Project> getProjects() {
 		return projects;
 	}
