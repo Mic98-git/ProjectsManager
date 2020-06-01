@@ -1,4 +1,4 @@
-package it.uniroma3.siw.sping.model;
+package it.uniroma3.siw.spring.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
