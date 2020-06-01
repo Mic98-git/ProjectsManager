@@ -21,7 +21,7 @@ public class Project {
 	
 	private String name;
 	
-	private LocalDateTime dateOfStart;
+	private LocalDateTime dateStart = LocalDateTime.now();
 	
 	@OneToMany
 	@JoinColumn(name = "project_id")
@@ -50,11 +50,11 @@ public class Project {
 	}
 
 	public LocalDateTime getDateOfStart() {
-		return dateOfStart;
+		return dateStart;
 	}
 
 	public void setDateOfStart(LocalDateTime dateOfStart) {
-		this.dateOfStart = dateOfStart;
+		this.dateStart = dateOfStart;
 	}
 
 	public List<Tag> getTags() {
