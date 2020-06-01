@@ -12,8 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="users")
 public class User {
 	
 	@Id
@@ -28,8 +30,8 @@ public class User {
 	private String username;
 	private String password;
 	
-	@ManyToOne
-	private Role role;
+//	@ManyToOne
+//	private Role role;
 	
 	@ManyToMany
 	private List<Project> visibleProjects = new ArrayList<>();
@@ -90,13 +92,13 @@ public class User {
 		this.password = password;
 	}
 
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
+//	public Role getRole() {
+//		return role;
+//	}
+//
+//	public void setRole(Role role) {
+//		this.role = role;
+//	}
 
 	public List<Project> getVisibleProjects() {
 		return visibleProjects;
