@@ -1,4 +1,4 @@
-package it.uniroma3.siw.sping.model;
+package it.uniroma3.siw.spring.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class Project {
 	
 	private String name;
 	
-	private LocalDateTime dateStart = LocalDateTime.now();
+	private LocalDateTime dateOfStart;
 	
 	@OneToMany
 	@JoinColumn(name = "project_id")
@@ -50,11 +50,11 @@ public class Project {
 	}
 
 	public LocalDateTime getDateOfStart() {
-		return dateStart;
+		return dateOfStart;
 	}
 
 	public void setDateOfStart(LocalDateTime dateOfStart) {
-		this.dateStart = dateOfStart;
+		this.dateOfStart = dateOfStart;
 	}
 
 	public List<Tag> getTags() {
