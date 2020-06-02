@@ -4,12 +4,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -27,11 +30,15 @@ public class Project {
 	@JoinColumn(name = "project_id")
 	private List<Tag> tags = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "project")
+	@OneToMany
+	@JoinColumn(name = "project_id")
 	private List<Task> projectTasks = new ArrayList<>();
 	
-	@ManyToMany(mappedBy = "visibleProjects")
-	private List<User> visibleUsers = new ArrayList<>();
+	@ManyToMany
+	private List<User> members = new ArrayList<>();
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	private User owner;
 
 	public long getId() {
 		return id;
@@ -73,11 +80,13 @@ public class Project {
 		this.projectTasks = projectTasks;
 	}
 
-	public List<User> getVisibleUsers() {
-		return visibleUsers;
+	public List<User> getMembers() {
+		return members;
 	}
 
-	public void setVisibleUsers(List<User> visibleUsers) {
-		this.visibleUsers = visibleUsers;
+	public void setMembers(List<User> members) {
+		this.members = members;
 	}
+
+	
 }

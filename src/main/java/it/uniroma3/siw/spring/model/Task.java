@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 @Entity
 public class Task {
@@ -20,12 +24,20 @@ public class Task {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@Column(nullable=false,length=100)
 	private String name;
+	
+	@Column
 	private String description;
-	private LocalDateTime creationDate = LocalDateTime.now();
-
-	@ManyToOne
-	private Project project;
+	
+	@Column(nullable=false)
+	private boolean completed;
+	
+	@Column(updatable=false,nullable=false)
+	private LocalDateTime creationTimestamp = LocalDateTime.now();
+	
+	@Column(nullable=false)
+	private LocalDateTime lastUpdateTimestamp;
 	
 	@ManyToMany(mappedBy = "tasks")
 	private List<Tag> tags = new ArrayList<>();
@@ -33,6 +45,25 @@ public class Task {
 	@OneToMany
 	@JoinColumn(name = "task_id")
 	private List<Comment> comments = new ArrayList<>();
+	
+	public Task() { }
+	
+	public Task(String name,String description,boolean completed) {
+		this.name = name;
+		this.description = description;
+		this.completed = completed;
+	}
+	
+	@PrePersist
+	protected void onPersist() {
+		this.creationTimestamp = LocalDateTime.now();
+		this.lastUpdateTimestamp = LocalDateTime.now();
+	}
+	
+	@PreUpdate
+	protected void onUpdate() {
+		this.lastUpdateTimestamp = LocalDateTime.now();
+	}
 	
 	public Long getId() {
 		return id;
@@ -58,22 +89,6 @@ public class Task {
 		this.description = description;
 	}
 
-	public LocalDateTime getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(LocalDateTime creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
-
 	public List<Tag> getTags() {
 		return tags;
 	}
@@ -90,7 +105,30 @@ public class Task {
 		this.comments = comments;
 	}
 
-	
-	
+	public boolean isCompleted() {
+		return completed;
+	}
 
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
+	}
+
+	public LocalDateTime getCreationTimestamp() {
+		return creationTimestamp;
+	}
+
+	public void setCreationTimestamp(LocalDateTime creationTimestamp) {
+		this.creationTimestamp = creationTimestamp;
+	}
+
+	public LocalDateTime getLastUpdateTimestamp() {
+		return lastUpdateTimestamp;
+	}
+
+	public void setLastUpdateTimestamp(LocalDateTime lastUpdateTimestamp) {
+		this.lastUpdateTimestamp = lastUpdateTimestamp;
+	}
+	
+	
+	
 }
