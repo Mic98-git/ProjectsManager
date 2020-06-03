@@ -21,6 +21,14 @@ public class CommentController {
 	@Autowired
 	private ProjectService projectService;
 	
-	
+	@PostMapping("/{projectId}/task/{taskId}/addcomment")
+	public String addComment(@RequestBody Comment comment,Long projectId,Long taskId) {
+		Task task = taskService.getTask(taskId);
+		task.getComments().add(comment);
+		taskService.saveTask(task);
+		commentService.saveComment(comment); // FIXME Non ha l'utente
+		
+		return "TODO"; // TODO
+	}
 
 }

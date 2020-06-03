@@ -68,13 +68,5 @@ public class TaskController {
 		// reindirizza ai miei progetti
 		return "redirect:/projects/my";
 	}
-	
-	@PostMapping("/{projectId}/task/{taskId}/addcomment")
-	public String addComment(@RequestBody Comment comment,Long projectId,Long taskId) {
-		Task task = taskService.getTask(taskId);
-		task.getComments().add(comment);
-		taskService.saveTask(task);
 		
-		return "TODO"; // TODO
-	}
 }
