@@ -136,5 +136,21 @@ public class User {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
+
+	public LocalDateTime getCreationTimestamp() {
+		return creationTimestamp;
+	}
+
+	public LocalDateTime getLastUpdateTimestamp() {
+		return lastUpdateTimestamp;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", lastname=" + lastname + ", creationTimestamp="
+				+ creationTimestamp + ", lastUpdateTimestamp=" + lastUpdateTimestamp + ", visibleProjects="
+				+ visibleProjects + ", ownedProjects=" + ownedProjects + ", comments=" + comments + "]";
+	}
+		
 	
 }
