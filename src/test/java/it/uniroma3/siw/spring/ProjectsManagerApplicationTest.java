@@ -2,6 +2,8 @@ package it.uniroma3.siw.spring;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -58,11 +60,34 @@ class ProjectsManagerApplicationTest {
 		User user1Update = new User("Maria","Rossi");
 		user1Update.setId(user1.getId());
 		user1Update = userService.saveUser(user1Update);
-		assertEquals(user1.getId().longValue(), 1L);
-		assertEquals(user1.getName(),"Maria");
+		assertEquals(user1Update.getId().longValue(), 1L);
+		assertEquals(user1Update.getName(),"Maria");
 		
-//		Project project1 = new Project("testProject1","è il test proj 1");
-		
+//		Project project1 = new Project("testproject1","è il test project 1"); // FIXME
+//		project1.setOwner(user1Update);
+//		project1 = projectService.saveProject(project1);
+//		assertEquals(project1.getOwner(),user1Update);
+//		assertEquals(project1.getName(),"testproject1");
+//		
+//		Project project2 = new Project("testproject2","è il test project 2"); // FIXME
+//		project2.setOwner(user2Update);
+//		project2 = projectService.saveProject(project2);
+//		assertEquals(project1.getOwner(),user1Update);
+//		assertEquals(project1.getName(),"testproject2");
+//		
+//		project1 = projectService.shareProjectWithUser(project1,user2);
+//		List<Project> projects = projectRepository.findByOwner(user1Update);
+//		assertEquals(projects.size(),2);
+//		assertEquals(projects.get(0),project1);
+//		assertEquals(projects.get(1),project2);
+//		
+//		List<Project> projectsVisibleByUser2 = projectRepository.findByMembers(user2);
+//		assertEquals(projectsVisibleByUser2.size(),1);
+//		assertEquals(projectsVisibleByUser2.get(0),project1);
+//		
+//		List<User> project1Members = userRepository.findByVisibleProjects(project1);
+//		assertEquals(project1Members.get(0),user2);
+//		assertEquals(project1Members.size(),1);
 	}
 
 }
