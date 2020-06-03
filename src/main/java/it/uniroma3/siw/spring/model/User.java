@@ -37,16 +37,7 @@ public class User {
 	
 	@Column(nullable=false)
 	private LocalDateTime lastUpdateTimestamp;
-	
-	@Column(unique=true,nullable=false,length=100)
-	private String username;
-	
-	@Column(nullable=false,length=100)
-	private String password;
-	
-//	@ManyToOne
-//	private Role role;
-	
+			
 	@ManyToMany(mappedBy="members")
 	private List<Project> visibleProjects;
 	
@@ -63,12 +54,10 @@ public class User {
 		this.comments = new ArrayList<>();
 	}
 	
-	public User(String name, String lastname, String username, String password) {
+	public User(String name, String lastname) {
 		this();
 		this.name = name;
 		this.lastname = lastname;
-		this.username = username;
-		this.password = password;
 	}
 
 	@PrePersist
@@ -107,31 +96,7 @@ public class User {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-//	public Role getRole() {
-//		return role;
-//	}
-//
-//	public void setRole(Role role) {
-//		this.role = role;
-//	}
-
+	
 	public List<Project> getVisibleProjects() {
 		return visibleProjects;
 	}
