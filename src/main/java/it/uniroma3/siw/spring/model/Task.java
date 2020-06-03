@@ -33,21 +33,25 @@ public class Task {
 	private boolean completed;
 	
 	@Column(updatable=false,nullable=false)
-	private LocalDateTime creationTimestamp = LocalDateTime.now();
+	private LocalDateTime creationTimestamp;
 	
 	@Column(nullable=false)
 	private LocalDateTime lastUpdateTimestamp;
 	
-	@ManyToMany(mappedBy = "tasks" , cascade = CascadeType.REMOVE)
-	private List<Tag> tags = new ArrayList<>();
+	@ManyToMany(mappedBy = "tasks")
+	private List<Tag> tags;
 
 	@OneToMany (cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "task_id")
-	private List<Comment> comments = new ArrayList<>();
+	private List<Comment> comments;
 	
-	public Task() { }
+	public Task() {
+		this.tags = new ArrayList<>();
+		this.comments = new ArrayList<>();
+	}
 	
 	public Task(String name,String description,boolean completed) {
+		this();
 		this.name = name;
 		this.description = description;
 		this.completed = completed;
@@ -131,6 +135,4 @@ public class Task {
 	public void addTag(Tag t) {
 		this.tags.add(t);
 	}
-	
-	
 }

@@ -24,23 +24,17 @@ public class UserService {
 	public User getUser(Long id) {
 		return userRepository.findById(id).orElse(null);
 	}
-	
-	@Transactional
-	public User getUser(String username) {
-		return userRepository.findByUsername(username).orElse(null);
-	}
 		
-	
 	/** Servirà per aggiornare il profilo  
 	 * 
 	 * */
 	@Transactional
-	public User updateUserProfile(User user) {
+	public User saveUser(User user) {
 		return userRepository.save(user);
 	}
 	
 	@Transactional
-	public List<User> getAllUsers() {
+	public List<User> findAllUsers() {
 		List<User> users = new ArrayList<>();
 		userRepository.findAll().iterator().forEachRemaining(user -> users.add(user));
 		return users;
