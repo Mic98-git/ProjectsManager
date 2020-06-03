@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,10 +39,10 @@ public class User {
 	@Column(nullable=false)
 	private LocalDateTime lastUpdateTimestamp;
 			
-	@ManyToMany(mappedBy="members")
+	@ManyToMany(mappedBy="members",fetch=FetchType.LAZY)
 	private List<Project> visibleProjects;
 	
-	@OneToMany(cascade=CascadeType.REMOVE,mappedBy = "owner")
+	@OneToMany(cascade=CascadeType.REMOVE,mappedBy = "owner",fetch=FetchType.LAZY)
 	private List<Project> ownedProjects;
 
 	@OneToMany
