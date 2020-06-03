@@ -1,5 +1,8 @@
 package it.uniroma3.siw.spring.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +21,16 @@ public class UserService {
 	 * 
 	 * */
 	@Transactional
-	public User getUserById(Long id) {
+	public User getUser(Long id) {
 		return userRepository.findById(id).orElse(null);
 	}
+	
+	@Transactional
+	public User getUser(String username) {
+		return userRepository.findByUsername(username).orElse(null);
+	}
 		
+	
 	/** Servirà per aggiornare il profilo  
 	 * 
 	 * */
@@ -30,4 +39,10 @@ public class UserService {
 		return userRepository.save(user);
 	}
 	
+	@Transactional
+	public List<User> getAllUsers() {
+		List<User> users = new ArrayList<>();
+		userRepository.findAll().iterator().forEachRemaining(user -> users.add(user));
+		return users;
+	}
 }

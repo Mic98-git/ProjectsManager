@@ -1,5 +1,7 @@
 package it.uniroma3.siw.spring.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -14,16 +16,13 @@ public class TaskService {
 	private TaskRepository taskRepository;
 	
 	/** Aggiungi nuovo task a un progetto. L'oggetto progetto è già memorizzato nel task */
+	@Transactional
 	public Task saveTask(Task task) {
 		return this.taskRepository.save(task);
 	}
 	
-	/**  */
-	public Task updateTask(Task task) { // non richiamare delete e save, devo avere un UPDATE
-		return null;
-	}
-	
 	/* Cancellare un task */
+	@Transactional
 	public void deleteTask(Task task) {
 		this.taskRepository.delete(task);
 	}	
