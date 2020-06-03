@@ -2,6 +2,7 @@ package it.uniroma3.siw.spring.model;
 
 import java.time.LocalDateTime;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
@@ -44,14 +44,9 @@ public class User {
 	@OneToMany(cascade=CascadeType.REMOVE,mappedBy = "owner")
 	private List<Project> ownedProjects;
 
-	@OneToMany
-	@JoinColumn(name = "task_id")
-	private List<Comment> comments;
-	
 	public User() {
 		this.ownedProjects = new ArrayList<>();
 		this.visibleProjects = new ArrayList<>();
-		this.comments = new ArrayList<>();
 	}
 	
 	public User(String name, String lastname) {
@@ -128,13 +123,4 @@ public class User {
 	public void setLastUpdateTimeStamp(LocalDateTime lastUpdateTimeStamp) {
 		this.lastUpdateTimestamp = lastUpdateTimeStamp;
 	}
-
-	public List<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
-	
 }

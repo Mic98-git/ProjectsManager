@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,10 +38,10 @@ public class Task {
 	@Column(nullable=false)
 	private LocalDateTime lastUpdateTimestamp;
 	
-	@ManyToMany(mappedBy = "tasks")
+	@ManyToMany(mappedBy = "tasks" , cascade = CascadeType.REMOVE)
 	private List<Tag> tags = new ArrayList<>();
 
-	@OneToMany
+	@OneToMany (cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "task_id")
 	private List<Comment> comments = new ArrayList<>();
 	
@@ -127,6 +128,9 @@ public class Task {
 		this.lastUpdateTimestamp = lastUpdateTimestamp;
 	}
 	
+	public void addTag(Tag t) {
+		this.tags.add(t);
+	}
 	
 	
 }
