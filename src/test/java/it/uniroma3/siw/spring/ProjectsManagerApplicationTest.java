@@ -63,31 +63,31 @@ class ProjectsManagerApplicationTest {
 		assertEquals(user1Update.getId().longValue(), 1L);
 		assertEquals(user1Update.getName(),"Maria");
 		
-//		Project project1 = new Project("testproject1","è il test project 1"); // FIXME
-//		project1.setOwner(user1Update);
-//		project1 = projectService.saveProject(project1);
-//		assertEquals(project1.getOwner(),user1Update);
-//		assertEquals(project1.getName(),"testproject1");
-//		
-//		Project project2 = new Project("testproject2","è il test project 2"); // FIXME
-//		project2.setOwner(user2Update);
-//		project2 = projectService.saveProject(project2);
-//		assertEquals(project1.getOwner(),user1Update);
-//		assertEquals(project1.getName(),"testproject2");
-//		
-//		project1 = projectService.shareProjectWithUser(project1,user2);
-//		List<Project> projects = projectRepository.findByOwner(user1Update);
-//		assertEquals(projects.size(),2);
-//		assertEquals(projects.get(0),project1);
-//		assertEquals(projects.get(1),project2);
-//		
-//		List<Project> projectsVisibleByUser2 = projectRepository.findByMembers(user2);
-//		assertEquals(projectsVisibleByUser2.size(),1);
-//		assertEquals(projectsVisibleByUser2.get(0),project1);
-//		
-//		List<User> project1Members = userRepository.findByVisibleProjects(project1);
-//		assertEquals(project1Members.get(0),user2);
-//		assertEquals(project1Members.size(),1);
+		Project project1 = new Project("testproject1");
+		project1.setOwner(user1Update);
+		project1 = projectService.saveProject(project1);
+		assertEquals(project1.getOwner(),user1Update);
+		assertEquals(project1.getName(),"testproject1");
+		
+		Project project2 = new Project("testproject2");
+		project2.setOwner(user1Update);
+		project2 = projectService.saveProject(project2);
+		assertEquals(project2.getOwner(),user1Update);
+		assertEquals(project2.getName(),"testproject2");
+		
+		project1 = projectService.shareProjectWithUser(project1,user2);
+		List<Project> projects = projectRepository.findByOwner(user1Update);
+		assertEquals(projects.size(),2);
+		assertEquals(projects.get(0).getName(),project1.getName());
+		assertEquals(projects.get(1).getName(),project2.getName());
+		
+		List<Project> projectsVisibleByUser2 = projectRepository.findByMembers(user2);
+		assertEquals(projectsVisibleByUser2.size(),1);
+		assertEquals(projectsVisibleByUser2.get(0).getName(),project1.getName());
+		
+		List<User> project1Members = userRepository.findByVisibleProjects(project1);
+		assertEquals(project1Members.get(0).getName(),user2.getName());
+		assertEquals(project1Members.size(),1);
 	}
 
 }
