@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
@@ -22,28 +26,64 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@Column(nullable=false,length=100)
 	private String name;
+	
+	@Column(nullable=false,length=100)
 	private String lastname;
 	
-	private LocalDateTime creationDate = LocalDateTime.now();
+	@Column(updatable = false,nullable=false)
+	private LocalDateTime creationTimestamp;
 	
+	@Column(nullable=false)
+	private LocalDateTime lastUpdateTimestamp;
+	
+	@Column(unique=true,nullable=false,length=100)
 	private String username;
+	
+	@Column(nullable=false,length=100)
 	private String password;
 	
 //	@ManyToOne
 //	private Role role;
 	
-	@ManyToMany
-	private List<Project> visibleProjects = new ArrayList<>();
+	@ManyToMany(mappedBy="members")
+	private List<Project> visibleProjects;
 	
-	@OneToMany
-	@JoinColumn(name = "owner_id")
-	private List<Project> projects = new ArrayList<>();
+	@OneToMany(cascade=CascadeType.REMOVE,mappedBy = "owner")
+	private List<Project> ownedProjects;
 
 	@OneToMany
 	@JoinColumn(name = "task_id")
-	private List<Comment> comments = new ArrayList<>();
+	private List<Comment> comments;
+	
+	public User() {
+		this.ownedProjects = new ArrayList<>();
+		this.visibleProjects = new ArrayList<>();
+		this.comments = new ArrayList<>();
+	}
+	
+	public User(String name, String lastname, String username, String password) {
+		this();
+		this.name = name;
+		this.lastname = lastname;
+		this.username = username;
+		this.password = password;
+	}
 
+	@PrePersist
+	protected void onPersist() {
+		this.creationTimestamp = LocalDateTime.now();
+		this.lastUpdateTimestamp = LocalDateTime.now();
+	}
+	
+	@PreUpdate
+	protected void onUpdate() {
+		this.lastUpdateTimestamp = LocalDateTime.now();
+	}
+
+	// GETTERS AND SETTERS
+	
 	public Long getId() {
 		return id;
 	}
@@ -66,14 +106,6 @@ public class User {
 
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
-	}
-
-	public LocalDateTime getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(LocalDateTime creationDate) {
-		this.creationDate = creationDate;
 	}
 
 	public String getUsername() {
@@ -108,14 +140,36 @@ public class User {
 		this.visibleProjects = visibleProjects;
 	}
 
-	public List<Project> getProjects() {
-		return projects;
+	public List<Project> getOwnedProjects() {
+		return ownedProjects;
 	}
 
-	public void setProjects(List<Project> projects) {
-		this.projects = projects;
+	public void setOwnedProjects(List<Project> ownedProjects) {
+		this.ownedProjects = ownedProjects;
 	}
-	
-	
+
+	public LocalDateTime getCreationTimeStamp() {
+		return creationTimestamp;
+	}
+
+	public void setCreationTimeStamp(LocalDateTime creationTimeStamp) {
+		this.creationTimestamp = creationTimeStamp;
+	}
+
+	public LocalDateTime getLastUpdateTimeStamp() {
+		return lastUpdateTimestamp;
+	}
+
+	public void setLastUpdateTimeStamp(LocalDateTime lastUpdateTimeStamp) {
+		this.lastUpdateTimestamp = lastUpdateTimeStamp;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 	
 }
