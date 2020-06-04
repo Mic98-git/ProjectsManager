@@ -1,5 +1,7 @@
 package it.uniroma3.siw.spring.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,11 +26,10 @@ public class AuthenticationController {
 		return "registerUser";
 	}
 	
-	// FIXME Aggiungere Valid
 	@RequestMapping(value= {"/users/register"},method=RequestMethod.POST)
-	public String registerUser( @ModelAttribute("userForm") User user,
+	public String registerUser(@Valid @ModelAttribute("userForm") User user,
 			BindingResult userBindingResult,
-			@ModelAttribute("credentialsForm") Credentials credentials,
+			@Valid @ModelAttribute("credentialsForm") Credentials credentials,
 			BindingResult credentialsBindingResult,
 			Model model) {
 		
