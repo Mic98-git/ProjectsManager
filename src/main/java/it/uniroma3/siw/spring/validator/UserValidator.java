@@ -24,14 +24,14 @@ public class UserValidator implements Validator {
 		String lastName = user.getLastname().trim();
 		
 		if(firstName.isBlank())
-			errors.rejectValue("firstName", "required"); // FIXME Va bene firstName o devo mettere name e basta??
+			errors.rejectValue("name", "required"); // FIXME Va bene firstName o devo mettere name e basta??
 		else if(firstName.length() < MIN_NAME_LENGTH || firstName.length() > MAX_NAME_LENGTH)
-			errors.rejectValue("firstName", "size");
+			errors.rejectValue("name", "size");
 		
 		if(lastName.isBlank())
-			errors.rejectValue("lastName", "required"); // FIXME Va bene lastName o devo mettere lastname e basta??
+			errors.rejectValue("lastname", "required"); // FIXME Va bene lastName o devo mettere lastname e basta??
 		else if(lastName.length() < MIN_NAME_LENGTH || lastName.length() > MAX_NAME_LENGTH)
-			errors.rejectValue("lastName", "size");
+			errors.rejectValue("lastname", "size");
 	}
 
 }

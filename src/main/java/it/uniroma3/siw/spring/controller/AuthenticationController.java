@@ -46,7 +46,7 @@ public class AuthenticationController {
 		
 		this.userValidator.validate(user, userBindingResult);
 		this.credentialsValidator.validate(credentials, credentialsBindingResult);		
-		
+				
 		if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
 			credentials.setUser(user);
 			credentialsService.saveCredentials(credentials);
