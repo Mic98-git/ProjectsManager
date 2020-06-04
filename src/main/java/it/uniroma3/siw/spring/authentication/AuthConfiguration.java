@@ -28,17 +28,17 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 			
-			.antMatchers(HttpMethod.GET, "","","","").permitAll()
+			.antMatchers(HttpMethod.GET, "/","/index","/login","/users/register").permitAll()
 			
-			.antMatchers(HttpMethod.POST, "","","","").permitAll()
+			.antMatchers(HttpMethod.POST, "/login","/users/register").permitAll()
 			
-			.antMatchers(HttpMethod.GET, "","","","").hasAnyAuthority(Credentials.ADMIN_ROLE)
+			.antMatchers(HttpMethod.GET, "/admin").hasAnyAuthority(Credentials.ADMIN_ROLE)
 			
 			.anyRequest().authenticated()
 			
 			.and().formLogin()
 			
-			.defaultSuccessUrl("/projects/my")
+			.defaultSuccessUrl("/home")
 			
 			.and().logout()
 			

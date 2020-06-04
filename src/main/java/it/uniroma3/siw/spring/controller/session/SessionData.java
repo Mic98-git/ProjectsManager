@@ -38,7 +38,7 @@ public class SessionData {
 		Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserDetails loggedUserDetails = (UserDetails)obj;
 		
-		this.credentials = this.credentialsRepository.findByUsername(loggedUserDetails.getUsername()).get();
+		this.credentials = this.credentialsRepository.findByUserName(loggedUserDetails.getUsername()).get();
 		this.credentials.setPassword("[PROTECTED]");
 		this.user = this.credentials.getUser();
 	}

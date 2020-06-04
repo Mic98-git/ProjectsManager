@@ -3,12 +3,14 @@ package it.uniroma3.siw.spring.validator;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import it.uniroma3.siw.spring.model.Credentials;
 import it.uniroma3.siw.spring.service.CredentialsService;
 
+@Component
 public class CredentialsValidator implements Validator {
 
 	@Autowired
@@ -28,7 +30,7 @@ public class CredentialsValidator implements Validator {
 	public void validate(Object o, Errors errors) {
 		Credentials credentials = (Credentials) o;
 		
-		String userName = credentials.getUsername().trim();
+		String userName = credentials.getUserName().trim();
 		String password = credentials.getPassword().trim();
 		
 		if(userName.isBlank())

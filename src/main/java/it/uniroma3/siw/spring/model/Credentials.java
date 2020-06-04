@@ -2,12 +2,14 @@ package it.uniroma3.siw.spring.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+@Entity
 public class Credentials {
 
 	public static final String DEFAULT_ROLE = "DEFAULT";
@@ -18,7 +20,7 @@ public class Credentials {
 	private Long id;
 	
 	@Column(unique=true,nullable=false,length=100)
-	private String username;
+	private String userName;
 	@Column(nullable = false,length=100)
 	private String password;
 	
@@ -36,12 +38,12 @@ public class Credentials {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getPassword() {
