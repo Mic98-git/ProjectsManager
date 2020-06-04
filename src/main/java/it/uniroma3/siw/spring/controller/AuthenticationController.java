@@ -54,12 +54,4 @@ public class AuthenticationController {
 		return "registerUser";
 	}
 	
-	@RequestMapping(value= {"/login"},method=RequestMethod.POST)
-	public String login(@RequestBody Credentials credentials,
-			Model model) {
-		
-		
-		return "redirect:/";
-	}
-	
 }

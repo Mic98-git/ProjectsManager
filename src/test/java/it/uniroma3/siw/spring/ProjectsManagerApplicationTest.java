@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import it.uniroma3.siw.spring.controller.session.SessionData;
 import it.uniroma3.siw.spring.model.Project;
+import it.uniroma3.siw.spring.model.Task;
 import it.uniroma3.siw.spring.model.User;
 import it.uniroma3.siw.spring.repository.ProjectRepository;
 import it.uniroma3.siw.spring.repository.TaskRepository;
@@ -38,6 +40,9 @@ class ProjectsManagerApplicationTest {
 	@Autowired
 	private ProjectService projectService;
 	
+//	@Autowired
+//	SessionData sessionData;
+	
 	@Before
 	public void deleteAll() {
 		this.userRepository.deleteAll();
@@ -56,7 +61,7 @@ class ProjectsManagerApplicationTest {
 		user2 = userService.saveUser(user2);
 		assertEquals(user2.getId().longValue(), 2L);
 		assertEquals(user2.getName(),"Luca");
-		
+				
 		User user1Update = new User("Maria","Rossi");
 		user1Update.setId(user1.getId());
 		user1Update = userService.saveUser(user1Update);
@@ -65,6 +70,11 @@ class ProjectsManagerApplicationTest {
 		
 		Project project1 = new Project("testproject1");
 		project1.setOwner(user1Update);
+		
+		
+		Task task1 = new Task("NomeTask1","Descrizione Task 1",false);
+		project1.getProjectTasks().add(task1);
+		
 		project1 = projectService.saveProject(project1);
 		assertEquals(project1.getOwner(),user1Update);
 		assertEquals(project1.getName(),"testproject1");
