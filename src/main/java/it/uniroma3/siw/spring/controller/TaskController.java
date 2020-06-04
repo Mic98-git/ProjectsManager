@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,15 +26,15 @@ public class TaskController {
 	private ProjectService projectService;
 	
 	/* projectId non servirebbe, ma lo metto per convenienza */
-	@GetMapping("/{projectId}/task/{taskId}")
-	public String viewTaskDetails(Long projectId,Long taskId,Model model) {
+	@GetMapping("/task/{taskId}")
+	public String viewTaskDetails(Long taskId,Model model) {
 		Task task = this.taskService.getTask(taskId);
 		model.addAttribute(task);
 		
-		return "task.html";
+		return "task";
 	}
 	
-	@GetMapping("/{projectId}/task")
+	@GetMapping("/{projectId}/task/new")
 	public String viewNewTaskForm(Long projectId,Model model) {
 		// trovo il progetto a partire dall'id
 		Project project = this.projectService.getProject(projectId);
@@ -42,28 +43,36 @@ public class TaskController {
 		// per il form del task nuovo
 		model.addAttribute("task",new Task());
 		
-		return "taskform.html";
+		return "newtask";
 	}
 	
-	@PostMapping("/{projectId}/task")
-	public String addTask(@RequestBody Task task,Long projectId) {
+	@PostMapping("/{projectId}/task/new")
+	public String addNewTask(@RequestBody Task task,Long projectId) {
 		Long taskId = task.getId();
 		this.taskService.saveTask(task);
 		
 		return "redirect:/" + projectId + "/task/" + taskId;
 	}
 	
-	@PutMapping("/{projectId}/task")
-	public String updateTask(@RequestBody Task task,Long projectId) {
+	@GetMapping("/task/{taskId}/edit")
+	public String viewEditTaskForm(Long taskId,Model model) {
+		// per il form del task da editare
+		model.addAttribute("taskForm",taskService.getTask(taskId));
+		
+		return "edittask";
+	}
+	
+	@PutMapping("/task/edit")
+	public String updateTask(@RequestBody Task task) {
 		Long taskId = task.getId();
 		this.taskService.saveTask(task);
 		
-		return "redirect:/" + projectId + "/task/" + taskId;
+		return "redirect:/task/" + taskId;
 	}
 	
-	@DeleteMapping("/{projectId}/task")
-	public String deleteTask(@RequestBody Task task,Long projectId) {
-		this.taskService.deleteTask(task);
+	@DeleteMapping("/task/{taskId}")
+	public String deleteTask(@PathVariable Long taskId) {
+		this.taskService.deleteTask(taskId);
 		
 		// reindirizza ai miei progetti
 		return "redirect:/projects/my";
