@@ -19,6 +19,25 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-
+	
+	@RequestMapping(value= {"/user/profile"},method=RequestMethod.GET)
+	public String showProfile(Model model) {
+		model.addAttribute("user",sessionData.getLoggedUser());
 		
+		return "profile";
+	}
+
+	@RequestMapping(value= {"/user/profile/edit"},method=RequestMethod.GET)
+	public String showEditUserForm(Model model) {
+		model.addAttribute("userForm",sessionData.getLoggedUser());
+		
+		return "userForm";
+	}
+	
+	@RequestMapping(value= {"/user/profile/edit"},method=RequestMethod.PUT)
+	public String editUser(@RequestBody User user) {
+		this.userService.saveUser(user);
+		
+		return "redirect:/";
+	}
 }
