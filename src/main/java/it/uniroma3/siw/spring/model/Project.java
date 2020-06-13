@@ -38,7 +38,7 @@ public class Project {
 	@JoinColumn(name = "project_id")
 	private List<Tag> tags;
 	
-	@OneToMany (cascade = CascadeType.REMOVE, fetch=FetchType.EAGER)
+	@OneToMany (cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "project_id")
 	private List<Task> projectTasks;
 	

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.spring.model.Comment;
 import it.uniroma3.siw.spring.model.Project;
@@ -47,7 +48,7 @@ public class TaskController {
 	}
 	
 	@PostMapping("/{projectId}/task/new")
-	public String addNewTask(@RequestBody Task task,Long projectId) {
+	public String addNewTask(@RequestParam Task task,Long projectId) {
 		Long taskId = task.getId();
 		this.taskService.saveTask(task);
 		
@@ -63,7 +64,7 @@ public class TaskController {
 	}
 	
 	@PutMapping("/task/edit")
-	public String updateTask(@RequestBody Task task) {
+	public String updateTask(@RequestParam Task task) {
 		Long taskId = task.getId();
 		this.taskService.saveTask(task);
 		
