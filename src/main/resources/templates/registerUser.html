@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Registrazione nuovo utente</title>
+    </head>
+    <body>
+    	<h1>Registrazione di un nuovo utente</h1>
+        <form th:action="@{/users/register}" method="post">
+        	<div>
+        		<label>Name: </label>
+        		<input type="text" th:field="${userForm.name}">
+        	</div>
+        	<div>
+        		<label>Last name: </label>
+        		<input type="text" th:field="${userForm.lastname}">
+        	</div>
+        	<div>
+        		<label>Username: </label>
+        		<input type="text" th:field="${credentialsForm.userName}">
+        	</div>
+        	<div>
+        		<label>Password: </label>
+        		<input type="password" th:field="${credentialsForm.password}">
+        	</div>
+        	<input type="submit" value="Salva">
+        </form>        
+    </body>
+</html>

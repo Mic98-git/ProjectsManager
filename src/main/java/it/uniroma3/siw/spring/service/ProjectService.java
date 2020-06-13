@@ -21,7 +21,7 @@ public class ProjectService {
 	protected ProjectRepository projectRepository;
 	
 	@Transactional
-	public Project getProject(long id) {
+	public Project getProject(Long id) {
 		Optional<Project> result = this.projectRepository.findById(id);
 		return result.orElse(null);
 	}

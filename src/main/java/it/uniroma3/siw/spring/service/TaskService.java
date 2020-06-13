@@ -29,12 +29,17 @@ public class TaskService {
 		return this.taskRepository.save(task);
 	}
 	
+	@Transactional
+	public void deleteTask(Long taskId) {
+		this.taskRepository.deleteById(taskId);
+	}
+	
 	/* Cancellare un task */
 	@Transactional
 	public void deleteTask(Task task) {
 		this.taskRepository.delete(task);
 	}
-	
+		
 	@Transactional
 	public Task setCompleted(Task task) {
 		task.setCompleted(true);
