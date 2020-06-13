@@ -23,12 +23,12 @@ public class UserValidator implements Validator {
 		String firstName = user.getName().trim();
 		String lastName = user.getLastname().trim();
 		
-		if(firstName.isBlank())
+		if(firstName.trim().isEmpty())
 			errors.rejectValue("name", "required"); // FIXME Va bene firstName o devo mettere name e basta??
 		else if(firstName.length() < MIN_NAME_LENGTH || firstName.length() > MAX_NAME_LENGTH)
 			errors.rejectValue("name", "size");
 		
-		if(lastName.isBlank())
+		if(lastName.trim().isEmpty())
 			errors.rejectValue("lastname", "required"); // FIXME Va bene lastName o devo mettere lastname e basta??
 		else if(lastName.length() < MIN_NAME_LENGTH || lastName.length() > MAX_NAME_LENGTH)
 			errors.rejectValue("lastname", "size");

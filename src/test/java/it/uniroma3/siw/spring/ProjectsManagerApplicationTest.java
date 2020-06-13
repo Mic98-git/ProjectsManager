@@ -98,5 +98,4 @@ class ProjectsManagerApplicationTest {
 		assertEquals(project1Members.get(0).getName(),user2.getName());
 		assertEquals(project1Members.size(),1);
 	}
-
 }
