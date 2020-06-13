@@ -78,6 +78,7 @@ class ProjectsManagerApplicationTest {
 		assertEquals(project1.getOwner(),user1Update);
 		assertEquals(project1.getName(),"testproject1");
 		
+		
 		Project project2 = new Project("testproject2");
 		project2.setOwner(user1Update);
 		project2 = projectService.saveProject(project2);
