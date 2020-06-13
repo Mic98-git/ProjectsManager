@@ -2,16 +2,12 @@ package it.uniroma3.siw.spring;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import it.uniroma3.siw.spring.model.Project;
 import it.uniroma3.siw.spring.model.User;
 import it.uniroma3.siw.spring.repository.ProjectRepository;
 import it.uniroma3.siw.spring.repository.TaskRepository;
