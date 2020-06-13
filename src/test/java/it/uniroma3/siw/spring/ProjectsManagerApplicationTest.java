@@ -10,7 +10,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import it.uniroma3.siw.spring.controller.session.SessionData;
 import it.uniroma3.siw.spring.model.Project;
 import it.uniroma3.siw.spring.model.Task;
