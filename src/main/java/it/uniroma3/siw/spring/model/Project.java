@@ -28,9 +28,12 @@ public class Project {
 	@Column(nullable = false)
 	private String name;
 	
+	@Column(length = 1000)
+	private String description;
+	
 	@Column(updatable = false,nullable=false)
 	private LocalDateTime creationTimestamp;
-	
+
 	@Column(nullable=false)
 	private LocalDateTime lastUpdateTimestamp;
 	
@@ -140,6 +143,14 @@ public class Project {
 
 	public void setLastUpdateTimestamp(LocalDateTime lastUpdateTimestamp) {
 		this.lastUpdateTimestamp = lastUpdateTimestamp;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }

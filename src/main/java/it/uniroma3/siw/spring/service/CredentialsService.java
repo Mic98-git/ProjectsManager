@@ -1,5 +1,7 @@
 package it.uniroma3.siw.spring.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -34,9 +36,21 @@ public class CredentialsService {
 	
 	@Transactional
 	public Credentials saveCredentials(Credentials credentials) {
-		credentials.setRole(Credentials.DEFAULT_ROLE);
+		credentials.setRole(Credentials.DEFAULT_ROLE); //di base quando salvo delle credenziali nuove, l'utente ha pochi provilegi
 		credentials.setPassword(this.passwordEncoder.encode(credentials.getPassword()));
 		return this.credentialsRepository.save(credentials);
+	}
+
+	public List<Credentials> getAllCredentials() {
+		List<Credentials> credentials = new ArrayList<>();
+		for(Credentials c : this.credentialsRepository.findAll())
+			credentials.add(c);
+		return credentials;
+		
+	}
+
+	public void deleteCredentials(String userName) {
+		this.credentialsRepository.delete(this.getCredentials(userName));
 	}
 
 }

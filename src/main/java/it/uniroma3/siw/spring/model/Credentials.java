@@ -21,6 +21,7 @@ public class Credentials {
 	
 	@Column(unique=true,nullable=false,length=100)
 	private String userName;
+	
 	@Column(nullable = false,length=100)
 	private String password;
 	

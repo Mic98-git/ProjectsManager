@@ -12,4 +12,6 @@ import it.uniroma3.siw.spring.model.User;
 public interface UserRepository extends CrudRepository<User, Long> {
 	
 	public List<User> findByVisibleProjects(Project project);
+	
+	public List<User> findByUserName(String username);
 }

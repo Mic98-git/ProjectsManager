@@ -2,6 +2,7 @@ package it.uniroma3.siw.spring.authentication;
 
 import javax.sql.DataSource;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.WebSecurityEnablerConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +25,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 	DataSource dataSource;
 	
 	@Override
-	public void configure(HttpSecurity http) throws Exception {
+	public void configure(HttpSecurity http) throws Exception { //policies di autenticazione e autorizzazione
 		http
 			.authorizeRequests()
 			
@@ -32,7 +33,9 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 			
 			.antMatchers(HttpMethod.POST, "/login","/users/register").permitAll()
 			
-			.antMatchers(HttpMethod.GET, "/admin").hasAnyAuthority(Credentials.ADMIN_ROLE)
+			.antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(Credentials.ADMIN_ROLE)
+			
+			.antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(Credentials.ADMIN_ROLE)
 			
 			.anyRequest().authenticated()
 			
@@ -45,10 +48,14 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 			.logoutUrl("/logout")
 			
 			.logoutSuccessUrl("/index");
+			
+			//.invalidateHttpSession(true);
+			
+			//.clearAuthentication(true).permitAll();
 	}
 	
 	@Override
-	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+	public void configure(AuthenticationManagerBuilder auth) throws Exception { //specifica dove il sistema trova username, password e ruoli nel DB
 		auth.jdbcAuthentication()
 			.dataSource(this.dataSource)
 			.authoritiesByUsernameQuery("SELECT user_name,role FROM credentials WHERE user_name=?")

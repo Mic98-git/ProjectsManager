@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.spring.model.Project;
 import it.uniroma3.siw.spring.model.User;
 import it.uniroma3.siw.spring.repository.UserRepository;
 
@@ -38,5 +39,12 @@ public class UserService {
 		List<User> users = new ArrayList<>();
 		userRepository.findAll().iterator().forEachRemaining(user -> users.add(user));
 		return users;
+	}
+	
+	@Transactional
+	public List<User> getMembers(Project p) {
+		List<User> members = new ArrayList<>();
+		members = p.getMembers();
+		return members;
 	}
 }

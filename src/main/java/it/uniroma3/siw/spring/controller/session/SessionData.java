@@ -12,7 +12,7 @@ import it.uniroma3.siw.spring.model.User;
 import it.uniroma3.siw.spring.repository.CredentialsRepository;
 
 @Component
-@Scope(value="session",proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Scope(value="session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class SessionData {
 	
 	private User user;

@@ -9,5 +9,6 @@ import it.uniroma3.siw.spring.model.Credentials;
 
 @Repository
 public interface CredentialsRepository extends CrudRepository<Credentials, Long> {
+	
 	public Optional<Credentials> findByUserName(String userName);
 }
