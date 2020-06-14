@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<title>Your projects</title>
+		<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+	</head>
+	<body>
+		<div th:replace="navbar :: topbar"></div>
+		<h1>Your projects</h1>
+		<table border="2" width="500" id="projectsTable">
+			<tr th:each="project : ${projectsList}">
+				<td class="projectTitle" th:text="${project.name}">
+					project name
+				</td>
+				<td th:text="${project.description}">
+					project description
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<a th:href="@{/projects/add}">Create a new project</a>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

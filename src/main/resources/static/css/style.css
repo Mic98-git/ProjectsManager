@@ -18,3 +18,8 @@ table#usersList tr td {
 	text-align: center;
 	height: 30px;
 }
+
+td.projectTitle {
+	text-align: center;
+	font-weight: bold;
+}
