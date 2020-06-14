@@ -7,12 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.spring.controller.session.SessionData;
 import it.uniroma3.siw.spring.model.User;
+import it.uniroma3.siw.spring.service.CredentialsService;
 import it.uniroma3.siw.spring.service.UserService;
 
 @Controller
@@ -24,10 +26,34 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private CredentialsService credentialsService;
+	
+	@RequestMapping(value= {"/admin"},method=RequestMethod.GET)
+	public String adminPageIndex(Model model) {
+		return "admin";
+	}
+	
+	@RequestMapping(value= {"/admin/users"},method=RequestMethod.GET)
+	public String showUsersList(Model model) {
+		model.addAttribute("credentialsList",credentialsService.getAllCredentials());
+		
+		return "usersList";
+	}
+	
+	@RequestMapping(value="/admin/users/{username}/delete",method=RequestMethod.POST)
+	public String removeUser(Model model,@PathVariable String username) {
+		this.credentialsService.deleteCredentials(username);
+		
+		return "redirect:/admin/users";
+	}
+	
 	@RequestMapping(value= {"/user/profile"},method=RequestMethod.GET)
 	public String showProfile(Model model) {
 		model.addAttribute("user",sessionData.getLoggedUser());
-		
+		model.addAttribute("credentials", sessionData.getLoggedCredentials());
+
+		System.out.println("");
 		return "profile";
 	}
 
@@ -42,11 +68,9 @@ public class UserController {
 	public String editUser(@Valid @ModelAttribute("userForm") User user) {
 		User loggedUser = this.sessionData.getLoggedUser();
 		loggedUser.setName(user.getName());
-		loggedUser.setLastname(user.getLastname());		
+		loggedUser.setLastname(user.getLastname());
 		this.userService.saveUser(loggedUser);
-		
-		System.out.println("");
-		
+				
 		return "redirect:/user/profile/edit";
 	}
 }

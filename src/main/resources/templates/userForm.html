@@ -2,13 +2,10 @@
   xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Edit your profile</title>
-        <style type="text/css">
-            body {
-            }
-
-        </style>
+        <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
     </head>
     <body>
+        <div th:replace="navbar :: topbar"></div>
     	<h1>Edit your profile</h1>
         <form th:object="${userForm}" th:action="@{/user/profile/edit}" method="post">
         	<table>
@@ -21,7 +18,7 @@
         		  <td><input type="text" th:field="*{lastname}"></td>
                 </tr>
         	</table>
-        	<input type="submit" value="Salva" style="margin-top: 10px;">
+        	<input type="submit" value="Save" style="margin-top: 10px;">
         </form>        
     </body>
 </html>

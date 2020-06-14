@@ -1,9 +1,30 @@
 <html>
-	<head>
-		<title>New task</title>		
-	</head>
-	<body>
-		<h1>Insert new task</h1>
+<head>
+	<title>New task</title>		
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+<body>
+	<th:block th:replace="navbar :: topbar"></th:block>
 
-	</body>
+	<h1>Insert new task</h1>
+
+	<form th:action="@{'/' + ${project.id} + '/task/new'}" method="post" th:object="${task}">
+		<table>
+			<tr>
+				<td>Task name</td>
+				<td><input type="text" th:field="*{name}"></td>
+			</tr>
+			<tr>
+				<td>Task description</td>
+				<td><textarea th:field="*{description}"></textarea></td>
+			</tr>
+			<tr>
+				<td>Completed</td>
+				<td><input type="checkbox" th:field="*{completed}" name="completed"/></td>
+			</tr>
+		</table>
+		<input type="submit" value="Salva" style="margin-top: 10px;">
+	</form>
+
+</body>
 </html>

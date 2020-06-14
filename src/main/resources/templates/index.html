@@ -1,22 +1,30 @@
 <html>
-	<head>
-		<title>Home</title>
-		<style type="text/css">
-			body { text-align: center; }
+<head>
+	<title>Home</title>
+	<style type="text/css">
+		body { text-align: center; }
 
-		</style>
-	</head>
-	<body>
-		<h1 th:text="${'Welcome ' + loggedCredentials.userName}">welcome</h1>
-		<div>
-			<h3>
+	</style>
+</head>
+<body>
+	<h1 th:text="${'Welcome ' + loggedCredentials.userName}">welcome</h1>
+	<div>
+		<h3>
+			<a th:href="@{/admin}">Admin area</a>
+		</h3>
+
+		<h3>
 			<a th:href="@{/projects}">Projects</a>
-			</h3>
-			
-			<h3>
-			<a th:href="@{/user/profile/edit}">Edit profile</a>
-			</h3>
-		</div>
+		</h3>
 
-	</body>
+		<h3>
+			<a th:href="@{/user/profile}">Your profile</a>
+		</h3>
+
+		<h3>
+			<a th:href="@{/user/profile/edit}">Edit profile</a>
+		</h3>
+	</div>
+
+</body>
 </html>

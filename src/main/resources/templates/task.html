@@ -1,11 +1,11 @@
 <html>
 	<head>
 		<title>Task</title>
-		<style>
-						
-		</style>
+		<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
 	</head>
 	<body>
+		<th:block th:replace="navbar :: topbar"></th:block>
+
 		<h1 th:text="${'Task: ' + task.name}">Task</h1>
 
 		<div th:text="${'ID: ' + task.id}">id</div>
@@ -13,18 +13,38 @@
 		<h3>Description</h3>
 		<div th:text="${task.description}">desc</div>
 
-		<table>
+		<br><br>
+		<table border="2" width="600">
 			<tr>
 				<th>Author</th>
 				<th>Comment</th>
 			</tr>
-			<tr th:each="${task.comments}">
+			<tr th:each="comment : ${task.comments}">
 				<td class='commenter_profile'>
 					<img src='' width="100" height="100" alt="profile"><br>
-					<span class='commenter' th:text="*{user.name + ' ' + user.lastname}">author</span>
+					<span class='commenter' th:text="${comment.user.name + ' ' + comment.user.lastname}">author</span>
 				</td>
-				<td class='comment' th:text="*{content}"></td>
+				<td class='comment' th:text="${comment.content}"></td>
 			</tr>
+			<tr th:if="${task.comments.empty}">
+				<td colspan="2">No comment</td>
+			</tr>	
 		</table>
+		<br>
+
+		<form th:action="@{'/task/' + ${task.id} + '/addcomment'}" method="post" th:object="${commentForm}">
+			<table border="2">
+				<tr>
+					<td class='commenter_profile'>
+						<img src='' width="100" height="100" alt="profile"><br>
+						<span class='commenter' th:text="${loggedUser.name + ' ' + loggedUser.lastname}">author</span>
+					</td>
+					<td class='comment'>
+						<textarea th:field="*{content}" placeholder="Write your comment..."></textarea><br>
+						<input type="submit" value="Send">
+					</td>
+				</tr>
+			</table>
+		</form>
 	</body>
 </html>

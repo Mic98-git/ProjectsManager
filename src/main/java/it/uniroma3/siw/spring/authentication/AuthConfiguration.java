@@ -29,10 +29,9 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			
 			.antMatchers(HttpMethod.GET, "/","/index","/login","/users/register").permitAll()
-			
-			.antMatchers(HttpMethod.POST, "/login","/users/register").permitAll()
-			
-			.antMatchers(HttpMethod.GET, "/admin").hasAnyAuthority(Credentials.ADMIN_ROLE)
+			.antMatchers(HttpMethod.POST, "/login","/users/register").permitAll()			
+			.antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(Credentials.ADMIN_ROLE)
+			.antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(Credentials.ADMIN_ROLE)
 			
 			.anyRequest().authenticated()
 			
@@ -44,7 +43,10 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 			
 			.logoutUrl("/logout")
 			
-			.logoutSuccessUrl("/index");
+			.logoutSuccessUrl("/index")
+			.invalidateHttpSession(true)
+			.clearAuthentication(true).permitAll()
+			;
 	}
 	
 	@Override
