@@ -18,13 +18,18 @@ public class MainController {
 		
 	}
 	
-	@RequestMapping(value = {"/","/index","/home"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/","/index"}, method = RequestMethod.GET)
+	public String home() {
+		return "index";
+	}
+	
+	@RequestMapping(value = {"/home"}, method = RequestMethod.GET)
 	public String index(Model model) {
 		//System.out.println("");
 		model.addAttribute("loggedUser",sessionData.getLoggedUser());
 		model.addAttribute("loggedCredentials",sessionData.getLoggedCredentials());
 		
-		return "index";
+		return "home";
 	}
 
 }

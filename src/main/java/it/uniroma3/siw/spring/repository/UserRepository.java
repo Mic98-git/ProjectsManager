@@ -13,5 +13,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	
 	public List<User> findByVisibleProjects(Project project);
 	
-	public List<User> findByUserName(String username);
 }

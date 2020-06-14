@@ -30,7 +30,7 @@ public class Project {
 	
 	@Column(length = 1000)
 	private String description;
-	
+		
 	@Column(updatable = false,nullable=false)
 	private LocalDateTime creationTimestamp;
 
