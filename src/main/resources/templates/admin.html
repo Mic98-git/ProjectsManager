@@ -1,0 +1,21 @@
+<html>
+<head>
+	<title>Edit task</title>		
+	<style type="text/css">
+		body { text-align: center; }
+
+	</style>
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+<body>
+	<th:block th:replace="navbar :: topbar"></th:block>
+
+	<h1>Hello administrator</h1>
+
+	<br>
+
+	<h3><a th:href="@{/index}">Home</a></h3>
+	<h3><a th:href="@{/admin/users}">Show users list</a></h3>
+
+</body>
+</html>
