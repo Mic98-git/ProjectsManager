@@ -40,17 +40,16 @@ public class CredentialsService {
 		credentials.setPassword(this.passwordEncoder.encode(credentials.getPassword()));
 		return this.credentialsRepository.save(credentials);
 	}
-
-	public List<Credentials> getAllCredentials() {
-		List<Credentials> credentials = new ArrayList<>();
-		for(Credentials c : this.credentialsRepository.findAll())
-			credentials.add(c);
-		return credentials;
-		
-	}
-
+	
+	@Transactional
 	public void deleteCredentials(String userName) {
-		this.credentialsRepository.delete(this.getCredentials(userName));
+		this.credentialsRepository.deleteByUserName(userName);
 	}
-
+	
+	@Transactional
+	public List<Credentials> getAllCredentials() {
+		List<Credentials> allCredentials = new ArrayList<>();
+		this.credentialsRepository.findAll().forEach(credential -> allCredentials.add(credential));
+		return allCredentials;
+	}
 }

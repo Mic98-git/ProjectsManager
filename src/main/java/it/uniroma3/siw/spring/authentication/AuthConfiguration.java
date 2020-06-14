@@ -47,11 +47,12 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 			
 			.logoutUrl("/logout")
 			
-			.logoutSuccessUrl("/index");
+			.logoutSuccessUrl("/index")
 			
-			//.invalidateHttpSession(true);
+			.invalidateHttpSession(true)
 			
-			//.clearAuthentication(true).permitAll();
+			.clearAuthentication(true).permitAll()
+		;
 	}
 	
 	@Override

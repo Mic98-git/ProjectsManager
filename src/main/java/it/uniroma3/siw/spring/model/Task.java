@@ -41,7 +41,7 @@ public class Task {
 	@ManyToMany(mappedBy = "tasks")
 	private List<Tag> tags;
 
-	@OneToMany (cascade = CascadeType.REMOVE)
+	@OneToMany (cascade = CascadeType.ALL)
 	@JoinColumn(name = "task_id")
 	private List<Comment> comments;
 	

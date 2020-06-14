@@ -1,0 +1,20 @@
+nav#topbar {
+	border: 1px solid #000;
+}
+
+nav#topbar ul {
+	text-align: center;
+}
+
+nav#topbar ul li {
+	display: inline;
+}
+
+table#usersList {
+	width: 500px;
+}
+
+table#usersList tr td {
+	text-align: center;
+	height: 30px;
+}

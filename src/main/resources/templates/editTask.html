@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>Edit task</title>		
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+<body>
+	<th:block th:replace="navbar :: topbar"></th:block>
+
+	<h1>Edit task</h1>
+
+	<form th:action="@{'/' + ${project.id} + '/task/edit'}" method="post" th:object="${taskForm}">
+		<table>
+			<tr>
+				<td>Task name</td>
+				<td><input type="text" th:field="*{name}"></td>
+			</tr>
+			<tr>
+				<td>Task description</td>
+				<td><textarea th:field="*{description}"></textarea></td>
+			</tr>
+			<tr>
+				<td>Completed</td>
+				<td><input type="checkbox" th:field="*{completed}" name="completed"/></td>
+			</tr>
+			<tr>
+				<td colspan="2">Tags</td>
+			</tr>
+			<tr>
+				<td colspan="2"><button>Add new tag</button></td>				
+			</tr>
+		</table>
+		<input type="submit" value="Salva" style="margin-top: 10px;">
+	</form>
+
+</body>
+</html>
