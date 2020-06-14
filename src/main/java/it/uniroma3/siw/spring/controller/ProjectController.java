@@ -45,7 +45,17 @@ public class ProjectController {
 		model.addAttribute("projectsList", projectsList);
 		
 		return "myOwnedProjects";
-	} 
+	}
+	
+	@RequestMapping(value = {"/projects"}, method = RequestMethod.GET)
+	public String shareProjects(Model model) {
+		User loggedUser = sessionData.getLoggedUser();
+		List<Project> projectsList = projectService.getShareProjects(loggedUser);
+		model.addAttribute("loggedUser", loggedUser);
+		model.addAttribute("projectsList", projectsList);
+		
+		return "sharedProjects";
+	}
 	
 	@RequestMapping(value = {"/projects/{projectId}"}, method = RequestMethod.GET)
 	public String project(Model model, @PathVariable Long projectId ) {
@@ -62,6 +72,25 @@ public class ProjectController {
 		model.addAttribute("members", members);
 		
 		return "project";
+	}
+	
+	@RequestMapping(value = {"/projects/{projectId}/edit"}, method = RequestMethod.GET)
+	public String createEditProjectForm(Model model, @PathVariable Long projectId) {
+		Project project = projectService.getProject(projectId);
+		model.addAttribute("projectForm", project);
+		
+		return "projectForm";
+	}
+	
+	@RequestMapping(value= {"/projects/{projectId}/edit"}, method=RequestMethod.POST)
+	public String editProject(@Valid @ModelAttribute("projectForm") Project project, @PathVariable Long projectId, 
+								BindingResult projectBindingResult, Model model) {
+		Project p = this.projectService.getProject(projectId);
+		p.setName(project.getName());
+		p.setDescription(project.getDescription());
+		this.projectService.saveProject(p);
+		
+		return "redirect:/projects/{projectId}";
 	}
 	
 	@RequestMapping(value = {"/project/add"}, method = RequestMethod.GET)
@@ -87,5 +116,12 @@ public class ProjectController {
 		model.addAttribute("loggedUser", loggedUser);
 		
 		return "addProject";
+	}
+	
+	@RequestMapping(value = {"/projects/{projectId}/delete"}, method = RequestMethod.POST)
+	public String deleteProject(@PathVariable Long projectId, Model model) {
+		this.projectService.deleteProjectById(projectId);
+		
+		return "redirect:/projects";		
 	}
 }

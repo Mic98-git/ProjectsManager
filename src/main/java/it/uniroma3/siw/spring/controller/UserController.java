@@ -54,7 +54,7 @@ public class UserController {
 		return "usersList";
 	}
 	
-	@RequestMapping(value="/admin/users/{username}/delete",method=RequestMethod.POST)
+	@RequestMapping(value="/admin/users/{username}/delete", method=RequestMethod.POST)
 	public String removeUser(Model model,@PathVariable String username) {
 		this.credentialsService.deleteCredentials(username);
 		
@@ -63,7 +63,7 @@ public class UserController {
 	
 	@RequestMapping(value= {"/user/profile"},method=RequestMethod.GET)
 	public String showProfile(Model model) {
-		model.addAttribute("user",sessionData.getLoggedUser());
+		model.addAttribute("user", sessionData.getLoggedUser());
 		model.addAttribute("credentials", sessionData.getLoggedCredentials());
 
 		System.out.println("");

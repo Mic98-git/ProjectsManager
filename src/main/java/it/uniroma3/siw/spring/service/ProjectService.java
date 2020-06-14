@@ -40,8 +40,13 @@ public class ProjectService {
 	}
 	
 	@Transactional
-	public void deleteProject (Project p) {
+	public void deleteProject(Project p) {
 		this.projectRepository.delete(p);
+	}
+	
+	@Transactional
+	public void deleteProjectById(Long id) {
+		this.projectRepository.deleteById(id);
 	}
 	
 	@Transactional
