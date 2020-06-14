@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Edit your profile</title>
+        <style type="text/css">
+            body {
+            }
+
+        </style>
+    </head>
+    <body>
+    	<h1>Edit your profile</h1>
+        <form th:object="${userForm}" th:action="@{/user/profile/edit}" method="post">
+        	<table>
+                <tr>
+        		  <td><label>Name</label></td>
+        		  <td><input type="text" th:field="*{name}"></td>
+                </tr>
+                <tr>
+        		  <td><label>Last name</label></td>
+        		  <td><input type="text" th:field="*{lastname}"></td>
+                </tr>
+        	</table>
+        	<input type="submit" value="Salva" style="margin-top: 10px;">
+        </form>        
+    </body>
+</html>

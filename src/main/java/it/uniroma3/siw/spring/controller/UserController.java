@@ -1,12 +1,16 @@
 package it.uniroma3.siw.spring.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.spring.controller.session.SessionData;
 import it.uniroma3.siw.spring.model.User;
 import it.uniroma3.siw.spring.service.UserService;
@@ -34,10 +38,15 @@ public class UserController {
 		return "userForm";
 	}
 	
-	@RequestMapping(value= {"/user/profile/edit"},method=RequestMethod.PUT)
-	public String editUser(@RequestBody User user) {
-		this.userService.saveUser(user);
+	@RequestMapping(value= {"/user/profile/edit"},method=RequestMethod.POST)
+	public String editUser(@Valid @ModelAttribute("userForm") User user) {
+		User loggedUser = this.sessionData.getLoggedUser();
+		loggedUser.setName(user.getName());
+		loggedUser.setLastname(user.getLastname());		
+		this.userService.saveUser(loggedUser);
 		
-		return "redirect:/";
+		System.out.println("");
+		
+		return "redirect:/user/profile/edit";
 	}
 }

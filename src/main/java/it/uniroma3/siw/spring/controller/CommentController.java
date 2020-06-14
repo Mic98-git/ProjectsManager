@@ -3,6 +3,7 @@ package it.uniroma3.siw.spring.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.spring.controller.session.SessionData;
 import it.uniroma3.siw.spring.model.Comment;
@@ -23,7 +24,7 @@ public class CommentController {
 	SessionData sessionData;
 	
 	@PostMapping("/{projectId}/task/{taskId}/addcomment")
-	public String addComment(@RequestBody Comment comment,Long projectId,Long taskId) {
+	public String addComment(@RequestParam Comment comment,Long projectId,Long taskId) {
 		comment.setUser(sessionData.getLoggedUser());
 		
 		Task task = taskService.getTask(taskId);
