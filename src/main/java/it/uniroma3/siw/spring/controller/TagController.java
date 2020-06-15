@@ -14,7 +14,7 @@ public class TagController {
 	@Autowired
 	private TagService tagService;
 	
-	@RequestMapping(value = {"/{projectId}/addTags"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/{projectId}/addTag"}, method = RequestMethod.POST)
 	public String setProjectTags() {
 		
 		return "";
