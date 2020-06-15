@@ -38,7 +38,7 @@ public class Task {
 	@Column(nullable=false)
 	private LocalDateTime lastUpdateTimestamp;
 	
-	@ManyToMany(mappedBy = "tasks")
+	@ManyToMany(mappedBy = "tasks", cascade = CascadeType.PERSIST)
 	private List<Tag> tags;
 
 	@OneToMany (cascade = CascadeType.ALL)

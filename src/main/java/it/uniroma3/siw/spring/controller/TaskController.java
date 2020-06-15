@@ -1,5 +1,7 @@
 package it.uniroma3.siw.spring.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.spring.controller.session.SessionData;
 import it.uniroma3.siw.spring.model.Comment;
 import it.uniroma3.siw.spring.model.Project;
+import it.uniroma3.siw.spring.model.Tag;
 import it.uniroma3.siw.spring.model.Task;
 import it.uniroma3.siw.spring.service.ProjectService;
+import it.uniroma3.siw.spring.service.TagService;
 import it.uniroma3.siw.spring.service.TaskService;
+import net.bytebuddy.asm.Advice.This;
 
 @Controller
 public class TaskController {
@@ -28,6 +33,9 @@ public class TaskController {
 	
 	@Autowired
 	private ProjectService projectService;
+	
+	@Autowired
+	private TagService tagService;
 	
 	@Autowired
 	SessionData sessionData;
@@ -42,9 +50,41 @@ public class TaskController {
 		model.addAttribute("commentForm",new Comment());
 		
 		//FIXME Mettere possibilità di aggiungere tag, ma solo a utente proprietario delprogetto
+		model.addAttribute("allTaskTags",this.taskService.getTask(taskId).getTags());
+		
+		List<Tag> tags = this.projectService.getProject(projectId).getTags();
+		tags.removeAll(task.getTags());
+		model.addAttribute("addableTags",tags);
+		
+		model.addAttribute("tagForm",new Tag());
 		
 		System.out.print("");
 		return "task";
+	}
+	
+	@PostMapping("/projects/{projectId}/task/{taskId}/addtag")
+	public String addTag(@PathVariable Long projectId,
+			@PathVariable Long taskId,
+			@ModelAttribute("tagForm") Tag tag,
+			BindingResult tagBindingResult) {
+		Task task = taskService.getTask(taskId);
+		tag = this.tagService.getTagById(tag.getId());
+		tag.getTasks().add(task);
+		this.tagService.saveTag(tag);
+		
+		return "redirect:/projects/"+projectId+"/task/"+taskId;
+	}
+	
+	@PostMapping("/projects/{projectId}/task/{taskId}/deletetag/{tagId}")
+	public String removeTag(@PathVariable Long projectId,
+			@PathVariable Long taskId,
+			@PathVariable Long tagId) {
+		Tag tag = this.tagService.getTagById(tagId);
+		Task task = this.taskService.getTask(taskId);
+		tag.getTasks().remove(task);
+		this.tagService.saveTag(tag);
+		
+		return "redirect:/projects/"+projectId+"/task/"+taskId;
 	}
 	
 	@GetMapping("/projects/{projectId}/task/new")
@@ -60,7 +100,7 @@ public class TaskController {
 		model.addAttribute("project",project);
 		// per il form del task nuovo
 		model.addAttribute("task",new Task());
-		//System.out.print("");
+		System.out.print("");
 		
 		return "newTask";
 	}

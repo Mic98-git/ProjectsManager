@@ -85,7 +85,7 @@ class ProjectsManagerApplicationTest {
 		assertEquals(project2.getOwner(),user1Update);
 		assertEquals(project2.getName(),"testproject2");
 		
-		project1 = projectService.shareProjectWithUser(project1,user2);
+		//project1 = projectService.shareProjectWithUser(project1,user2);
 		List<Project> projects = projectRepository.findByOwner(user1Update);
 		assertEquals(projects.size(),2);
 		assertEquals(projects.get(0).getName(),project1.getName());

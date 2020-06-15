@@ -13,6 +13,38 @@
 		<h3>Description</h3>
 		<div th:text="${task.description}">desc</div>
 
+		<h3>Tags</h3>
+		<table>
+			<tr th:each="tag : ${allTaskTags}">
+				<td th:text="${tag.name} + ' - ' + ${tag.color}">
+				</td>
+				<td>
+					<!-- form per eliminare il tag -->
+					<form th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/deletetag/' + ${tag.id}}" method="post" th:object="${tag}">
+						<input type="submit" name="button" value="Delete">
+					</form>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					Add a new tag
+				</th>
+				<td>
+					<form method="post" th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/addtag'}" th:object="${tagForm}">
+						<select th:field="*{id}">
+							<th:block th:each="addableTag : ${addableTags}">
+								<option th:value="${addableTag.id}" th:text="${addableTag.name}"></option>
+							</th:block>
+						</select>
+						<input type="submit" name="" value="Add tag">
+					</form>
+				</td>
+				<td>
+					
+				</td>
+			</tr>
+		</table>
+
 		<br><br>
 		<table border="2" width="600">
 			<tr>
@@ -46,5 +78,7 @@
 				</tr>
 			</table>
 		</form>
+
+
 	</body>
 </html>

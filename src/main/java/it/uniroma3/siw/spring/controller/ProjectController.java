@@ -140,7 +140,9 @@ public class ProjectController {
 			@ModelAttribute Credentials credentials) {
 		Credentials c = credentialsService.getCredentials(credentials.getUserName());
 		Project project = projectService.getProject(projectId);
-		project.addMember(c.getUser());
+		
+		if(!project.getMembers().contains(c.getUser()))
+			project.addMember(c.getUser());
 		projectService.saveProject(project);
 		
 		//System.out.println();
