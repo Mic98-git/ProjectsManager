@@ -29,7 +29,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 			
-			.antMatchers(HttpMethod.GET, "/","/index","/login","/users/register").permitAll()
+			.antMatchers(HttpMethod.GET, "/","/login","/users/register").permitAll()
 			
 			.antMatchers(HttpMethod.POST, "/login","/users/register").permitAll()
 			
@@ -47,7 +47,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 			
 			.logoutUrl("/logout")
 			
-			.logoutSuccessUrl("/index")
+			.logoutSuccessUrl("/")
 			
 			.invalidateHttpSession(true)
 			

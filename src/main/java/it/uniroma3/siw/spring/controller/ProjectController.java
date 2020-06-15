@@ -45,22 +45,11 @@ public class ProjectController {
 	public String myOwnedProjects(Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		List<Project> projectsList = projectService.getMyProjects(loggedUser);
-		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("projectsList", projectsList);
 		
 		return "myOwnedProjects";
 	}
-	
-//	@RequestMapping(value = {"/projects"}, method = RequestMethod.GET)
-//	public String shareProjects(Model model) {
-//		User loggedUser = sessionData.getLoggedUser();
-//		List<Project> projectsList = projectService.getShareProjects(loggedUser);
-//		model.addAttribute("loggedUser", loggedUser);
-//		model.addAttribute("projectsList", projectsList);
-//		
-//		return "sharedProjects";
-//	}
-	
+		
 	@RequestMapping(value = {"/projects/{projectId}"}, method = RequestMethod.GET)
 	public String project(Model model, @PathVariable Long projectId ) {
 		Project project = projectService.getProject(projectId);
