@@ -32,7 +32,7 @@
 		</table>
 		<br>
 
-		<form th:action="@{'/task/' + ${task.id} + '/addcomment'}" method="post" th:object="${commentForm}">
+		<form th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/addcomment'}" method="post" th:object="${commentForm}">
 			<table border="2">
 				<tr>
 					<td class='commenter_profile'>
