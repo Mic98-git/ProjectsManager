@@ -98,7 +98,7 @@ public class ProjectController {
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("projectForm", new Project());
 		//System.out.println("");
-		return "addProject";
+		return "registerProject";
 	}
 	
 	@RequestMapping(value = {"/projects/add"}, method = RequestMethod.POST)
