@@ -63,12 +63,14 @@ public class ProjectController {
 			return "redirect:/projects";
 		User loggedUser = sessionData.getLoggedUser();
 		List<User> members = userService.getMembers(project);
-		if(!project.getOwner().equals(loggedUser) && !members.contains(loggedUser))
+		if(!(project.getOwner().equals(loggedUser) || members.contains(loggedUser)))
 			return "redirect:/projects";
 		
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("project", project);
 		model.addAttribute("members", members);
+		
+		//System.out.println();
 		
 		return "project";
 	}

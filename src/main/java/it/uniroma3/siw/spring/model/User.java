@@ -134,4 +134,53 @@ public class User {
 		return lastUpdateTimestamp;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((creationTimestamp == null) ? 0 : creationTimestamp.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((lastUpdateTimestamp == null) ? 0 : lastUpdateTimestamp.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (creationTimestamp == null) {
+			if (other.creationTimestamp != null)
+				return false;
+		} else if (!creationTimestamp.equals(other.creationTimestamp))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (lastUpdateTimestamp == null) {
+			if (other.lastUpdateTimestamp != null)
+				return false;
+		} else if (!lastUpdateTimestamp.equals(other.lastUpdateTimestamp))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", lastName=" + lastName + ", creationTimestamp="
+				+ creationTimestamp + ", lastUpdateTimestamp=" + lastUpdateTimestamp + "]";
+	}	
+	
 }
