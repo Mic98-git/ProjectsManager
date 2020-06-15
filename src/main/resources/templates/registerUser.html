@@ -9,6 +9,8 @@
         	<div>
         		<label>Name: </label>
         		<input type="text" th:field="${userForm.name}">
+        		<td th:if="${#fields.hasErrors('userForm.name')}"
+        			th:errors = "${userForm.name}" th:style= "red"></td>
         	</div>
         	<div>
         		<label>Last name: </label>
@@ -17,10 +19,14 @@
         	<div>
         		<label>Username: </label>
         		<input type="text" th:field="${credentialsForm.userName}">
+        		<td th:if="${#fields.hasErrors('credentialsForm.userName')}"
+        			th:errors = "${credentialsForm.userName}" th:style= "red"></td>
         	</div>
         	<div>
         		<label>Password: </label>
         		<input type="password" th:field="${credentialsForm.password}">
+        		<td th:if="${#fields.hasErrors('credentialsForm.password')}"
+        			th:errors = "${credentialsForm.password}" th:style= "red"></td>
         	</div>
         	<input type="submit" value="Salva">
         </form>        

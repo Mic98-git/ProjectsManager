@@ -22,7 +22,7 @@
 			<tr th:each="comment : ${task.comments}">
 				<td class='commenter_profile'>
 					<img src='' width="100" height="100" alt="profile"><br>
-					<span class='commenter' th:text="${comment.user.name + ' ' + comment.user.lastname}">author</span>
+					<span class='commenter' th:text="${comment.user.name + ' ' + comment.user.lastName}">author</span>
 				</td>
 				<td class='comment' th:text="${comment.content}"></td>
 			</tr>
@@ -37,7 +37,7 @@
 				<tr>
 					<td class='commenter_profile'>
 						<img src='' width="100" height="100" alt="profile"><br>
-						<span class='commenter' th:text="${loggedUser.name + ' ' + loggedUser.lastname}">author</span>
+						<span class='commenter' th:text="${loggedUser.name + ' ' + loggedUser.lastName}">author</span>
 					</td>
 					<td class='comment'>
 						<textarea th:field="*{content}" placeholder="Write your comment..."></textarea><br>

@@ -31,7 +31,7 @@ public class User {
 	private String name;
 	
 	@Column(nullable=false,length=100)
-	private String lastname;
+	private String lastName;
 	
 	@Column(updatable = false,nullable=false)
 	private LocalDateTime creationTimestamp;
@@ -50,10 +50,10 @@ public class User {
 		this.visibleProjects = new ArrayList<>();
 	}
 	
-	public User(String name, String lastname) {
+	public User(String name, String lastName) {
 		this();
 		this.name = name;
-		this.lastname = lastname;
+		this.lastName = lastName;
 	}
 
 	@PrePersist
@@ -86,11 +86,11 @@ public class User {
 	}
 
 	public String getLastname() {
-		return lastname;
+		return lastName;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setLastname(String lastName) {
+		this.lastName = lastName;
 	}
 	
 	public List<Project> getVisibleProjects() {

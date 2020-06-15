@@ -18,7 +18,7 @@
 			<tr th:each="credentials : ${credentialsList}">
 				<td th:text="${credentials.userName}"></td>
 				<td th:text="${credentials.user.name}"></td>
-				<td th:text="${credentials.user.lastname}"></td>
+				<td th:text="${credentials.user.lastName}"></td>
 				<td>
 					<form method="post" th:action="@{/admin/users/{username}/delete(username=${credentials.userName})}">
 						<button type="submit" name="submit" value="value">DELETE</button>

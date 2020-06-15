@@ -2,6 +2,7 @@ package it.uniroma3.siw.spring.controller;
 
 import java.util.List;
 
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.spring.controller.session.SessionData;
-import it.uniroma3.siw.spring.model.Credentials;
 import it.uniroma3.siw.spring.model.Project;
 import it.uniroma3.siw.spring.model.User;
-import it.uniroma3.siw.spring.service.CredentialsService;
 import it.uniroma3.siw.spring.service.ProjectService;
 import it.uniroma3.siw.spring.service.UserService;
 import it.uniroma3.siw.spring.validator.ProjectValidator;
