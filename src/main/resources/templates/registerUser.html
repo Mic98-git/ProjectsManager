@@ -15,6 +15,9 @@
         	<div>
         		<label>Last name: </label>
         		<input type="text" th:field="${userForm.lastName}">
+        		<td th:if="${#fields.hasErrors('userForm.lastName')}"
+        			th:errors = "${userForm.lastName}" th:style= "red"></td>
+        		
         	</div>
         	<div>
         		<label>Username: </label>
