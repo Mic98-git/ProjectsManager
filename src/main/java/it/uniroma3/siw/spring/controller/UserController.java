@@ -81,9 +81,9 @@ public class UserController {
 	public String editUser(@Valid @ModelAttribute("userForm") User user) {
 		User loggedUser = this.sessionData.getLoggedUser();
 		loggedUser.setName(user.getName());
-		loggedUser.setLastname(user.getLastname());
+		loggedUser.setLastName(user.getLastName());
 		this.userService.saveUser(loggedUser);
-				
+		//System.out.println();
 		return "redirect:/user/profile/edit";
 	}
 	

@@ -21,7 +21,7 @@ public class UserValidator implements Validator {
 	public void validate(Object o, Errors errors) {
 		User user = (User) o;
 		String firstName = user.getName().trim();
-		String lastName = user.getLastname().trim();
+		String lastName = user.getLastName().trim();
 		
 		if(firstName.trim().isEmpty())
 			errors.rejectValue("name", "required");

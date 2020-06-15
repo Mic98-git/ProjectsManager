@@ -85,11 +85,11 @@ public class User {
 		this.name = name;
 	}
 
-	public String getLastname() {
+	public String getLastName() {
 		return lastName;
 	}
 
-	public void setLastname(String lastName) {
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 	

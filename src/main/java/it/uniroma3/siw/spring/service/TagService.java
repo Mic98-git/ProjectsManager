@@ -25,4 +25,9 @@ public class TagService {
 	public void deleteTag(Tag tag) {
 		this.tagRepository.delete(tag);
 	}	
+	
+	@Transactional
+	public void deleteTagById(Long id) {
+		this.tagRepository.deleteById(id);
+	}
 }
