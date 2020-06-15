@@ -109,6 +109,7 @@ public class ProjectController {
 		projectValidator.validate(project, projectBindingResult);
 		if(!projectBindingResult.hasErrors()) {
 			project.setOwner(loggedUser);
+			project.addMember(loggedUser);
 			this.projectService.saveProject(project);
 			return "redirect:/projects/" + project.getId();
 		}
