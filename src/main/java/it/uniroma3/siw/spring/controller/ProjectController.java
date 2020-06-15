@@ -92,7 +92,7 @@ public class ProjectController {
 		return "redirect:/projects/{projectId}";
 	}
 	
-	@RequestMapping(value = {"/project/add"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/projects/add"}, method = RequestMethod.GET)
 	public String createProjectForm(Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		model.addAttribute("loggedUser", loggedUser);

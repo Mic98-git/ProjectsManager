@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>TaskManager</title>
+</head>
+
+<body>
+        <div th:replace="navbar :: topbar"></div>
+    	<h1>Create new Project</h1>
+        <form th:object="${projectForm}" th:action="@{/projects/add}" method="post">
+        	<table>
+                <tr>
+        		  <td><label>Project Name</label></td>
+        		  <td><input type="text" th:field="*{name}"></td>
+                </tr>
+                <tr>
+        		  <td><label>Decsription</label></td>
+        		  <td><input type="text" th:field="*{description}"></td>
+                </tr>
+        	</table>
+        	<input type="submit" value="Save" style="margin-top: 10px;">
+        </form>        
+    </body>
+</html>

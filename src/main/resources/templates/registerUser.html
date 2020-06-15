@@ -7,27 +7,28 @@
  <form th:action="@{/users/register}" method="post">
     <table>
         <tr>
+        	<div>
           <td><label>Name: </label></td>
           <td><input type="text" th:field="${userForm.name}"></td>
           <td th:if="${#fields.hasErrors('userForm.name')}"
           th:errors = "${userForm.name}" th:style="'color: red'"></td>
-      </div>
-  </tr>
-  <tr>
-      <div>
-          <td><label>Last name: </label></td>
-          <td><input type="text" th:field="${userForm.lastName}"></td>
-          <td th:if="${#fields.hasErrors('userForm.lastName')}"
-          th:errors = "${userForm.lastName}" th:style="'color: red'"></td>
-      </div>
-  </tr>
-  <tr>
-      <div>
-          <td><label>Username: </label></td>
-          <td><input type="text" th:field="${credentialsForm.userName}"></td>
-          <td th:if="${#fields.hasErrors('credentialsForm.userName')}"
-          th:errors = "${credentialsForm.userName}" th:style="'color: red'"></td>
-      </div>
+          	</div>
+  		</tr>
+  		<tr>
+      		<div>
+          		<td><label>Last name: </label></td>
+          		<td><input type="text" th:field="${userForm.lastName}"></td>
+          		<td th:if="${#fields.hasErrors('userForm.lastName')}"
+          		th:errors = "${userForm.lastName}" th:style="'color: red'"></td>
+      		</div>
+  		</tr>
+  		<tr>
+     		 <div>
+         		<td><label>Username: </label></td>
+          		<td><input type="text" th:field="${credentialsForm.userName}"></td>
+          		<td th:if="${#fields.hasErrors('credentialsForm.userName')}"
+          		th:errors = "${credentialsForm.userName}" th:style="'color: red'"></td>
+      		</div>
   </tr>
   <tr>
       <div>

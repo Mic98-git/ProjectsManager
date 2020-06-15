@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Your projects</title>
+		<title>My projects</title>
 		<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
 	</head>
 	<body>
@@ -8,7 +8,7 @@
 		<h1>Your projects</h1>
 		<table border="2" width="500" id="projectsTable">
 			<tr th:each="project : ${projectsList}">
-				<td class="projectTitle" th:text="${project.name}">
+				<td><a th:href="'/projects/' + ${project.id}" th:text="${project.name}"></a>
 					project name
 				</td>
 				<td th:text="${project.description}">

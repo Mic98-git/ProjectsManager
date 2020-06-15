@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<title>TaskManager</title>
+		<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+	</head>
+	
+	<body>
+		<div th:replace="navbar :: topbar"></div>
+		<h1 th:text="${project.name}"></h1>
+		<h4 th:text="${project.description}" style="color.gray"></h4>
+		<div th:if="${members.size( )> 0">
+			<h3>Share with:</h3>
+			<ul>
+				<li th:each="member : ${members}">
+					<div th:text ="${member.name} + ' ' + ${member.lastName}"></div>
+				</li>
+			</ul>
+		</div>
+		<h3>Tasks</h3>
+		<ul>
+			<li th:each="task : ${project.tasks}">
+				<div th:text="${task.name}"></div>
+				<div th:text="${task.description}"></div>
+			</li>
+		</ul>
+				
+	</body>
+</html>
