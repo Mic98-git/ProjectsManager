@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.spring.controller.session.SessionData;
+import it.uniroma3.siw.spring.model.Credentials;
 import it.uniroma3.siw.spring.model.Project;
 import it.uniroma3.siw.spring.model.User;
+import it.uniroma3.siw.spring.service.CredentialsService;
 import it.uniroma3.siw.spring.service.ProjectService;
 import it.uniroma3.siw.spring.service.UserService;
 import it.uniroma3.siw.spring.validator.ProjectValidator;
@@ -29,6 +31,9 @@ public class ProjectController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	CredentialsService credentialsService;
 	
 	@Autowired
 	ProjectValidator projectValidator;
@@ -66,11 +71,16 @@ public class ProjectController {
 		if(!(project.getOwner().equals(loggedUser) || members.contains(loggedUser)))
 			return "redirect:/projects";
 		
+		List<Credentials> credentials = credentialsService.getAllCredentials();
+		credentials.forEach(credential -> credential.setPassword("[PROTECTED]"));
+		
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("project", project);
 		model.addAttribute("members", members);
+		model.addAttribute("credentialForm", new Credentials());
+		model.addAttribute("allCredentials", credentials);
 		
-		//System.out.println();
+		System.out.println();
 		
 		return "project";
 	}
@@ -125,5 +135,18 @@ public class ProjectController {
 		this.projectService.deleteProjectById(projectId);
 		
 		return "redirect:/projects";		
+	}
+	
+	@RequestMapping(value = {"/projects/{projectId}/members/add"}, method = RequestMethod.POST)
+	public String addMemberToProject(@PathVariable Long projectId,
+			@ModelAttribute Credentials credentials) {
+		Credentials c = credentialsService.getCredentials(credentials.getUserName());
+		Project project = projectService.getProject(projectId);
+		project.addMember(c.getUser());
+		projectService.saveProject(project);
+		
+		//System.out.println();
+		
+		return "redirect:/projects/"+projectId;
 	}
 }
