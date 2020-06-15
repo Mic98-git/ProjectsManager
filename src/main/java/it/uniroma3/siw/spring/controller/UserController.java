@@ -34,25 +34,25 @@ public class UserController {
 	@Autowired
 	private CredentialsService credentialsService;
 	
-	@RequestMapping(value = {"/home"}, method = RequestMethod.GET)
-	public String home(Model model) {
-		User loggedUser = sessionData.getLoggedUser();
-		model.addAttribute("user", loggedUser);
-		
-		return "home";
-	}
+//	@RequestMapping(value = {"/home"}, method = RequestMethod.GET)
+//	public String home(Model model) {
+//		User loggedUser = sessionData.getLoggedUser();
+//		model.addAttribute("user", loggedUser);
+//		
+//		return "home";
+//	}
 	
 	@RequestMapping(value= {"/admin"},method=RequestMethod.GET)
 	public String adminPageIndex(Model model) {
 		return "admin";
 	}
 	
-	@RequestMapping(value= {"/admin/users"},method=RequestMethod.GET)
-	public String showUsersList(Model model) {
-		model.addAttribute("credentialsList",credentialsService.getAllCredentials());
-		
-		return "usersList";
-	}
+//	@RequestMapping(value= {"/admin/users"},method=RequestMethod.GET)
+//	public String showUsersList(Model model) {
+//		model.addAttribute("credentialsList",credentialsService.getAllCredentials());
+//		
+//		return "usersList";
+//	}
 	
 	@RequestMapping(value="/admin/users/{username}/delete", method=RequestMethod.POST)
 	public String removeUser(Model model,@PathVariable String username) {

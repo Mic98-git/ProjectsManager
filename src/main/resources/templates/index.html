@@ -1,30 +1,14 @@
 <html>
-<head>
-	<title>Home</title>
-	<style type="text/css">
-		body { text-align: center; }
-
-	</style>
-</head>
-<body>
-	<h1 th:text="${'Welcome ' + loggedCredentials.userName}">welcome</h1>
-	<div>
-		<h3>
-			<a th:href="@{/admin}">Admin area</a>
-		</h3>
-
-		<h3>
-			<a th:href="@{/projects}">Projects</a>
-		</h3>
-
-		<h3>
-			<a th:href="@{/user/profile}">Your profile</a>
-		</h3>
-
-		<h3>
-			<a th:href="@{/user/profile/edit}">Edit profile</a>
-		</h3>
-	</div>
-
-</body>
+	<head>
+		<title>TaskManager</title>
+	</head>
+	<body>
+		<h1>Task Manager</h1>
+		<table style="width: 100%;">
+			<tr>
+				<td><h5><a th:href="@{/login}">Login</a></h5></td>
+				<td><h5><a th:href="@{/users/register}">Register</a></h5></td>
+			</tr>
+		</table>
+	</body>
 </html>
