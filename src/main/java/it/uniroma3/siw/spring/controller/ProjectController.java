@@ -113,8 +113,8 @@ public class ProjectController {
 			return "redirect:/projects/" + project.getId();
 		}
 		model.addAttribute("loggedUser", loggedUser);
-		
-		return "addProject";
+		model.addAttribute("projectForm", project);
+		return "registerProject";
 	}
 	
 	@RequestMapping(value = {"/projects/{projectId}/delete"}, method = RequestMethod.POST)

@@ -2,6 +2,7 @@
 <head>
 </head>
 <body>
+	<div th:replace="navbar :: topbar"></div>
  <h1>Register new Project</h1>
  <form th:action="@{/projects/add}" method="post">
     <table>
@@ -10,7 +11,7 @@
           <td><label>Project Name: </label></td>
           <td><input type="text" th:field="${projectForm.name}"></td>
           <td th:if="${#fields.hasErrors('projectForm.name')}"
-          th:errors = "${projectForm.name}" th:style="'color: red'"></td>
+          		th:errors = "${projectForm.name}" th:style="'color: red'"></td>
           	</div>
   		</tr>
   		<tr>
