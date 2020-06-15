@@ -33,20 +33,21 @@ public class TaskController {
 	SessionData sessionData;
 	
 	/* projectId non servirebbe, ma lo metto per convenienza */
-	@GetMapping("/task/{taskId}")
-	public String viewTaskDetails(@PathVariable Long taskId,Model model) {
+	@GetMapping("/projects/{projectId}/task/{taskId}")
+	public String viewTaskDetails(@PathVariable Long projectId,@PathVariable Long taskId,Model model) {
 		Task task = this.taskService.getTask(taskId);
 		model.addAttribute("task",task);
+		model.addAttribute("projectId", projectId);
 		model.addAttribute("loggedUser",sessionData.getLoggedUser());
 		model.addAttribute("commentForm",new Comment());
 		
 		//FIXME Mettere possibilità di aggiungere tag, ma solo a utente proprietario delprogetto
 		
-		//System.out.print("");
+		System.out.print("");
 		return "task";
 	}
 	
-	@GetMapping("/{projectId}/task/new")
+	@GetMapping("/projects/{projectId}/task/new")
 	public String viewNewTaskForm(@PathVariable Long projectId,Model model) {
 		// trovo il progetto a partire dall'id
 		Project project = this.projectService.getProject(projectId);
@@ -64,7 +65,7 @@ public class TaskController {
 		return "newTask";
 	}
 	
-	@PostMapping("/{projectId}/task/new")
+	@PostMapping("/projects/{projectId}/task/new")
 	public String addNewTask(@ModelAttribute("task") Task task,
 			BindingResult taskBindingResult,
 			@PathVariable Long projectId) {
@@ -73,10 +74,10 @@ public class TaskController {
 		project.getProjectTasks().add(task);
 		projectService.saveProject(project);
 		
-		return "redirect:/project/" + projectId;
+		return "redirect:/projects/" + projectId;
 	}
 	
-	@GetMapping("/task/{taskId}/edit")
+	@GetMapping("/projects/{projectId}/task/{taskId}/edit")
 	public String viewEditTaskForm(@PathVariable Long taskId,Model model) {
 		Task task = taskService.getTask(taskId);
 				
@@ -86,7 +87,7 @@ public class TaskController {
 		return "editTask";
 	}
 	
-	@PostMapping("/task/edit")
+	@PostMapping("/projects/{projectId}/task/edit")
 	public String updateTask(@ModelAttribute Task task) {
 		Long taskId = task.getId();
 		this.taskService.saveTask(task);
@@ -94,12 +95,12 @@ public class TaskController {
 		return "redirect:/task/" + taskId;
 	}
 	
-	@DeleteMapping("/task/{taskId}")
-	public String deleteTask(@PathVariable Long taskId) {
+	@PostMapping("/projects/{projectId}/task/{taskId}/delete")
+	public String deleteTask(@PathVariable Long projectId, @PathVariable Long taskId) {
 		this.taskService.deleteTask(taskId);
 		
 		// reindirizza ai miei progetti
-		return "redirect:/projects/my";
+		return "redirect:/projects";
 	}
 		
 }

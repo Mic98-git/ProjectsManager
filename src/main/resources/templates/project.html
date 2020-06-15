@@ -32,14 +32,18 @@
 				<td>
 					<ul>
 					<li th:each="task : ${project.projectTasks}">
-						<div th:text="${task.name}"></div>
+						<div>
+							<a th:href="@{'/projects/' + ${project.id} + '/task/' + ${task.id}}" th:text="${task.name}">...</a>							
+						</div>
 						<div th:text="${task.description}"></div>
 					</li>
 					</ul>
 				</td>
 			</tr>
+			<tr>
+				<td colspan="2"><a th:href="@{'/projects/' + ${project.id} + '/task/new'}">Create a new Task</a></td>
+			</tr>
 		</table>
-
 
 		<table>
 			<tr>
