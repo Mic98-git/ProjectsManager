@@ -47,7 +47,7 @@ public class ProjectController {
 		List<Project> projectsList = projectService.getMyProjects(loggedUser);
 		model.addAttribute("projectsList", projectsList);
 		
-		return "sharedProjects";
+		return "myOwnedProjects";
 	}
 	
 	@RequestMapping(value = {"/projects/shared"}, method = RequestMethod.GET)
@@ -56,7 +56,7 @@ public class ProjectController {
 		List<Project> projectsList = projectService.getShareProjects(loggedUser);
 		model.addAttribute("projectsList", projectsList);
 		
-		return "myOwnedProjects";
+		return "sharedProjects";
 	}
 		
 	@RequestMapping(value = {"/projects/{projectId}"}, method = RequestMethod.GET)
