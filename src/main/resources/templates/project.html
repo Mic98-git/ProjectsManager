@@ -68,10 +68,9 @@
         		</table>
         			<input type="submit" value="Add tag" style="margin-top: 10px;">
        		</form>
-       		
         	<tr>
-        		<td>
 					<!-- Form per aggiunta di membri -->
+        		<td>
 					<form method="post" th:action="@{'/projects/' + ${project.id} + '/members/add'}" th:object="${credentialForm}">
 						<label>Choose a member to add</label><br>
 						<select th:field="*{userName}">
