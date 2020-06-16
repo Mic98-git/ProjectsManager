@@ -25,11 +25,13 @@ public class TagController {
 	@Autowired
 	private ProjectService projectService;
 	
-	@RequestMapping(value = {"/projects/{projectId}/addTag"}, method = RequestMethod.POST)
-	public String setProjectTags(@PathVariable Long projectId, @Valid @ModelAttribute("tagForm") Tag tag,
-									BindingResult projectBindingResult, Model model) {
+	@RequestMapping(value = {"/projects/{projectId}/addtag"}, method = RequestMethod.POST)
+	public String setProjectTags(@PathVariable Long projectId, 
+			@Valid @ModelAttribute("tagForm") Tag tag,
+			BindingResult projectBindingResult, Model model) {
 		Project p = this.projectService.getProject(projectId);
 		p.addTag(tag);
+		this.projectService.saveProject(p);
 		
 		return "redirect:/projects/" + projectId;
 	}
