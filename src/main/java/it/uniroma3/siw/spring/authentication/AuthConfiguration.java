@@ -54,6 +54,10 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 			.clearAuthentication(true).permitAll()
 			
 			.and()
+		      .exceptionHandling()
+		      .accessDeniedPage("/deniedAccess")
+			
+			.and()
 			.oauth2Login()
 			.defaultSuccessUrl("/home")
 		;

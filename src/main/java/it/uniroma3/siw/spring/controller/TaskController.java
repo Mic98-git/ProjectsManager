@@ -135,12 +135,22 @@ public class TaskController {
 		return "redirect:/task/" + taskId;
 	}
 	
+	@PostMapping("/projects/{projectId}/task/{taskId}/completed")
+	public String markCompletedTask(@PathVariable Long projectId, @PathVariable Long taskId) {
+		Task task = taskService.getTask(taskId);
+		task.setCompleted(true);
+		taskService.saveTask(task);
+		//System.out.println("");
+		
+		return "redirect:/projects/"+projectId+"/task/"+taskId;
+	}
+	
 	@PostMapping("/projects/{projectId}/task/{taskId}/delete")
 	public String deleteTask(@PathVariable Long projectId, @PathVariable Long taskId) {
 		this.taskService.deleteTask(taskId);
 		
 		// reindirizza ai miei progetti
-		return "redirect:/projects";
+		return "redirect:/projects/"+projectId;
 	}
 		
 }

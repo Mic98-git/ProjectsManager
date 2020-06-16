@@ -45,7 +45,7 @@ public class Project {
 	@JoinColumn(name = "project_id")
 	private List<Task> projectTasks;
 	
-	@ManyToMany (fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY)
 	private List<User> members;
 	
 	@ManyToOne(fetch=FetchType.EAGER)

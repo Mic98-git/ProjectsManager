@@ -10,6 +10,10 @@
 
 		<div th:text="${'ID: ' + task.id}">id</div>
 
+		<div>Completed: <span th:text="${task.Completed} ? 'YES' : 'NO'"></span></div>
+
+		<div><a th:href="@{'/projects/' + ${projectId}}">Back to project</a></div>
+
 		<h3>Description</h3>
 		<div th:text="${task.description}">desc</div>
 
@@ -79,6 +83,13 @@
 			</table>
 		</form>
 
+		<form th:if="${!task.completed}" method="post" th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/completed'}">
+			<input type="submit" name="" value="Mark as completed">
+		</form>
+
+		<form method="post" th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/delete'}">
+			<input type="submit" name="" value="Delete this task">
+		</form>
 
 	</body>
 </html>

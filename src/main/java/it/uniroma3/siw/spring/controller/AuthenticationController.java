@@ -56,4 +56,9 @@ public class AuthenticationController {
 		return "registerUser";
 	}
 	
+	@RequestMapping(value= {"/deniedAccess"},method=RequestMethod.GET)
+	public String deniedAccess() {
+		return "noAuth";
+	}
+	
 }

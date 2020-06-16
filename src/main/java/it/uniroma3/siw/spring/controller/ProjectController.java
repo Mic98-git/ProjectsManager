@@ -77,6 +77,11 @@ public class ProjectController {
 		model.addAttribute("project", project);
 		model.addAttribute("members", members);
 		model.addAttribute("credentialForm", new Credentials());
+		
+		// SPIEGARE Java 8
+		// comando che rimuove dalle credentials tutti gli utenti già facenti
+		// parte dei membri del project
+		credentials.removeIf(credential -> members.contains(credential.getUser()));
 		model.addAttribute("allCredentials", credentials);
 		model.addAttribute("tagForm", new Tag());
 		

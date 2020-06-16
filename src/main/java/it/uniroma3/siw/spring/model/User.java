@@ -38,8 +38,9 @@ public class User {
 	
 	@Column(nullable=false)
 	private LocalDateTime lastUpdateTimestamp;
-			
-	@ManyToMany(mappedBy="members",fetch=FetchType.LAZY)
+	
+	/* Importantissimo il cascade remove FIXME */
+	@ManyToMany(mappedBy="members",fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
 	private List<Project> visibleProjects;
 	
 	@OneToMany(cascade=CascadeType.REMOVE,mappedBy = "owner",fetch=FetchType.LAZY)
