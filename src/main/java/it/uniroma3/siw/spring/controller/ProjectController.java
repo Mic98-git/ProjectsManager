@@ -80,7 +80,7 @@ public class ProjectController {
 		model.addAttribute("allCredentials", credentials);
 		model.addAttribute("tagForm", new Tag());
 		
-		System.out.println();
+		//System.out.println();
 		
 		return "project";
 	}
