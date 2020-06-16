@@ -33,6 +33,7 @@ public class TagController {
 		p.addTag(tag);
 		this.projectService.saveProject(p);
 		
+		
 		return "redirect:/projects/" + projectId;
 	}
 	
