@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import it.uniroma3.siw.spring.controller.session.SessionData;
 import it.uniroma3.siw.spring.model.Credentials;
 import it.uniroma3.siw.spring.model.Project;
+import it.uniroma3.siw.spring.model.Tag;
 import it.uniroma3.siw.spring.model.User;
 import it.uniroma3.siw.spring.service.CredentialsService;
 import it.uniroma3.siw.spring.service.ProjectService;
@@ -77,6 +78,7 @@ public class ProjectController {
 		model.addAttribute("members", members);
 		model.addAttribute("credentialForm", new Credentials());
 		model.addAttribute("allCredentials", credentials);
+		model.addAttribute("tagForm", new Tag());
 		
 		System.out.println();
 		

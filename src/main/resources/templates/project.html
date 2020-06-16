@@ -50,11 +50,27 @@
 				<th>Tag</th>
 				<th>Manage members</th>
 			</tr>
-			<tr>
-				<td>
 					<!-- Form per il nuovo tag -->
-				</td>
-				<td>
+			<form method="post" th:action="@{'/projects/' + ${project.id} + '/addTag'}" th:object="${tagForm}">
+				<table>
+                	<tr>
+        		  		<td><label>Name</label></td>
+        		  		<td><input type="text" th:field="*{name}"></td>
+                	</tr>
+                	<tr>
+        		  		<td><label>Color</label></td>
+        		  		<td><input type="text" th:field="*{color}"></td>
+                	</tr>
+                	<tr>
+        		  		<td><label>Description</label></td>
+        		  	<td><input type="text" th:field="*{description}"></td>
+                	</tr>
+        		</table>
+        			<input type="submit" value="Add tag" style="margin-top: 10px;">
+       		</form>
+       		
+        	<tr>
+        		<td>
 					<!-- Form per aggiunta di membri -->
 					<form method="post" th:action="@{'/projects/' + ${project.id} + '/members/add'}" th:object="${credentialForm}">
 						<label>Choose a member to add</label><br>
