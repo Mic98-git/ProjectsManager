@@ -1,5 +1,7 @@
 package it.uniroma3.siw.spring.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.spring.controller.session.SessionData;
 import it.uniroma3.siw.spring.model.Comment;
 import it.uniroma3.siw.spring.model.Project;
+import it.uniroma3.siw.spring.model.Tag;
 import it.uniroma3.siw.spring.model.Task;
 import it.uniroma3.siw.spring.service.ProjectService;
+import it.uniroma3.siw.spring.service.TagService;
 import it.uniroma3.siw.spring.service.TaskService;
+import net.bytebuddy.asm.Advice.This;
 
 @Controller
 public class TaskController {
@@ -30,23 +35,59 @@ public class TaskController {
 	private ProjectService projectService;
 	
 	@Autowired
+	private TagService tagService;
+	
+	@Autowired
 	SessionData sessionData;
 	
 	/* projectId non servirebbe, ma lo metto per convenienza */
-	@GetMapping("/task/{taskId}")
-	public String viewTaskDetails(@PathVariable Long taskId,Model model) {
+	@GetMapping("/projects/{projectId}/task/{taskId}")
+	public String viewTaskDetails(@PathVariable Long projectId,@PathVariable Long taskId,Model model) {
 		Task task = this.taskService.getTask(taskId);
 		model.addAttribute("task",task);
+		model.addAttribute("projectId", projectId);
 		model.addAttribute("loggedUser",sessionData.getLoggedUser());
 		model.addAttribute("commentForm",new Comment());
 		
 		//FIXME Mettere possibilità di aggiungere tag, ma solo a utente proprietario delprogetto
+		model.addAttribute("allTaskTags",this.taskService.getTask(taskId).getTags());
 		
-		//System.out.print("");
+		List<Tag> tags = this.projectService.getProject(projectId).getTags();
+		tags.removeAll(task.getTags());
+		model.addAttribute("addableTags",tags);
+		
+		model.addAttribute("tagForm",new Tag());
+		
+		System.out.print("");
 		return "task";
 	}
 	
-	@GetMapping("/{projectId}/task/new")
+	@PostMapping("/projects/{projectId}/task/{taskId}/addtag")
+	public String addTag(@PathVariable Long projectId,
+			@PathVariable Long taskId,
+			@ModelAttribute("tagForm") Tag tag,
+			BindingResult tagBindingResult) {
+		Task task = taskService.getTask(taskId);
+		tag = this.tagService.getTagById(tag.getId());
+		tag.getTasks().add(task);
+		this.tagService.saveTag(tag);
+		
+		return "redirect:/projects/"+projectId+"/task/"+taskId;
+	}
+	
+	@PostMapping("/projects/{projectId}/task/{taskId}/deletetag/{tagId}")
+	public String removeTag(@PathVariable Long projectId,
+			@PathVariable Long taskId,
+			@PathVariable Long tagId) {
+		Tag tag = this.tagService.getTagById(tagId);
+		Task task = this.taskService.getTask(taskId);
+		tag.getTasks().remove(task);
+		this.tagService.saveTag(tag);
+		
+		return "redirect:/projects/"+projectId+"/task/"+taskId;
+	}
+	
+	@GetMapping("/projects/{projectId}/task/new")
 	public String viewNewTaskForm(@PathVariable Long projectId,Model model) {
 		// trovo il progetto a partire dall'id
 		Project project = this.projectService.getProject(projectId);
@@ -59,12 +100,12 @@ public class TaskController {
 		model.addAttribute("project",project);
 		// per il form del task nuovo
 		model.addAttribute("task",new Task());
-		//System.out.print("");
+		System.out.print("");
 		
 		return "newTask";
 	}
 	
-	@PostMapping("/{projectId}/task/new")
+	@PostMapping("/projects/{projectId}/task/new")
 	public String addNewTask(@ModelAttribute("task") Task task,
 			BindingResult taskBindingResult,
 			@PathVariable Long projectId) {
@@ -73,10 +114,10 @@ public class TaskController {
 		project.getProjectTasks().add(task);
 		projectService.saveProject(project);
 		
-		return "redirect:/project/" + projectId;
+		return "redirect:/projects/" + projectId;
 	}
 	
-	@GetMapping("/task/{taskId}/edit")
+	@GetMapping("/projects/{projectId}/task/{taskId}/edit")
 	public String viewEditTaskForm(@PathVariable Long taskId,Model model) {
 		Task task = taskService.getTask(taskId);
 				
@@ -86,7 +127,7 @@ public class TaskController {
 		return "editTask";
 	}
 	
-	@PostMapping("/task/edit")
+	@PostMapping("/projects/{projectId}/task/edit")
 	public String updateTask(@ModelAttribute Task task) {
 		Long taskId = task.getId();
 		this.taskService.saveTask(task);
@@ -94,12 +135,12 @@ public class TaskController {
 		return "redirect:/task/" + taskId;
 	}
 	
-	@DeleteMapping("/task/{taskId}")
-	public String deleteTask(@PathVariable Long taskId) {
+	@PostMapping("/projects/{projectId}/task/{taskId}/delete")
+	public String deleteTask(@PathVariable Long projectId, @PathVariable Long taskId) {
 		this.taskService.deleteTask(taskId);
 		
 		// reindirizza ai miei progetti
-		return "redirect:/projects/my";
+		return "redirect:/projects";
 	}
 		
 }

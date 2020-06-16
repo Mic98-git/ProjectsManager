@@ -8,7 +8,7 @@
 
 	<h1>Insert new task</h1>
 
-	<form th:action="@{'/' + ${project.id} + '/task/new'}" method="post" th:object="${task}">
+	<form th:action="@{'/projects/' + ${project.id} + '/task/new'}" method="post" th:object="${task}">
 		<table>
 			<tr>
 				<td>Task name</td>

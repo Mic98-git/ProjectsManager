@@ -27,9 +27,10 @@ public class CommentController {
 	@Autowired
 	SessionData sessionData;
 	
-	@PostMapping("/task/{taskId}/addcomment")
+	@PostMapping("/projects/{projectId}/task/{taskId}/addcomment")
 	public String addComment(@ModelAttribute("commentForm") Comment comment,
-			@PathVariable Long taskId) {
+			@PathVariable Long taskId,
+			@PathVariable Long projectId) {
 		comment.setUser(sessionData.getLoggedUser());
 		
 		Task task = taskService.getTask(taskId);
@@ -38,7 +39,7 @@ public class CommentController {
 		
 		//System.out.println();
 		
-		return "redirect:/task/"+taskId;
+		return "redirect:/projects/" + projectId + "/task/"+taskId;
 	}
 
 }

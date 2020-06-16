@@ -6,25 +6,69 @@
 	
 	<body>
 		<div th:replace="navbar :: topbar"></div>
-		<td>Name</td>
-		<td th:text="${project.name}">...</td>
-		<td>Description</td>
-		<td th:text="${project.description}">...</td>
-		<div th:if="${members.size() > 0}">
-			<h3>Share with:</h3>
-			<ul>
-				<li th:each="member : ${members}">
-					<div th:text ="${member.name} + ' ' + ${member.lastName}"></div>
-				</li>
-			</ul>
-		</div>
-		<h3>Tasks</h3>
-		<ul>
-			<li th:each="task : ${project.projectTasks}">
-				<div th:text="${task.name}"></div>
-				<div th:text="${task.description}"></div>
-			</li>
-		</ul>
-				
+		<h2 th:text="${project.name}">...</h2>
+		
+		<table>
+			<tr>
+				<td>
+					<h3>Description</h3>
+				</td>
+				<td th:text="${project.description}">...</td>
+			</tr>
+			<tr>
+				<td>
+					<h3>Shared with:</h3>
+				</td>
+				<td>
+					<ul>
+						<li th:each="member : ${members}">
+							<div th:text ="${member.name} + ' ' + ${member.lastName}"></div>
+						</li>
+					</ul>					
+				</td>
+			</tr>
+			<tr>
+				<td><h3>Tasks</h3></td>
+				<td>
+					<ul>
+					<li th:each="task : ${project.projectTasks}">
+						<div>
+							<a th:href="@{'/projects/' + ${project.id} + '/task/' + ${task.id}}" th:text="${task.name}">...</a>							
+						</div>
+						<div th:text="${task.description}"></div>
+					</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><a th:href="@{'/projects/' + ${project.id} + '/task/new'}">Create a new Task</a></td>
+			</tr>
+		</table>
+
+		<table>
+			<tr>
+				<th>Tag</th>
+				<th>Manage members</th>
+			</tr>
+			<tr>
+				<td>
+					<!-- Form per il nuovo tag -->
+				</td>
+				<td>
+					<!-- Form per aggiunta di membri -->
+					<form method="post" th:action="@{'/projects/' + ${project.id} + '/members/add'}" th:object="${credentialForm}">
+						<label>Choose a member to add</label><br>
+						<select th:field="*{userName}">
+							<th:block th:each="credential : ${allCredentials}">
+								<option th:value="${credential.userName}" 
+									th:text="${credential.userName}"></option>				
+							</th:block>
+						</select><br>
+
+						<input type="submit" name="memberButton" value="Add member">
+					</form>
+				</td>
+			</tr>
+		</table>	
 	</body>
 </html>
