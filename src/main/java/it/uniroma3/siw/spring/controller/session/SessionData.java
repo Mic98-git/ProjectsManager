@@ -1,5 +1,7 @@
 package it.uniroma3.siw.spring.controller.session;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -37,7 +39,7 @@ public class SessionData {
 	private void update() {
 		Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserDetails loggedUserDetails = (UserDetails)obj;
-		
+				
 		this.credentials = this.credentialsRepository.findByUserName(loggedUserDetails.getUsername()).get();
 		//this.credentials.setPassword("[PROTECTED]");
 		this.user = this.credentials.getUser();

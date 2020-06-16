@@ -52,6 +52,10 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 			.invalidateHttpSession(true)
 			
 			.clearAuthentication(true).permitAll()
+			
+			.and()
+			.oauth2Login()
+			.defaultSuccessUrl("/home")
 		;
 	}
 	

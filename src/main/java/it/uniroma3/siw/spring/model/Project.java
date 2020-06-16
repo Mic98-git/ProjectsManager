@@ -37,7 +37,7 @@ public class Project {
 	@Column(nullable=false)
 	private LocalDateTime lastUpdateTimestamp;
 	
-	@OneToMany (cascade = CascadeType.REMOVE)
+	@OneToMany (cascade = CascadeType.ALL)
 	@JoinColumn(name = "project_id")
 	private List<Tag> tags;
 	
