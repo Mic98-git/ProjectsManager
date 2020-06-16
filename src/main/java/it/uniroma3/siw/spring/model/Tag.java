@@ -17,13 +17,13 @@ public class Tag {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(nullable = false, length = 2000)
+	@Column(nullable = false, length = 100)
 	private String name;
 	
-	@Column
+	@Column(nullable = false, length = 100)
 	private String color;
 	
-	@Column(nullable = false, length = 2000)
+	@Column(length = 1000)
 	private String description;
 	
 	@ManyToMany
