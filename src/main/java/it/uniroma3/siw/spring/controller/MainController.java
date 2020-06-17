@@ -7,12 +7,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.spring.controller.session.SessionData;
+import it.uniroma3.siw.spring.model.User;
+import it.uniroma3.siw.spring.service.ProjectService;
 
 @Controller
 public class MainController {
 	
 	@Autowired
 	SessionData sessionData;
+	
+	@Autowired
+	ProjectService projectService;
 	
 	public MainController() {
 		
@@ -26,8 +31,10 @@ public class MainController {
 	@RequestMapping(value = {"/home"}, method = RequestMethod.GET)
 	public String index(Model model) {
 		//System.out.println("");
-		model.addAttribute("loggedUser",sessionData.getLoggedUser());
+		User currentUser = sessionData.getLoggedUser();
+		model.addAttribute("loggedUser",currentUser);
 		model.addAttribute("loggedCredentials",sessionData.getLoggedCredentials());
+		model.addAttribute("projectsList",projectService.getShareProjects(currentUser));
 		
 		return "home";
 	}

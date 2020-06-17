@@ -110,7 +110,7 @@ public class TaskController {
 			BindingResult taskBindingResult,
 			@PathVariable Long projectId) {
 		Project project = projectService.getProject(projectId);
-		//System.out.println(project.getName());
+		//System.out.println();
 		project.getProjectTasks().add(task);
 		projectService.saveProject(project);
 		

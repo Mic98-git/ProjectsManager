@@ -29,7 +29,6 @@ public class TagController {
 	public String newTagForm(@PathVariable Long projectId,Model model) {
 		model.addAttribute("tagForm", new Tag());
 		model.addAttribute("projectId", projectId);
-		String b;
 		
 		return "newTag";
 	}
