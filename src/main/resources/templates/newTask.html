@@ -24,12 +24,14 @@
 
 	<main class="container" style="margin-top: 30px; margin-left: 40px;">
 		<h1>Insert new task</h1>
-		<form th:action="@{'/projects/' + ${project.id} + '/task/new'}" method="post" th:object="${task}">
+		<form th:action="@{'/projects/' + ${project.id} + '/task/new'}" method="post" th:object="${taskForm}">
 			<div>Task name</div>
 			<input type="text" th:field="*{name}">
+			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:style="'color: red'"></span>
 
 			<div>Task description</div>
 			<textarea th:field="*{description}"></textarea>
+			<div><span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:style="'color: red'"></span></div>
 
 			<div class="form-check">
 				<input type="checkbox" th:field="*{completed}" name="completed" class="form-check-input"/>
