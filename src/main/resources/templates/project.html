@@ -1,97 +1,124 @@
 <html>
-	<head>
-		<title>TaskManager</title>
-		<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
-	</head>
-	
-	<body>
-		<div th:replace="navbar :: topbar"></div>
-		<h2 th:text="${project.name}">...</h2>
-		
-		<table>
-			<tr>
-				<td>
-					<h3>Description</h3>
-				</td>
-				<td th:text="${project.description}">...</td>
-			</tr>
-			<tr>
-				<td>
-					<h3>Shared with:</h3>
-				</td>
-				<td>
-					<ul>
-						<li th:each="member : ${members}">
-							<div th:text ="${member.name} + ' ' + ${member.lastName}"></div>
-						</li>
-					</ul>					
-				</td>
-			</tr>
-			<tr>
-				<td><h3>Tasks</h3></td>
-				<td>
-					<ul>
-					<li th:each="task : ${project.projectTasks}">
-						<div>
-							<a th:href="@{'/projects/' + ${project.id} + '/task/' + ${task.id}}" th:text="${task.name}">...</a>	
-						</div>
-						<div th:text="${task.description}"></div>
-					</li>
-					</ul>
-				</td>
-			</tr>
-			
-			<tr>
-				<td colspan="2"><a th:href="@{'/projects/' + ${project.id} + '/task/new'}">Create a new Task</a></td>
-			</tr>
-			<br>
-			<tr>
-				<td><h3>Tags</h3></td>
-				<td>
-					<ul>
-					<li th:each="tag : ${project.tags}">
-						<div>
-							<a th:text="${tag.name}">...</a>							
-						</div>
-						<div th:text="${tag.description}"></div>
-						<div th:text="${tag.color}"></div>
-					</li>
-					</ul>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2"><a th:href="@{'/projects/' + ${project.id} + '/addtag'}">Create a new Tag</a></td>
-			</tr>
-		</table>
-		<br>			
-       		<tr>
-       			<td><h3>Manage members</h3></td>
-					<!-- Form per aggiunta di membri -->
-        		<td>
-					<form method="post" th:action="@{'/projects/' + ${project.id} + '/members/add'}" th:object="${credentialForm}">
-						<label>Choose a member to add</label><br>
-						<select th:field="*{userName}">
-							<th:block th:each="credential : ${allCredentials}">
-								<option th:value="${credential.userName}" 
-									th:text="${credential.userName}"></option>				
-							</th:block>
-						</select><br>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-						<input type="submit" name="memberButton" value="Add member">
-					</form>
-				</td>
-			</tr>
+	<title th:text="${'Task: ' + task.name}">Task    
+	</title>
+
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
+
+	<!-- Bootstrap core CSS -->
+	<link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
+
+	<link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet"> 
+</head>
+
+<body>
+	<div th:replace="navbar :: topbar"></div>
+	<main class="container" style="margin-top: 30px; margin-left: 40px;">
+
+		<!-- Contenuto principale -->
+		<div role="main" class="col-md-9">
+
+			<h1 th:text="${project.name}">...</h1>
+
+
+
 			
-			<td>
-					<form method="post" th:action="@{'/projects/' + ${project.id} + '/delete'}" th:object="${projectForm}">
-						<input type="submit" name="deleteProject" value ="Delete project">
-					</form>
-			</td>
+			<h3>Description</h3>
 			
-			<td>
-					<form method="get" th:action="@{'/projects/' + ${project.id} + '/edit'}" th:object="${projectForm}">
-						<input type="submit" name="editProject" value ="Edit project">
-			</form>
-		</table>	
-	</body>
+			<div th:text="${project.description}"></div>
+
+
+			
+			<h3>Shared with:</h3>
+			
+			
+			<ul>
+				<li th:each="member : ${members}">
+					<div th:text ="${member.name} + ' ' + ${member.lastName}"></div>
+				</li>
+			</ul>					
+			
+
+
+			<h3>Tasks</h3>
+			
+			<ul>
+				<li th:each="task : ${project.projectTasks}">
+					<div>
+						<a th:href="@{'/projects/' + ${project.id} + '/task/' + ${task.id}}" th:text="${task.name}">...</a>	
+					</div>
+					<div th:text="${task.description}"></div>
+				</li>
+			</ul>
+			
+
+
+
+			<a th:href="@{'/projects/' + ${project.id} + '/task/new'}">Create a new Task</a>
+
+			<h3>Tags</h3>
+			
+			<ul>
+				<li th:each="tag : ${project.tags}">
+					<div>
+						<a th:text="${tag.name}">...</a>							
+					</div>
+					<div th:text="${tag.description}"></div>
+					<div th:text="${tag.color}"></div>
+				</li>
+			</ul>
+			
+
+
+			<a th:href="@{'/projects/' + ${project.id} + '/addtag'}">Create a new Tag</a>
+
+
+			<br>			
+
+			<h3>Manage members</h3>
+			<!-- Form per aggiunta di membri -->
+
+			<form method="post" th:action="@{'/projects/' + ${project.id} + '/members/add'}" th:object="${credentialForm}">
+				<label>Choose a member to add</label><br>
+				<select th:field="*{userName}">
+					<th:block th:each="credential : ${allCredentials}">
+					<option th:value="${credential.userName}" 
+					th:text="${credential.userName}"></option>				
+				</th:block>
+			</select><br>
+
+			<input type="submit" name="memberButton" value="Add member">
+		</form>
+
+	</div>
+
+
+	<!-- SIDEBAR -->
+	<div class="col-md-3">
+
+
+
+		<form method="post" th:action="@{'/projects/' + ${project.id} + '/delete'}" th:object="${projectForm}">
+			<input type="submit" name="deleteProject" value ="Delete project">
+		</form>
+
+
+
+		<form method="get" th:action="@{'/projects/' + ${project.id} + '/edit'}" th:object="${projectForm}">
+			<input type="submit" name="editProject" value ="Edit project">
+		</form>
+
+	</div>
+	
+</main>
+</body>
 </html>
