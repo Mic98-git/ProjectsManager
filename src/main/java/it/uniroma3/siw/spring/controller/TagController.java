@@ -25,6 +25,15 @@ public class TagController {
 	@Autowired
 	private ProjectService projectService;
 	
+	@RequestMapping(value = {"/projects/{projectId}/addtag"}, method = RequestMethod.GET)
+	public String newTagForm(@PathVariable Long projectId,Model model) {
+		model.addAttribute("tagForm", new Tag());
+		model.addAttribute("projectId", projectId);
+		String b;
+		
+		return "newTag";
+	}
+	
 	@RequestMapping(value = {"/projects/{projectId}/addtag"}, method = RequestMethod.POST)
 	public String setProjectTags(@PathVariable Long projectId, 
 			@Valid @ModelAttribute("tagForm") Tag tag,
