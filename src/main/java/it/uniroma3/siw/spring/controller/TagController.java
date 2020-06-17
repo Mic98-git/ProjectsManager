@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.spring.model.Project;
 import it.uniroma3.siw.spring.model.Tag;
+import it.uniroma3.siw.spring.model.Task;
 import it.uniroma3.siw.spring.service.ProjectService;
 import it.uniroma3.siw.spring.service.TagService;
 
@@ -49,6 +52,31 @@ public class TagController {
 	public String removeTag(@PathVariable Long tagId, @PathVariable Long projectId) {
 		tagService.deleteTagById(tagId);
 		return "redirect:/projects/" + projectId;
+	}
+	
+	@GetMapping("/projects/{projectId}/tags/{tagId}/edit")
+	public String viewEditTagForm(@PathVariable Long projectId,
+			@PathVariable Long tagId,Model model) {
+		Tag tag = this.tagService.getTagById(tagId);
+				
+		// per il form del task da editare	
+		model.addAttribute("tagForm", tag);
+		model.addAttribute("projectId", projectId);
+		
+		return "editTag";
+	}
+	
+	@PostMapping("/projects/{projectId}/tags/{tagId}/edit")
+	public String updateTag(@PathVariable Long projectId,
+			@PathVariable Long tagId,
+			@ModelAttribute Tag tag) {
+		Tag t = this.tagService.getTagById(tagId);
+		t.setName(tag.getName());
+		t.setDescription(tag.getDescription());
+		
+		this.tagService.saveTag(t);
+		
+		return "redirect:/projects/"+ projectId +"/tags/" + tagId;
 	}
 	
 }

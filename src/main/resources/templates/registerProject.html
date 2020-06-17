@@ -12,20 +12,22 @@
         	<div>
           <td><label>Project Name: </label></td>
           <td><input type="text" th:field="${projectForm.name}"></td>
-          <td th:if="${#fields.hasErrors('projectForm.name')}"
-          		th:errors = "${projectForm.name}" th:style="'color: red'"></td>
+          <div th:if="${#fields.hasErrors('projectForm.name')}"
+          		th:errors = "${projectForm.name}" th:style="'color: red'">
           	</div>
+          </div>
   		</tr>
   		<tr>
       		<div>
           		<td><label>Description: </label></td>
           		<td><input type="text" th:field="${projectForm.description}"></td>
-          		<td th:if="${#fields.hasErrors('projectForm.description')}"
-          		th:errors = "${projectForm.description}" th:style="'color: red'"></td>
+          		<div th:if="${#fields.hasErrors('projectForm.description')}"
+          		th:errors = "${projectForm.description}" th:style="'color: red'">
       		</div>
+      	</div>
   		</tr>	
 </table>
-<input type="submit" value="Salva">
+<input type="submit" value="Save">
 </form>        
 </body>
 </html>

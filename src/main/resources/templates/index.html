@@ -9,8 +9,6 @@
 
     <title>Task Manager - Home</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/cover/">
-
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -32,7 +30,7 @@
           <nav class="nav nav-masthead justify-content-center">
             <a class="nav-link active" href="#">Home</a>
             <a class="nav-link" th:href="@{/users/register}">Register</a>
-            <a class="nav-link" th:href="@{/login}">Login</a>
+            <a class="nav-link" th:href="@{/home}">Login</a>
           </nav>
         </div>
       </header>
@@ -42,7 +40,7 @@
         <p class="lead">Organizza i tuoi progetti. Progetto associato alla prova d'esame di Sistemi Informativi su Web.<br>Progetto svolto da Fippi Daniele e Celli Michael</p>
         <p class="lead">
           <a th:href="@{/users/register}" class="btn btn-lg btn-secondary">Register</a>
-          <a th:href="@{/login}" class="btn btn-lg btn-secondary">Login</a>
+          <a th:href="@{/home}" class="btn btn-lg btn-secondary">Login</a>
         </p>
       </main>
 
@@ -62,6 +60,7 @@
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="../../assets/js/vendor/popper.min.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
 

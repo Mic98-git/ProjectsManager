@@ -27,7 +27,7 @@
 		<form th:action="@{'/projects/' + ${project.id} + '/task/new'}" method="post" th:object="${task}">
 			<div>Task name</div>
 			<input type="text" th:field="*{name}">
-
+			
 			<div>Task description</div>
 			<textarea th:field="*{description}"></textarea>
 

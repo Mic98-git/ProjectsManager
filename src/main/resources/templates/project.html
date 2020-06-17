@@ -17,37 +17,30 @@
 	<link href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
 
 	<link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet"> 
+
 </head>
 
 <body>
-	<div th:replace="navbar :: topbar"></div>
+	<th:block th:replace="navbar :: topbar"></th:block>
 	<main class="container" style="margin-top: 30px; margin-left: 40px;">
 
 		<!-- Contenuto principale -->
 		<div role="main" class="col-md-9">
+			<h1 th:text="${project.name}">...
+			</h1>
 
-			<h1 th:text="${project.name}">...</h1>
-
-
-
-			
 			<h3>Description</h3>
-			
-			<div th:text="${project.description}"></div>
+			<br>
+			<div th:text="${project.description}">
+			</div>
 
-
-			
 			<h3>Shared with:</h3>
-			
-			
 			<ul>
 				<li th:each="member : ${members}">
 					<div th:text ="${member.name} + ' ' + ${member.lastName}"></div>
 				</li>
 			</ul>					
 			
-
-
 			<h3>Tasks</h3>
 			
 			<ul>
@@ -59,10 +52,9 @@
 				</li>
 			</ul>
 			
-
-
-
 			<a th:href="@{'/projects/' + ${project.id} + '/task/new'}">Create a new Task</a>
+			
+			<br>			
 
 			<h3>Tags</h3>
 			
@@ -76,16 +68,17 @@
 				</li>
 			</ul>
 			
-
-
 			<a th:href="@{'/projects/' + ${project.id} + '/addtag'}">Create a new Tag</a>
 
 
-			<br>			
+			<br>
+		</main>
 
+	<!-- SIDEBAR -->
+	<div class="col-md-3">
+			<div style="margin-bottom: 10px;">
 			<h3>Manage members</h3>
 			<!-- Form per aggiunta di membri -->
-
 			<form method="post" th:action="@{'/projects/' + ${project.id} + '/members/add'}" th:object="${credentialForm}">
 				<label>Choose a member to add</label><br>
 				<select th:field="*{userName}">
@@ -100,24 +93,25 @@
 
 	</div>
 
-
-	<!-- SIDEBAR -->
-	<div class="col-md-3">
-
-
-
+		<div style="margin-bottom: 10px;">
 		<form method="post" th:action="@{'/projects/' + ${project.id} + '/delete'}" th:object="${projectForm}">
 			<input type="submit" name="deleteProject" value ="Delete project">
 		</form>
-
-
-
+		</div>
+		<br>
+		<div style="margin-bottom: 10px;">
 		<form method="get" th:action="@{'/projects/' + ${project.id} + '/edit'}" th:object="${projectForm}">
 			<input type="submit" name="editProject" value ="Edit project">
 		</form>
+		</div>
+		<br>
+		<div><a th:href="@{'/projects/'}">Back to my projects</a></div>
+    </div>
 
-	</div>
-	
-</main>
+     <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Task Manager App (SIW)</span>
+      </div>
+    </footer>
 </body>
 </html>
