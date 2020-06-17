@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.spring.controller.session.SessionData;
@@ -41,15 +43,16 @@ public class TaskController {
 	SessionData sessionData;
 	
 	/* projectId non servirebbe, ma lo metto per convenienza */
-	@GetMapping("/projects/{projectId}/task/{taskId}")
-	public String viewTaskDetails(@PathVariable Long projectId,@PathVariable Long taskId,Model model) {
+	@RequestMapping(value = {"/projects/{projectId}/task/{taskId}"}, method = RequestMethod.GET)
+	public String viewTaskDetails(@PathVariable Long projectId,@PathVariable Long taskId,
+			
+			Model model) {
 		Task task = this.taskService.getTask(taskId);
 		model.addAttribute("task",task);
 		model.addAttribute("projectId", projectId);
 		model.addAttribute("loggedUser",sessionData.getLoggedUser());
 		model.addAttribute("commentForm",new Comment());
 		
-		//FIXME Mettere possibilità di aggiungere tag, ma solo a utente proprietario delprogetto
 		model.addAttribute("allTaskTags",this.taskService.getTask(taskId).getTags());
 		
 		List<Tag> tags = this.projectService.getProject(projectId).getTags();

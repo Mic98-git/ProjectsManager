@@ -22,9 +22,9 @@ public class CommentValidator implements Validator {
 		
 		Comment comment = (Comment) o;
 		
-		if(comment.getContent().trim().isEmpty())
+		if(comment.getContent().trim().isEmpty()) {
 			errors.rejectValue("content", "required");
-		else if(comment.getContent().length() < MIN_COMMENT_LENGTH || 
+		} else if(comment.getContent().length() < MIN_COMMENT_LENGTH || 
 				comment.getContent().length() > MAX_COMMENT_LENGTH)
 			errors.rejectValue("content", "size");
 	}
