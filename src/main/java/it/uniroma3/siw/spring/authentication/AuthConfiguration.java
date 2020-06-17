@@ -29,7 +29,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 			
-			.antMatchers(HttpMethod.GET, "/","/login","/users/register").permitAll()
+			.antMatchers(HttpMethod.GET, "/","/login","/users/register","/img/public/**").permitAll()
 			
 			.antMatchers(HttpMethod.POST, "/login","/users/register").permitAll()
 			

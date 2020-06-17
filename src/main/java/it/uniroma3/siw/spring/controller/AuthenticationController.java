@@ -33,6 +33,7 @@ public class AuthenticationController {
 	public String showRegisterForm(Model model) {
 		model.addAttribute("userForm",new User());
 		model.addAttribute("credentialsForm",new Credentials());
+		System.out.print("");
 		
 		return "registerUser";
 	}
@@ -50,7 +51,7 @@ public class AuthenticationController {
 		if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
 			credentials.setUser(user);
 			credentialsService.saveCredentials(credentials);
-			return "registrationSuccessful";
+			return "redirect:/";
 		}
 		
 		return "registerUser";
