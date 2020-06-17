@@ -74,7 +74,7 @@ public class UserController {
 	public String showEditUserForm(Model model) {
 		model.addAttribute("userForm",sessionData.getLoggedUser());
 		
-		return "userForm";
+		return "editUser";
 	}
 	
 	@RequestMapping(value= {"/user/profile/edit"},method=RequestMethod.POST)
@@ -83,7 +83,7 @@ public class UserController {
 		loggedUser.setName(user.getName());
 		loggedUser.setLastName(user.getLastName());
 		this.userService.saveUser(loggedUser);
-		//System.out.println();
+		System.out.println();
 		return "redirect:/user/profile/edit";
 	}
 	
@@ -94,7 +94,7 @@ public class UserController {
 		
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("credentialsList", allCredentials);
-		//System.out.println();
+		System.out.println();
 		
 		return "allUsers";
 	}

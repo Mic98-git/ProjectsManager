@@ -58,7 +58,7 @@ public class TaskController {
 		
 		model.addAttribute("tagForm",new Tag());
 		
-		System.out.print("");
+		//System.out.print("");
 		return "task";
 	}
 	
@@ -100,7 +100,7 @@ public class TaskController {
 		model.addAttribute("project",project);
 		// per il form del task nuovo
 		model.addAttribute("task",new Task());
-		System.out.print("");
+		//System.out.print("");
 		
 		return "newTask";
 	}
@@ -118,21 +118,29 @@ public class TaskController {
 	}
 	
 	@GetMapping("/projects/{projectId}/task/{taskId}/edit")
-	public String viewEditTaskForm(@PathVariable Long taskId,Model model) {
+	public String viewEditTaskForm(@PathVariable Long projectId,
+			@PathVariable Long taskId,Model model) {
 		Task task = taskService.getTask(taskId);
 				
 		// per il form del task da editare	
 		model.addAttribute("taskForm",task);
+		model.addAttribute("projectId", projectId);
 		
 		return "editTask";
 	}
 	
-	@PostMapping("/projects/{projectId}/task/edit")
-	public String updateTask(@ModelAttribute Task task) {
-		Long taskId = task.getId();
+	@PostMapping("/projects/{projectId}/task/{taskId}/edit")
+	public String updateTask(@PathVariable Long projectId,
+			@PathVariable Long taskId,
+			@ModelAttribute Task task) {
+		Task t = taskService.getTask(taskId);
+		t.setName(task.getName());
+		t.setDescription(task.getDescription());
+		t.setCompleted(task.isCompleted());
+		
 		this.taskService.saveTask(task);
 		
-		return "redirect:/task/" + taskId;
+		return "redirect:/projects/"+ projectId +"/task/" + taskId;
 	}
 	
 	@PostMapping("/projects/{projectId}/task/{taskId}/completed")
@@ -140,7 +148,7 @@ public class TaskController {
 		Task task = taskService.getTask(taskId);
 		task.setCompleted(true);
 		taskService.saveTask(task);
-		//System.out.println("");
+		System.out.println("");
 		
 		return "redirect:/projects/"+projectId+"/task/"+taskId;
 	}
