@@ -83,7 +83,7 @@ public class UserController {
 		loggedUser.setName(user.getName());
 		loggedUser.setLastName(user.getLastName());
 		this.userService.saveUser(loggedUser);
-		System.out.println();
+		//System.out.println();
 		return "redirect:/user/profile/edit";
 	}
 	
