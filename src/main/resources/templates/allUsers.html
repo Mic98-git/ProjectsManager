@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>All users</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+<body>
+	<th:block th:replace="navbar :: topbar"></th:block>
+
+	<h1>Registered Users</h1>
+
+	<table>
+		<tr th:each="credential : ${credentialsList}">
+			<td th:text="${credential.userName}"></td>
+			<td th:text="${credential.user.name}"></td>
+			<td th:text="${credential.user.lastName}"></td>
+			<td>
+				<form method="post" th:action="@{/admin/users/{username}/delete(username=${credential.userName})}">
+					<button type="submit" name="submit" value="value">DELETE</button>
+				</form>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -33,7 +33,7 @@
 					<ul>
 					<li th:each="task : ${project.projectTasks}">
 						<div>
-							<a th:href="@{'/projects/' + ${project.id} + '/task/' + ${task.id}}" th:text="${task.name}">...</a>							
+							<a th:href="@{'/projects/' + ${project.id} + '/task/' + ${task.id}}" th:text="${task.name}">...</a>	
 						</div>
 						<div th:text="${task.description}"></div>
 					</li>
