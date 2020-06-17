@@ -1,34 +1,68 @@
 <html>
 <head>
 	<title>Home</title>
-	<style type="text/css">
-		body { text-align: center; }
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-	</style>
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
+
+	<!-- Bootstrap core CSS -->
+	<link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
+
+	<link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet"> 
 </head>
 <body>
-	<h1 th:text="${'Welcome ' + loggedCredentials.userName}">welcome</h1>
-	<div>
-		<h3>
-			<a th:href="@{/admin}">Admin area</a>
-		</h3>
+	<th:block th:replace="navbar :: topbar"></th:block>
 
-		<h3>
-			<a th:href="@{/projects}">Projects</a>
-		</h3>
+	<main class="container" style="margin-top: 30px; margin-left: 40px;">
 
-		<h3>
-			<a th:href="@{/projects/shared}">Shared Projects</a>
-		</h3>
+		<h1 th:text="${'Welcome ' + loggedCredentials.userName}">welcome</h1>
+		<a th:href="@{/projects/add}" class="btn btn-primary">Create a new project</a>
 
-		<h3>
-			<a th:href="@{/user/profile}">Your profile</a>
-		</h3>
+		<nav class="nav">
+			<a class="nav-link active" th:href="@{/home}">All projects</a>
+			<a class="nav-link" th:href="@{/projects}">Owned</a>
+			<!--<a class="nav-link" th:href="@{/projects/shared}">Shared with you</a>-->
+		</nav>
 
-		<h3>
-			<a th:href="@{/user/profile/edit}">Edit profile</a>
-		</h3>
-	</div>
+		<div class="media position-relative" th:each="project : ${projectsList}" style="margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #999;">
+			<svg class="bd-placeholder-img mr-3" width="144" height="144" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Generic placeholder image"><title>Generic placeholder image</title><rect width="100%" height="100%" fill="#868e96" /></svg>
+  
+			<div class="media-body">
+				<h5 class="mt-0" th:text="${project.name}">Nome progetto</h5>
+				<p th:text="${project.description}">Descrizione proj</p>
+				<a th:href="'/projects/' + ${project.id}" class="stretched-link">View project</a>
+			</div>
+		</div>	
 
+		<!--<div>
+			<h3>
+				<a th:href="@{/admin}">Admin area</a>
+			</h3>
+
+			<h3>
+				<a th:href="@{/projects}">Projects</a>
+			</h3>
+
+			<h3>
+				<a th:href="@{/projects/shared}">Shared Projects</a>
+			</h3>
+
+			<h3>
+				<a th:href="@{/user/profile}">Your profile</a>
+			</h3>
+
+			<h3>
+				<a th:href="@{/user/profile/edit}">Edit profile</a>
+			</h3>
+		</div>-->
+
+	</main>
 </body>
 </html>
