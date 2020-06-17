@@ -24,13 +24,13 @@
 		<h1>Projects shared with me</h1>
 		<a th:href="@{/projects/add}" class="btn btn-primary">Create a new project</a>	
 
-		<nav class="nav">
+		<nav class="nav nav-tabs">
 			<!--<a class="nav-link" th:href="@{/home}">All projects</a>-->
 			<a class="nav-link" th:href="@{/projects}">Owned</a>
 			<a class="nav-link active" th:href="@{/projects/shared}">Shared with you</a>
 		</nav>
 
-		<div class="media position-relative" th:each="project : ${projectsList}" style="margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #999;">
+		<div class="media position-relative" th:each="project : ${projectsList}" style="margin-bottom: 10px; margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #999;">
 			<svg class="bd-placeholder-img mr-3" width="144" height="144" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Generic placeholder image"><title>Generic placeholder image</title><rect width="100%" height="100%" fill="#868e96" /></svg>
   
 			<div class="media-body">
