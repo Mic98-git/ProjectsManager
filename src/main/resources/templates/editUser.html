@@ -31,12 +31,14 @@ xmlns:th="http://www.thymeleaf.org">
             <div class="row">
                 <div class="col-md-3">
                     <label>Name</label>
-                    <input type="text" th:field="*{name}">
+                    <input type="text" th:field="*{name}"><br>
+                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:style="'color: red'"></span>
                 </div>
 
                 <div class="col-md-3">
                     <label>Last name</label>
-                    <input type="text" th:field="*{lastName}">
+                    <input type="text" th:field="*{lastName}"><br>
+                    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:style="'color: red'"></span>
                 </div>
             </div>
             <input type="submit" value="Save" style="margin-top: 10px;" class="btn btn-primary">
