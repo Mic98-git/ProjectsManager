@@ -62,8 +62,10 @@
               <strong class="d-block text-gray-dark" th:text="${loggedUser.name + ' ' + loggedUser.lastName}">@username</strong>
               <br>
               <textarea class="form-control" th:field="*{content}" placeholder="Write your comment..."></textarea><br>
-              <!--<div th:if="${#fields.hasErrors('commentForm.content')}"
-              th:errors = "${commentForm.content}" th:style="'color: red'">--><br>
+              <div th:if="${#fields.hasErrors('content')}"
+               th:style="'color: red'">
+                <span th:errors = "*{content}"></span>
+              </div><br>
               <input type="submit" value="Send comment" class="btn btn-primary">
             </p>
           </form>

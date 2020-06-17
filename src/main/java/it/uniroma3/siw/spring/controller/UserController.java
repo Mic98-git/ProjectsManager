@@ -21,6 +21,7 @@ import it.uniroma3.siw.spring.model.Credentials;
 import it.uniroma3.siw.spring.model.User;
 import it.uniroma3.siw.spring.service.CredentialsService;
 import it.uniroma3.siw.spring.service.UserService;
+import it.uniroma3.siw.spring.validator.UserValidator;
 
 @Controller
 public class UserController {
@@ -34,25 +35,13 @@ public class UserController {
 	@Autowired
 	private CredentialsService credentialsService;
 	
-//	@RequestMapping(value = {"/home"}, method = RequestMethod.GET)
-//	public String home(Model model) {
-//		User loggedUser = sessionData.getLoggedUser();
-//		model.addAttribute("user", loggedUser);
-//		
-//		return "home";
-//	}
+	@Autowired
+	private UserValidator userValidator;
 	
 	@RequestMapping(value= {"/admin"},method=RequestMethod.GET)
 	public String adminPageIndex(Model model) {
 		return "admin";
 	}
-	
-//	@RequestMapping(value= {"/admin/users"},method=RequestMethod.GET)
-//	public String showUsersList(Model model) {
-//		model.addAttribute("credentialsList",credentialsService.getAllCredentials());
-//		
-//		return "usersList";
-//	}
 	
 	@RequestMapping(value="/admin/users/{username}/delete", method=RequestMethod.POST)
 	public String removeUser(Model model,@PathVariable String username) {
@@ -78,12 +67,19 @@ public class UserController {
 	}
 	
 	@RequestMapping(value= {"/user/profile/edit"},method=RequestMethod.POST)
-	public String editUser(@Valid @ModelAttribute("userForm") User user) {
+	public String editUser(@Valid @ModelAttribute("userForm") User user,
+			Model model,
+			BindingResult userBindingResult) {
+		this.userValidator.validate(user, userBindingResult);
+		if(userBindingResult.hasErrors()) {
+			return "editUser";
+		}
+		
 		User loggedUser = this.sessionData.getLoggedUser();
 		loggedUser.setName(user.getName());
 		loggedUser.setLastName(user.getLastName());
 		this.userService.saveUser(loggedUser);
-		System.out.println();
+		//System.out.println();
 		return "redirect:/user/profile/edit";
 	}
 	
@@ -94,7 +90,7 @@ public class UserController {
 		
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("credentialsList", allCredentials);
-		System.out.println();
+		//System.out.println();
 		
 		return "allUsers";
 	}
