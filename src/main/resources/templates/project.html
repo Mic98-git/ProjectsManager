@@ -40,16 +40,28 @@
 					</ul>
 				</td>
 			</tr>
+			
 			<tr>
 				<td colspan="2"><a th:href="@{'/projects/' + ${project.id} + '/task/new'}">Create a new Task</a></td>
 			</tr>
-		</table>
-
-		<table>
+			<br>
 			<tr>
-				<th>Tag</th>
-				<th>Manage members</th>
+				<td><h3>Tags</h3></td>
+				<td>
+					<ul>
+					<li th:each="tag : ${project.tags}">
+						<div>
+							<a th:text="${tag.name}">...</a>							
+						</div>
+						<div th:text="${tag.description}"></div>
+						<div th:text="${tag.color}"></div>
+					</li>
+					</ul>
+				</td>
 			</tr>
+		</table>
+		<br>
+		<td><h3>Create a new tag</h3></td>
 					<!-- Form per il nuovo tag -->
 			<form method="post" th:action="@{'/projects/' + ${project.id} + '/addtag'}" th:object="${tagForm}">
 				<table>
@@ -66,9 +78,11 @@
         		  	<td><input type="text" th:field="*{description}"></td>
                 	</tr>
         		</table>
-        			<input type="submit" value="Add tag">
+        			<input type="submit" value="Add tag" style="margin-top: 10px;">
        		</form>
-        	<tr>
+			
+       		<tr>
+       			<td><h3>Manage members</h3></td>
 					<!-- Form per aggiunta di membri -->
         		<td>
 					<form method="post" th:action="@{'/projects/' + ${project.id} + '/members/add'}" th:object="${credentialForm}">
@@ -84,6 +98,17 @@
 					</form>
 				</td>
 			</tr>
+			
+			<td>
+					<form method="post" th:action="@{'/projects/' + ${project.id} + '/delete'}" th:object="${projectForm}">
+						<input type="submit" name="deleteProject" value ="Delete project">
+					</form>
+			</td>
+			
+			<td>
+					<form method="post" th:action="@{'/projects/' + ${project.id} + '/edit'}" th:object="${projectForm}">
+						<input type="submit" name="editProject" value ="Edit project">
+			</form>
 		</table>	
 	</body>
 </html>

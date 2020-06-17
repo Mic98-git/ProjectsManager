@@ -5,7 +5,7 @@
 	</head>
 	<body>
 		<div th:replace="navbar :: topbar"></div>
-		<h1>Your projects</h1>
+		<h1>My projects</h1>
 		<table border="2" width="500" id="projectsTable">
 			<tr th:each="project : ${projectsList}">
 				<td><a th:href="'/projects/' + ${project.id}" th:text="${project.name}"></a>

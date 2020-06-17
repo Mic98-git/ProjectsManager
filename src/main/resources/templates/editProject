@@ -1,0 +1,23 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Edit your project</title>
+    </head>
+    <body>
+    	<h1>Edit your project</h1>
+        <form th:object="${projectForm}" th:action="@{/user/profile/edit}" method="post">
+        	<div>
+        		<label>Name: </label>
+        		<input type="text" th:field="*{name}">
+        	</div>
+        	<div>
+        		<label>Color: </label>
+        		<input type="text" th:field="*{color}">
+        	</div>
+        	<div>
+        		<label>Description: </label>
+        		<input type="text" th:field="*{description}">
+        	<input type="submit" value="Save">
+        </form>        
+    </body>
+</html>
