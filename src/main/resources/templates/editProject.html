@@ -1,23 +1,24 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Edit your project</title>
-    </head>
-    <body>
-    	<h1>Edit your project</h1>
-        <form th:object="${projectForm}" th:action="@{/user/profile/edit}" method="post">
-        	<div>
-        		<label>Name: </label>
-        		<input type="text" th:field="*{name}">
-        	</div>
-        	<div>
-        		<label>Color: </label>
-        		<input type="text" th:field="*{color}">
-        	</div>
-        	<div>
-        		<label>Description: </label>
-        		<input type="text" th:field="*{description}">
-        	<input type="submit" value="Save">
+<html>
+<head>
+	<title>TaskManager</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+
+<body>
+        <div th:replace="navbar :: topbar"></div>
+    	<h1>Create new Project</h1>
+        <form th:object="${projectForm}" th:action="@{/projects/add}" method="post">
+        	<table>
+                <tr>
+        		  <td><label>Project Name</label></td>
+        		  <td><input type="text" th:field="*{name}"></td>
+                </tr>
+                <tr>
+        		  <td><label>Description</label></td>
+        		  <td><input type="text" th:field="*{description}"></td>
+                </tr>
+        	</table>
+        	<input type="submit" value="Save" style="margin-top: 10px;">
         </form>        
     </body>
 </html>

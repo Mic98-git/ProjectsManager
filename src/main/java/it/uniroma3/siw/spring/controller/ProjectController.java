@@ -95,7 +95,7 @@ public class ProjectController {
 		Project project = projectService.getProject(projectId);
 		model.addAttribute("projectForm", project);
 		
-		return "projectForm";
+		return "editProject";
 	}
 	
 	@RequestMapping(value= {"/projects/{projectId}/edit"}, method=RequestMethod.POST)
