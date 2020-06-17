@@ -59,28 +59,11 @@
 					</ul>
 				</td>
 			</tr>
+			<tr>
+				<td colspan="2"><a th:href="@{'/projects/' + ${project.id} + '/addtag'}">Create a new Tag</a></td>
+			</tr>
 		</table>
-		<br>
-		<td><h3>Create a new tag</h3></td>
-					<!-- Form per il nuovo tag -->
-			<form method="post" th:action="@{'/projects/' + ${project.id} + '/addtag'}" th:object="${tagForm}">
-				<table>
-                	<tr>
-        		  		<td><label>Name</label></td>
-        		  		<td><input type="text" th:field="*{name}"></td>
-                	</tr>
-                	<tr>
-        		  		<td><label>Color</label></td>
-        		  		<td><input type="text" th:field="*{color}"></td>
-                	</tr>
-                	<tr>
-        		  		<td><label>Description</label></td>
-        		  	<td><input type="text" th:field="*{description}"></td>
-                	</tr>
-        		</table>
-        			<input type="submit" value="Add tag" style="margin-top: 10px;">
-       		</form>
-			
+		<br>			
        		<tr>
        			<td><h3>Manage members</h3></td>
 					<!-- Form per aggiunta di membri -->
@@ -106,7 +89,7 @@
 			</td>
 			
 			<td>
-					<form method="post" th:action="@{'/projects/' + ${project.id} + '/edit'}" th:object="${projectForm}">
+					<form method="get" th:action="@{'/projects/' + ${project.id} + '/edit'}" th:object="${projectForm}">
 						<input type="submit" name="editProject" value ="Edit project">
 			</form>
 		</table>	

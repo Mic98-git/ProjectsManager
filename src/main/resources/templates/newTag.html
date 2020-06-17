@@ -6,7 +6,7 @@
 	<meta name="author" content="">
 	<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-	<title>New task    
+	<title>New tag    
 	</title>
 
 	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
@@ -23,20 +23,19 @@
 	<th:block th:replace="navbar :: topbar"></th:block>
 
 	<main class="container" style="margin-top: 30px; margin-left: 40px;">
-		<h1>Insert new task</h1>
-		<form th:action="@{'/projects/' + ${project.id} + '/task/new'}" method="post" th:object="${task}">
-			<div>Task name</div>
+		<h1>Insert new tag</h1>
+		<form th:action="@{'/projects/' + ${projectId} + '/addtag'}" method="post" th:object="${tagForm}">
+			<div>Tag name</div>
 			<input type="text" th:field="*{name}">
 
-			<div>Task description</div>
+			<div>Tag color</div>
+			<input type="text" th:field="*{color}">
+
+			<div>Tag description</div>
 			<textarea th:field="*{description}"></textarea>
 
-			<div class="form-check">
-				<input type="checkbox" th:field="*{completed}" name="completed" class="form-check-input"/>
-				<label class="form-check-label" for="completed">Completed</label>
-			</div>
-			
-			<input type="submit" value="Save Task" style="margin-top: 10px;" class="btn btn-primary">
+			<br>
+			<input type="submit" value="Save Tag" style="margin-top: 10px;" class="btn btn-primary">
 		</form>
 	</main>
 
