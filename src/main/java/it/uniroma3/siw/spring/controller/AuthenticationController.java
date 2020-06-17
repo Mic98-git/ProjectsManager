@@ -33,7 +33,7 @@ public class AuthenticationController {
 	public String showRegisterForm(Model model) {
 		model.addAttribute("userForm",new User());
 		model.addAttribute("credentialsForm",new Credentials());
-		//System.out.print("");
+		System.out.print("");
 		
 		return "registerUser";
 	}
