@@ -1,37 +1,56 @@
 <html>
-	<head>
-		<title>My profile</title>
-		<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
-	</head>
-	<body>
-		<div th:replace="navbar :: topbar"></div>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-		<h1>My profile</h1>
-		<table>
-			<tr>
-				<td>Name</td>
-				<td th:text="${user.name}">...</td>
-			</tr>
-			<tr>
-				<td>Last name</td>
-				<td th:text="${user.lastName}">...</td>
-			</tr>
-			<tr>
-				<td>Username</td>
-				<td th:text="${credentials.userName}">...</td>
-			</tr>
-			<tr>
-				<td>Role</td>
-				<td th:text="${credentials.role}">...</td>
-			</tr>
-			<tr>
-				<td>Registered at</td>
-				<td th:text="${user.creationTimestamp}">...</td>
-			</tr>
-			<tr>
-				<td>Last update at</td>
-				<td th:text="${user.lastUpdateTimestamp}">...</td>
-			</tr>
-		</table>
-	</body>
+	<title>My profile</title>
+
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
+
+	<!-- Bootstrap core CSS -->
+	<link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
+
+	<link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet"> 
+</head>
+<body>
+	<div th:replace="navbar :: topbar"></div>
+
+	<main class="container" style="margin-top: 30px; margin-left: 40px;">
+		<div class="row"><h1>My profile</h1></div>
+		<br><br>
+		<div class="row">
+			<div class="col-md-3">
+				<h4>Name</h4>
+				<div th:text="${user.name}"></div>
+			</div>
+
+			<div class="col-md-3">
+				<h4>Last name</h4>
+				<div th:text="${user.lastName}"></div>
+			</div>
+			<div class="col-md-3">
+				<h4>Username</h4>
+				<div th:text="${credentials.userName}"></div>
+			</div>
+			<div class="col-md-3">
+				<h4>Role</h4>
+				<div th:text="${credentials.role}"></div>
+			</div>
+			<div class="col-md-3">
+				<h4>Registered at</h4>
+				<div th:text="${user.creationTimestamp}"></div>
+			</div>
+			<div class="col-md-3">
+				<h4>Last update at</h4>
+				<div th:text="${user.lastUpdateTimestamp}"></div>
+			</div>
+		</div>
+	</main>
+</body>
 </html>

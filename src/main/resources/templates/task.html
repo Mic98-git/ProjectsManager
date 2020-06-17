@@ -1,95 +1,128 @@
-<html>
-	<head>
-		<title>Task</title>
-		<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
-	</head>
-	<body>
-		<th:block th:replace="navbar :: topbar"></th:block>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-		<h1 th:text="${'Task: ' + task.name}">Task</h1>
+  <title th:text="${'Task: ' + task.name}">Task    
+  </title>
 
-		<div th:text="${'ID: ' + task.id}">id</div>
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
 
-		<div>Completed: <span th:text="${task.Completed} ? 'YES' : 'NO'"></span></div>
+  <!-- Bootstrap core CSS -->
+  <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-		<div><a th:href="@{'/projects/' + ${projectId}}">Back to project</a></div>
+  <!-- Custom styles for this template -->
+  <link href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
 
-		<h3>Description</h3>
-		<div th:text="${task.description}">desc</div>
+  <link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet"> 
 
-		<h3>Tags</h3>
-		<table>
-			<tr th:each="tag : ${allTaskTags}">
-				<td th:text="${tag.name} + ' - ' + ${tag.color}">
-				</td>
-				<td>
-					<!-- form per eliminare il tag -->
-					<form th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/deletetag/' + ${tag.id}}" method="post" th:object="${tag}">
-						<input type="submit" name="button" value="Delete">
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<th>
-					Add a new tag
-				</th>
-				<td>
-					<form method="post" th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/addtag'}" th:object="${tagForm}">
-						<select th:field="*{id}">
-							<th:block th:each="addableTag : ${addableTags}">
-								<option th:value="${addableTag.id}" th:text="${addableTag.name}"></option>
-							</th:block>
-						</select>
-						<input type="submit" name="" value="Add tag">
-					</form>
-				</td>
-				<td>
-					
-				</td>
-			</tr>
-		</table>
+  <style type="text/css">
+    ul#tagsList li {
+      display: inline;
+      background: #ddd;
+      border-radius: 2px;
+      padding: 2px;
+      margin: 2px;
+    }
 
-		<br><br>
-		<table border="2" width="600">
-			<tr>
-				<th>Author</th>
-				<th>Comment</th>
-			</tr>
-			<tr th:each="comment : ${task.comments}">
-				<td class='commenter_profile'>
-					<img src='' width="100" height="100" alt="profile"><br>
-					<span class='commenter' th:text="${comment.user.name + ' ' + comment.user.lastName}">author</span>
-				</td>
-				<td class='comment' th:text="${comment.content}"></td>
-			</tr>
-			<tr th:if="${task.comments.empty}">
-				<td colspan="2">No comment</td>
-			</tr>	
-		</table>
-		<br>
+    ul#tagsList {
+      padding-left: 0px;
+    }
 
-		<form th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/addcomment'}" method="post" th:object="${commentForm}">
-			<table border="2">
-				<tr>
-					<td class='commenter_profile'>
-						<img src='' width="100" height="100" alt="profile"><br>
-						<span class='commenter' th:text="${loggedUser.name + ' ' + loggedUser.lastName}">author</span>
-					</td>
-					<td class='comment'>
-						<textarea th:field="*{content}" placeholder="Write your comment..."></textarea><br>
-						<input type="submit" value="Send">
-					</td>
-				</tr>
-			</table>
-		</form>
+  </style>
+</head>
 
-		<form th:if="${!task.completed}" method="post" th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/completed'}">
-			<input type="submit" name="" value="Mark as completed">
-		</form>
+<body>
 
-		<form method="post" th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/delete'}">
-			<input type="submit" name="" value="Delete this task">
-		</form>
+  <th:block th:replace="navbar :: topbar"></th:block>
+  <main class="container row" style="margin-top: 30px; margin-left: 40px;">
+    <!-- Begin page content -->
+    <div role="main" class="col-md-9">
+      <h1 th:text="${'Task: ' + task.name}">Task</h1>
 
-	</body>
-</html>
+      <h3>Description</h3>
+      <div th:text="${task.description}">desc</div>
+
+      <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h6 class="border-bottom border-gray pb-2 mb-0">Comments</h6>
+        <div class="media text-muted pt-3" th:each="comment : ${task.comments}">
+          <img data-src="" alt="" class="mr-2 rounded">
+          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <strong class="d-block text-gray-dark" th:text="${comment.user.name + ' ' + comment.user.lastName}">@username</strong>
+            <th:block th:text="${comment.content}">Contenuto commento</th:block>
+          </p>
+        </div>
+        <div class="media text-muted pt-3">
+          <form th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/addcomment'}" method="post" th:object="${commentForm}">          
+            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+              <strong class="d-block text-gray-dark" th:text="${loggedUser.name + ' ' + loggedUser.lastName}">@username</strong>
+              <br>
+              <textarea class="form-control" th:field="*{content}" placeholder="Write your comment..."></textarea><br>
+              <input type="submit" value="Send comment" class="btn btn-primary">
+            </p>
+          </form>
+        </div>
+        <!--<small class="d-block text-right mt-3">
+          <a href="#">All updates</a>
+        </small>-->
+      </div>
+
+    </div>
+
+    <div class="col-md-3">
+      <div th:text="${'ID: ' + task.id}">id</div>
+
+      <div><h5>Status</h5><span th:text="${task.Completed} ? 'Completed' : 'In progress'"></span></div>
+      <div style="margin-bottom: 10px;">
+        <h5>Tags</h5>
+        <ul id="tagsList">
+          <li th:each="tag : ${allTaskTags}" th:text="${tag.name} + ' - ' + ${tag.color}">          
+          </li>
+        </ul>
+        <div th:if="${allTaskTags.size() == 0}">No tags available</div>
+        <form method="post" th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/addtag'}" th:object="${tagForm}" th:if="${addableTags.size() > 0}">
+            <select th:field="*{id}">
+              <th:block th:each="addableTag : ${addableTags}">
+                <option th:value="${addableTag.id}" th:text="${addableTag.name}"></option>
+              </th:block>
+            </select>
+            <input type="submit" name="" value="Add tag" class="btn btn-primary">
+          </form>
+      </div>
+
+      <div style="margin-bottom: 10px;">
+        <form th:if="${!task.completed}" method="post" th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/completed'}">
+          <input type="submit" name="" value="Mark as completed" class="btn btn-primary">
+        </form>
+      </div>
+
+      <div style="margin-bottom: 10px;">
+        <form method="post" th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/delete'}">
+          <input type="submit" name="" value="Delete this task" class="btn btn-primary">
+        </form>
+      </div>
+      <br>
+      <div><a  class="btn btn-primary" th:href="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/edit'}">Edit task</a></div>
+
+      <div><a th:href="@{'/projects/' + ${projectId}}">Back to project</a></div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Task Manager App (SIW)</span>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+      ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+      <script src="../../assets/js/vendor/popper.min.js"></script>
+      <script src="../../dist/js/bootstrap.min.js"></script>
+    </body>
+    </html>

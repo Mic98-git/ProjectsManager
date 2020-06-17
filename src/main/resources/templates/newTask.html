@@ -1,30 +1,44 @@
 <html>
 <head>
-	<title>New task</title>		
-	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+	<title>New task    
+	</title>
+
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
+
+	<!-- Bootstrap core CSS -->
+	<link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
+
+	<link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet"> 
 </head>
 <body>
 	<th:block th:replace="navbar :: topbar"></th:block>
 
-	<h1>Insert new task</h1>
+	<main class="container" style="margin-top: 30px; margin-left: 40px;">
+		<h1>Insert new task</h1>
+		<form th:action="@{'/projects/' + ${project.id} + '/task/new'}" method="post" th:object="${task}">
+			<div>Task name</div>
+			<input type="text" th:field="*{name}">
 
-	<form th:action="@{'/projects/' + ${project.id} + '/task/new'}" method="post" th:object="${task}">
-		<table>
-			<tr>
-				<td>Task name</td>
-				<td><input type="text" th:field="*{name}"></td>
-			</tr>
-			<tr>
-				<td>Task description</td>
-				<td><textarea th:field="*{description}"></textarea></td>
-			</tr>
-			<tr>
-				<td>Completed</td>
-				<td><input type="checkbox" th:field="*{completed}" name="completed"/></td>
-			</tr>
-		</table>
-		<input type="submit" value="Salva" style="margin-top: 10px;">
-	</form>
+			<div>Task description</div>
+			<textarea th:field="*{description}"></textarea>
+
+			<div class="form-check">
+				<input type="checkbox" th:field="*{completed}" name="completed" class="form-check-input"/>
+				<label class="form-check-label" for="completed">Completed</label>
+			</div>
+			
+			<input type="submit" value="Salva" style="margin-top: 10px;" class="btn btn-primary">
+		</form>
+	</main>
 
 </body>
 </html>

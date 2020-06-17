@@ -1,36 +1,61 @@
 <html>
 <head>
-	<title>Edit task</title>		
-	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+	<title th:text="${'Edit Task: ' + taskForm.name}">Task    
+	</title>
+
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
+
+	<!-- Bootstrap core CSS -->
+	<link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
+
+	<link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet">
 </head>
 <body>
 	<th:block th:replace="navbar :: topbar"></th:block>
+	<main class="container" style="margin-top: 30px; margin-left: 40px;">
 
-	<h1>Edit task</h1>
+		<h1>Edit task</h1>
 
-	<form th:action="@{'/' + ${project.id} + '/task/edit'}" method="post" th:object="${taskForm}">
-		<table>
-			<tr>
-				<td>Task name</td>
-				<td><input type="text" th:field="*{name}"></td>
-			</tr>
-			<tr>
-				<td>Task description</td>
-				<td><textarea th:field="*{description}"></textarea></td>
-			</tr>
-			<tr>
-				<td>Completed</td>
-				<td><input type="checkbox" th:field="*{completed}" name="completed"/></td>
-			</tr>
-			<tr>
-				<td colspan="2">Tags</td>
-			</tr>
-			<tr>
-				<td colspan="2"><button>Add new tag</button></td>				
-			</tr>
-		</table>
-		<input type="submit" value="Salva" style="margin-top: 10px;">
-	</form>
+		<form th:action="@{'/projects/' + ${projectId} + '/task/' + ${taskForm.id} + '/edit'}" method="post" th:object="${taskForm}">
 
-</body>
-</html>
+			<label>Task name</label>
+			<input type="text" th:field="*{name}" class="form-control">
+
+			<label>Task description</label>
+			<textarea th:field="*{description}" class="form-control"></textarea>
+			
+			<div class="form-check">
+				<input type="checkbox"  class="form-check-input" th:field="*{completed}" name="completed" />
+				<label class="form-check-label" for="defaultCheck1">
+					Completed
+				</label>
+			</div>
+			<input type="submit" value="Salva" style="margin-top: 10px;"  class="btn btn-primary">
+		</form>
+	</main>
+
+	<footer class="footer">
+		<div class="container">
+			<span class="text-muted">Task Manager App (SIW)</span>
+		</div>
+	</footer>
+
+    <!-- Bootstrap core JavaScript
+    	================================================== -->
+    	<!-- Placed at the end of the document so the pages load faster -->
+    	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    	<script src="../../assets/js/vendor/popper.min.js"></script>
+    	<script src="../../dist/js/bootstrap.min.js"></script>
+
+    </body>
+    </html>

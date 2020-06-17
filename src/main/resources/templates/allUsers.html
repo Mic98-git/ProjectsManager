@@ -1,25 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>All users</title>
-	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+	<title>List of registered users    
+	</title>
+
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
+
+	<!-- Bootstrap core CSS -->
+	<link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
+
+	<link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet"> 
 </head>
 <body>
 	<th:block th:replace="navbar :: topbar"></th:block>
 
-	<h1>Registered Users</h1>
+	<main class="container" style="margin-top: 30px; margin-left: 40px;">
+		<h1>Registered Users</h1>
 
-	<table>
-		<tr th:each="credential : ${credentialsList}">
-			<td th:text="${credential.userName}"></td>
-			<td th:text="${credential.user.name}"></td>
-			<td th:text="${credential.user.lastName}"></td>
-			<td>
-				<form method="post" th:action="@{/admin/users/{username}/delete(username=${credential.userName})}">
-					<button type="submit" name="submit" value="value">DELETE</button>
-				</form>
-			</td>
-		</tr>
-	</table>
+		<table class="table">
+			<tr>
+				<th>Username</th>
+				<th>First name</th>
+				<th>Last name</th>
+				<th>Action</th>
+			</tr>
+			<tr th:each="credential : ${credentialsList}">
+				<td th:text="${credential.userName}"></td>
+				<td th:text="${credential.user.name}"></td>
+				<td th:text="${credential.user.lastName}"></td>
+				<td>
+					<form method="post" th:action="@{/admin/users/{username}/delete(username=${credential.userName})}">
+						<button type="submit" name="submit" value="value" class="btn btn-primary">DELETE</button>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</main>
 </body>
 </html>

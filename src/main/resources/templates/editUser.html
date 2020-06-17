@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Edit user data</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
+
+    <link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet">
+</head>
+<body>
+    <div th:replace="navbar :: topbar"></div>
+
+    <main class="container" style="margin-top: 30px; margin-left: 40px;">
+
+        <h1>Edit user data</h1>
+
+        
+        <form th:object="${userForm}" th:action="@{/user/profile/edit}" method="post">
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Name</label>
+                    <input type="text" th:field="*{name}">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Last name</label>
+                    <input type="text" th:field="*{lastName}">
+                </div>
+            </div>
+            <input type="submit" value="Save" style="margin-top: 10px;" class="btn btn-primary">
+        </form>     
+    </main>
+</body>
+</html>
