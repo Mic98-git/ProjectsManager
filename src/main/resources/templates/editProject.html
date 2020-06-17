@@ -6,8 +6,8 @@
 
 <body>
         <div th:replace="navbar :: topbar"></div>
-    	<h1>Create new Project</h1>
-        <form th:object="${projectForm}" th:action="@{/projects/add}" method="post">
+    	<h1>Edit Project</h1>
+        <form th:object="${projectForm}" th:action="@{'/projects/' + ${projectForm.id} +'/edit'}" method="post">
         	<table>
                 <tr>
         		  <td><label>Project Name</label></td>
