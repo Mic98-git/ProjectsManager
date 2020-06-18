@@ -22,7 +22,7 @@ public class TagValidator implements Validator {
 
 	@Override
 	public void validate(Object o, Errors errors) {
-		Tag t =(Tag)o;
+		Tag t = (Tag)o;
 		String name = t.getName();
 		String description = t.getDescription();
 		String color = t.getColor();

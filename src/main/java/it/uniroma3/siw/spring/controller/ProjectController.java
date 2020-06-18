@@ -105,7 +105,6 @@ public class ProjectController {
 		if(projectBindingResult.hasErrors()) {
 			return "editProject";
 		}
-		
 		Project p = this.projectService.getProject(projectId);
 		p.setName(project.getName());
 		p.setDescription(project.getDescription());

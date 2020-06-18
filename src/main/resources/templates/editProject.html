@@ -24,10 +24,12 @@
                 <tr>
         		  <td><label>Project Name </label></td>
         		  <td><input type="text" th:field="*{name}"></td>
+        		 <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:style="'color: red'"></td>
                 </tr>
                 <tr>
         		  <td><label>Description </label></td>
         		  <td><input type="text" th:field="*{description}"></td>
+        		  <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:style="'color: red'"></td>
                 </tr>
         	</table>
         	<input type="submit" value="Save"  class="btn btn-primary" style="margin-top: 10px">
