@@ -1,65 +1,80 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Task Manager - Home</title>
+<title>Task Manager - Home</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap core CSS -->
+<link
+	href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="https://getbootstrap.com/docs/4.0/examples/cover/cover.css" rel="stylesheet">
-    
-    <style th:inline="text">
-    
+<!-- Custom styles for this template -->
+<link href="https://getbootstrap.com/docs/4.0/examples/cover/cover.css"
+	rel="stylesheet">
+
+<style>
+.body_azure {
+    background-color: #1cabe2!important;
+}
 </style>
-        
-  </head>
 
-  <body class="text-center">
+</head>
 
-    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-      <header class="masthead mb-auto">
-        <div class="inner">
-          <h3 class="masthead-brand">Task Manager</h3>
-          <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active" href="#">Home</a>
-            <a class="nav-link" th:href="@{/users/register}">Register</a>
-            <a class="nav-link" th:href="@{/home}">Login</a>
-          </nav>
-        </div>
-      </header>
+<body class="text-center body_azure">
 
-      <main role="main" class="inner cover">
-        <h1 class="cover-heading">Task Manager</h1>
-        <p class="lead">Organizza i tuoi progetti. Progetto associato alla prova d'esame di Sistemi Informativi su Web.<br>Progetto svolto da Fippi Daniele e Celli Michael</p>
-        <p class="lead">
-          <a th:href="@{/users/register}" class="btn btn-lg btn-secondary">Register</a>
-          <a th:href="@{/home}" class="btn btn-lg btn-secondary">Login</a>
-        </p>
-      </main>
+	<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+		<header class="masthead mb-auto">
+			<div class="inner">
+				<h3 class="masthead-brand">Task Manager</h3>
+				<nav class="nav nav-masthead justify-content-center">
+					<a class="nav-link active" href="#">Home</a> <a class="nav-link"
+						th:href="@{/users/register}">Register</a> <a class="nav-link"
+						th:href="@{/home}">Login</a>
+				</nav>
+			</div>
+		</header>
 
-      <footer class="mastfoot mt-auto">
-        <div class="inner">
-          <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-        </div>        
-      </footer>
-    </div>
+		<main role="main" class="inner cover">
+			<h1 class="cover-heading">Task Manager</h1>
+			<p class="lead">
+				Organize and manage your projects <br/>(website developed in the context of the exam "Sistemi informativi sul Web") 
+			</p>
+			<p class="lead">
+				<a th:href="@{/users/register}" class="btn btn-lg btn-secondary">Register</a>
+				<a th:href="@{/home}" class="btn btn-lg btn-secondary">Login</a>
+			</p>
+		</main>
+
+		<footer class="mastfoot mt-auto">
+			<div class="inner">
+				<p>
+					Developed by Fippi Daniele and Celli Michael.
+				</p>
+			</div>
+		</footer>
+	</div>
 
 
-    <!-- Bootstrap core JavaScript
+	<!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+	<script src="../../assets/js/vendor/popper.min.js"></script>
+	<script src="../../dist/js/bootstrap.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
 </html>
 

@@ -23,3 +23,41 @@ td.projectTitle {
 	text-align: center;
 	font-weight: bold;
 }
+
+/*
+ * Colors
+ */
+.bg_azure {
+	background-color: #1cabe2 !important;
+}
+
+/*
+ * lists
+ */
+ul#tagsList li {
+	background: #ddd;
+	border-radius: 2px;
+	padding: 2px;
+	margin: 2px;
+}
+
+ul#tagsList {
+	padding-left: 0px;
+}
+
+/*
+ * Size
+ */
+.fit_heigth_card {
+	height: 100%;
+	padding-bottom:30px;
+}
+
+.bottom20_div {
+	position: absolute;
+	bottom: 20px;
+}
+
+.icon_container{
+	max-width: 100px;
+}

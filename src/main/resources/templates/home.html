@@ -1,21 +1,30 @@
 <html>
 <head>
-	<title>Home</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+<title>Home</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
+<link rel="canonical"
+	href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
 
-	<!-- Bootstrap core CSS -->
-	<link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap core CSS -->
+<link
+	href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 
-	<!-- Custom styles for this template -->
-	<link href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link
+	href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css"
+	rel="stylesheet">
 
-	<link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet"> 
+<link
+	href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css"
+	rel="stylesheet">
+<link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 <body>
 	<th:block th:replace="navbar :: topbar"></th:block>
@@ -30,22 +39,32 @@
 		<div class="row">
 
 			<div class="col-md-4">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top" src="https://www.aperiam.com/wp-content/uploads/2018/12/aperiam-agile-project-management-foundation.png" alt="Card image cap">
+				<div class="card fit_heigth_card">
+					<img class="card-img-top"
+						src="https://www.aperiam.com/wp-content/uploads/2018/12/aperiam-agile-project-management-foundation.png"
+						alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-title">My Projects</h5>
 						<p class="card-text">Shows a list of my projects</p>
-						<a th:href="@{/projects}" class="btn btn-primary">Go to My Projects</a>
+						<div class="bottom20_div">
+							<a th:href="@{/projects}" class="btn btn-primary">Go to My
+								Projects</a>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top" src="https://cdn.lynda.com/course/625940/625940-637242270359578322-16x9.jpg" alt="Card image cap">
+				<div class="card fit_heigth_card">
+					<img class="card-img-top"
+						src="https://cdn.lynda.com/course/625940/625940-637242270359578322-16x9.jpg"
+						alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-title">Shared projects</h5>
 						<p class="card-text">Shows a list of projects shared with me</p>
-						<a th:href="@{/projects/shared}" class="btn btn-primary">Go to Shared Projects</a>
+						<div class="bottom20_div">
+							<a th:href="@{/projects/shared}" class="btn btn-primary">Go
+								to Shared Projects</a>
+						</div>
 					</div>
 				</div>
 

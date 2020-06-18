@@ -16,6 +16,7 @@
 	<link href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
 
 	<link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet"> 
+	<link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 <body>
 	<div th:replace="navbar :: topbar"></div>
@@ -32,10 +33,10 @@
 			<a class="nav-link active" th:href="@{/projects/shared}">Shared with me</a>
 		</nav>-->
 
-		<div class="media position-relative" th:each="project : ${projectsList}" style="margin-bottom: 10px; margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #999;">
-			<svg class="bd-placeholder-img mr-3" width="144" height="144" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Generic placeholder image"><title>Generic placeholder image</title><rect width="100%" height="100%" fill="#868e96" /></svg>
-
-			<div class="media-body">
+		<div class="media position-relative pt-3 pb-3" th:each="project : ${projectsList}" style="border-bottom: 1px solid #999;">
+			<div class="icon_container">
+				<img th:src="@{/img/project_icon.png}" style="width: 100%;">
+			</div><div class="media-body ml-5">
 				<h5 class="mt-0" th:text="${project.name}">Nome progetto</h5>
 				<p th:text="${project.description}">Descrizione proj</p>
 				<a th:href="'/projects/' + ${project.id}" class="stretched-link">View project</a>

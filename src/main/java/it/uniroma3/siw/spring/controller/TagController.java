@@ -66,7 +66,7 @@ public class TagController {
 	
 	@GetMapping("/projects/{projectId}/tags/{tagId}/edit")
 	public String viewEditTagForm(@PathVariable Long projectId,
-			@PathVariable Long tagId,Model model) {
+			@PathVariable Long tagId, Model model) {
 		Tag tag = this.tagService.getTagById(tagId);
 				
 		// per il form del task da editare	
@@ -82,7 +82,7 @@ public class TagController {
 			Model model,
 			@Valid @ModelAttribute("tagForm") Tag tag,
 			BindingResult tagBindingResult) {
-		
+		tag.setId(tagId);
 		this.tagValidator.validate(tag, tagBindingResult);
 		if(tagBindingResult.hasErrors()) {
 			model.addAttribute("projectId", projectId);	
