@@ -45,10 +45,15 @@ public class User {
 	
 	@OneToMany(cascade=CascadeType.REMOVE,mappedBy = "owner",fetch=FetchType.LAZY)
 	private List<Project> ownedProjects;
+	
+	/* FIXME MOlto importante la bidirezionalità */
+	@OneToMany(cascade=CascadeType.REMOVE,mappedBy = "user",fetch=FetchType.LAZY)
+	private List<Comment> comments;
 
 	public User() {
 		this.ownedProjects = new ArrayList<>();
 		this.visibleProjects = new ArrayList<>();
+		this.setComments(new ArrayList<>());
 	}
 	
 	public User(String name, String lastName) {
@@ -182,6 +187,14 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", lastName=" + lastName + ", creationTimestamp="
 				+ creationTimestamp + ", lastUpdateTimestamp=" + lastUpdateTimestamp + "]";
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}	
 	
 }
