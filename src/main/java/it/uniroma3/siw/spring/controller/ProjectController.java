@@ -60,7 +60,7 @@ public class ProjectController {
 		return "sharedProjects";
 	}
 	
-	@RequestMapping(value = {"/projects/{projectId}/members/{memberId}/delete"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/projects/{projectId}/members/{memberId}/remove"}, method = RequestMethod.POST)
 	public String deleteMember(@PathVariable Long projectId, @PathVariable Long memberId) {
 		Project project = this.projectService.getProject(projectId);
 		User user = this.userService.getUser(memberId);
@@ -163,6 +163,7 @@ public class ProjectController {
 	
 	@RequestMapping(value = {"/projects/{projectId}/members/add"}, method = RequestMethod.POST)
 	public String addMemberToProject(@PathVariable Long projectId,
+			
 			@ModelAttribute Credentials credentials) {
 		Credentials c = credentialsService.getCredentials(credentials.getUserName());
 		Project project = projectService.getProject(projectId);
@@ -171,7 +172,7 @@ public class ProjectController {
 			project.addMember(c.getUser());
 		projectService.saveProject(project);
 		
-		//System.out.println();
+		System.out.println();
 		
 		
 		return "redirect:/projects/"+projectId;
