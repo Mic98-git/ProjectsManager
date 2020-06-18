@@ -23,10 +23,23 @@
 	<th:block th:replace="navbar :: topbar"></th:block>
 
 	<main class="container" style="margin-top: 30px; margin-left: 40px;">
-		<h1>Hello administrator</h1>
-		<br>	
-		<h3><a th:href="@{/admin/users}">Show users list</a></h3>
-
+		<h1>Hello Administrator</h1>
+		<br>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="card fit_heigth_card">
+					<img class="card-img-top"
+						src="https://www.aperiam.com/wp-content/uploads/2018/12/aperiam-agile-project-management-foundation.png"
+						alt="Card image cap">
+					<div class="card-body">
+						<h5 class="card-title">Users List</h5>
+						<p class="card-text">Shows users list</p>
+						<div class="bottom20_div">
+							<a th:href="@{/admin/users}" class="btn btn-primary">Go to users list</a>
+						</div>
+					</div>
+				</div>
+			</div>
 	</main>
 </body>
 </html>
