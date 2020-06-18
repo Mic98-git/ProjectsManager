@@ -30,11 +30,11 @@
     <div role="main" class="col-md-9">
       <h1 th:text="${'Task: ' + task.name}">Task</h1>
 
-      <h3>Description: </h3>
+      <h3>Description</h3>
       <div th:text="${task.description}"></div>
-
-      <div class="my-3 p-3 bg-white rounded shadow-sm">
-        <h6 class="border-bottom border-gray pb-2 mb-0">Comments</h6>
+		<br>
+      <div class="my-3 bg-white rounded shadow-sm">
+        <h4 class="border-bottom border-gray pb-2 mb-0">Comments</h4>
         <div class="media text-muted pt-3" th:each="comment : ${task.comments}">
           <img data-src="" alt="" class="mr-2 rounded">
           <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
@@ -44,7 +44,7 @@
         </div>
         <div class="media text-muted pt-3">
           <form th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/addcomment'}" method="post" th:object="${commentForm}">          
-            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <p class="media-body pb-3 mb-0 small lh-125">
               <strong class="d-block text-gray-dark" th:text="${loggedUser.name + ' ' + loggedUser.lastName}">@username</strong>
               <br>
               <textarea class="form-control" th:field="*{content}" placeholder="Write your comment..."></textarea><br>

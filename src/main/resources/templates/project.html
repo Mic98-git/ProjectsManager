@@ -30,7 +30,8 @@
 			<h1 th:text="${'Project: ' + project.name}">...
 			</h1>
 			
-			<h3>Description: </h3><div th:text="${project.description}"></div>
+			<h3>Description</h3><div th:text="${project.description}"></div>
+			
 			<br>
 			<br>
 			
@@ -53,7 +54,7 @@
 			</table>
 			
 			<br>
-			
+				
 			<h3>Tasks</h3>
 			<a th:href="@{'/projects/' + ${project.id} + '/task/new'}">Create new Task</a>
 			<table class="table">
@@ -74,7 +75,8 @@
 			</table>
 			
 			<br>		
-
+			<br>
+			
 			<h3>Tags</h3>
 			<a th:href="@{'/projects/' + ${project.id} + '/addtag'}">Create new Tag</a>
 			<table class="table">
@@ -83,6 +85,7 @@
 					<th>Color</th>
 					<th>Description</th>
 					<th>Action</th>
+					<th></th>
 				</tr>
 				<tr th:each="tag : ${project.tags}">
 					<td th:text="${tag.name}"></td>
