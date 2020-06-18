@@ -37,7 +37,7 @@ public class TagValidator implements Validator {
 		
 		if(color.trim().isEmpty())
 			errors.rejectValue("color", "required");
-		else if(name.length() < MIN_COLOR_LENGTH || name.length() > MAX_COLOR_LENGTH)
+		else if(color.length() < MIN_COLOR_LENGTH || color.length() > MAX_COLOR_LENGTH)
 			errors.rejectValue("color", "size");
 	}
 }
