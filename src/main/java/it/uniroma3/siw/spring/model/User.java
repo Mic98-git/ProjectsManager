@@ -40,14 +40,14 @@ public class User {
 	private LocalDateTime lastUpdateTimestamp;
 	
 	/* Importantissimo il cascade remove FIXME */
-	@ManyToMany(mappedBy="members",fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
+	@ManyToMany(mappedBy="members",fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private List<Project> visibleProjects;
 	
-	@OneToMany(cascade=CascadeType.REMOVE,mappedBy = "owner",fetch=FetchType.LAZY)
+	@OneToMany(cascade=CascadeType.REMOVE, mappedBy = "owner",fetch=FetchType.LAZY)
 	private List<Project> ownedProjects;
 	
 	/* FIXME MOlto importante la bidirezionalità */
-	@OneToMany(cascade=CascadeType.REMOVE,mappedBy = "user",fetch=FetchType.LAZY)
+	@OneToMany(cascade=CascadeType.REMOVE, mappedBy = "user",fetch=FetchType.LAZY)
 	private List<Comment> comments;
 
 	public User() {
@@ -139,6 +139,14 @@ public class User {
 	public LocalDateTime getLastUpdateTimestamp() {
 		return lastUpdateTimestamp;
 	}
+	
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 
 	@Override
 	public int hashCode() {
@@ -188,13 +196,4 @@ public class User {
 		return "User [id=" + id + ", name=" + name + ", lastName=" + lastName + ", creationTimestamp="
 				+ creationTimestamp + ", lastUpdateTimestamp=" + lastUpdateTimestamp + "]";
 	}
-
-	public List<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}	
-	
 }

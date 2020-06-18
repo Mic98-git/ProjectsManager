@@ -49,12 +49,6 @@ public class ProjectService {
 		this.projectRepository.deleteById(id);
 	}
 	
-	/* non serve lo facciamo da controller e poi salviamo il project */
-//	@Transactional
-//	public Project shareProjectWithUser(Project p, User u) {
-//		return this.projectRepository.save(p);
-//	}
-	
 	@Transactional
 	public List<Project> getShareProjects(User u) {
 		return this.projectRepository.findByMembers(u);

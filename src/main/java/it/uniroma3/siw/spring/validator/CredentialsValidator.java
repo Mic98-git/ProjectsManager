@@ -45,6 +45,4 @@ public class CredentialsValidator implements Validator {
 			errors.rejectValue("password","size");
 		
 	}
-
-
 }

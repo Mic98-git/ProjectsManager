@@ -26,7 +26,6 @@ public class Task {
 	@Column(nullable=false,length=100)
 	private String name;
 	
-	@Column
 	private String description;
 	
 	@Column(nullable=false)
@@ -38,6 +37,7 @@ public class Task {
 	@Column(nullable=false)
 	private LocalDateTime lastUpdateTimestamp;
 	
+	/*eliminando il task non si eliminano anche i tag del progetto*/
 	@ManyToMany(mappedBy = "tasks", cascade = CascadeType.PERSIST)
 	private List<Tag> tags;
 
@@ -134,5 +134,57 @@ public class Task {
 	
 	public void addTag(Tag t) {
 		this.tags.add(t);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (completed ? 1231 : 1237);
+		result = prime * result + ((creationTimestamp == null) ? 0 : creationTimestamp.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((lastUpdateTimestamp == null) ? 0 : lastUpdateTimestamp.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Task other = (Task) obj;
+		if (completed != other.completed)
+			return false;
+		if (creationTimestamp == null) {
+			if (other.creationTimestamp != null)
+				return false;
+		} else if (!creationTimestamp.equals(other.creationTimestamp))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (lastUpdateTimestamp == null) {
+			if (other.lastUpdateTimestamp != null)
+				return false;
+		} else if (!lastUpdateTimestamp.equals(other.lastUpdateTimestamp))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Task [id=" + id + ", name=" + name + ", description=" + description + ", completed=" + completed
+				+ ", creationTimestamp=" + creationTimestamp + ", lastUpdateTimestamp=" + lastUpdateTimestamp + "]";
 	}
 }

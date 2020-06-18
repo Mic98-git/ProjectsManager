@@ -60,6 +60,5 @@ public class AuthenticationController {
 	@RequestMapping(value= {"/deniedAccess"},method=RequestMethod.GET)
 	public String deniedAccess() {
 		return "noAuth";
-	}
-	
+	}	
 }
