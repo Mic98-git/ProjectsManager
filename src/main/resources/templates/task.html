@@ -22,7 +22,6 @@
 
   <style type="text/css">
     ul#tagsList li {
-      display: inline;
       background: #ddd;
       border-radius: 2px;
       padding: 2px;
@@ -70,9 +69,20 @@
             </p>
           </form>
         </div>
-        <!--<small class="d-block text-right mt-3">
-          <a href="#">All updates</a>
-        </small>-->
+        <br>
+        <h3>Tags</h3>
+			<table class="table">
+				<tr>
+					<th>Name</th>
+					<th>Color</th>
+					<th>Description</th>
+				</tr>
+				<tr th:each="tag : ${allTaskTags}">
+					<td th:text ="${tag.name}"></td>
+					<td th:text ="${tag.color}"></td>
+					<td th:text ="${tag.description}"></td>	
+				</tr>
+			</table>
       </div>
 
     </div>
@@ -84,11 +94,6 @@
       <div><h5>Status: </h5><span th:text="${task.Completed} ? 'Completed' : 'In progress'"></span></div>
       <div style="margin-bottom: 10px;" th:if="${currentUserIsOwner == true}">
       	<br>
-        <h5>Tags</h5>
-        <ul id="tagsList">
-          <li th:each="tag : ${allTaskTags}" th:text="${tag.name} + ' - ' + ${tag.color}">         
-          </li>
-        </ul>
         <div th:if="${allTaskTags.size() == 0}">No tags added</div>
         <form method="post" th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/addtag'}" th:object="${tagForm}" th:if="${addableTags.size() > 0}">
             <select th:field="*{id}">
