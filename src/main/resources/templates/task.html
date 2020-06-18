@@ -86,7 +86,7 @@
       	<br>
         <h5>Tags</h5>
         <ul id="tagsList">
-          <li th:each="tag : ${allTaskTags}" th:text="${tag.name} + ' - ' + ${tag.color}">          
+          <li th:each="tag : ${allTaskTags}" th:text="${tag.name} + ' - ' + ${tag.color}">         
           </li>
         </ul>
         <div th:if="${allTaskTags.size() == 0}">No tags added</div>
