@@ -162,6 +162,7 @@ public class TaskController {
 		this.taskValidator.validate(task, taskBindingResult);
 		if(taskBindingResult.hasErrors()) {
 			model.addAttribute("projectId", projectId);	
+			
 			return "editTask";
 		}
 		
