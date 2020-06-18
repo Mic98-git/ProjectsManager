@@ -38,6 +38,9 @@
 				<h4>Username</h4>
 				<div th:text="${credentials.userName}"></div>
 			</div>
+		</div>
+		<br>
+		<div class="row">
 			<div class="col-md-3">
 				<h4>Role</h4>
 				<div th:text="${credentials.role}"></div>
@@ -50,7 +53,7 @@
 				<h4>Last update at</h4>
 				<div th:text="${user.lastUpdateTimestamp}"></div>
 			</div>
-		</div>
+		</div><br>
 		<div>
 			<a th:href="@{/user/profile/edit}" value="Edit Profile" class="btn btn-primary">Edit profile</a>
 		</div>
