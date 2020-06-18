@@ -82,7 +82,7 @@
 					<td th:text="${tag.color}"></td>
 					<td th:text="${tag.description}"></td>
 					<td>
-						<form method="post" th:action="@{'/projects/' + ${project.id} + '/tags/' + ${tag.id} +'/remove}">
+						<form method="post" th:action="@{'/projects/' + ${project.id} + '/tags/' + ${tag.id} +'/remove'}">
 							<button type="submit" name="submit" value="value" class="btn btn-primary">DELETE</button>
 						</form>
 						<a th:href="@{'/projects/' + ${project.id} + '/tags/' + ${tag.id} +'/edit'}" class="btn btn-primary">
