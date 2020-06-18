@@ -90,8 +90,8 @@ public class TaskController {
 			@PathVariable Long tagId) {
 		Tag tag = this.tagService.getTagById(tagId);
 		Task task = this.taskService.getTask(taskId);
-		tag.getTasks().remove(task);
-		this.tagService.saveTag(tag);
+		task.getTags().remove(tag);
+		this.taskService.saveTask(task);
 		
 		return "redirect:/projects/"+projectId+"/task/"+taskId;
 	}
