@@ -33,7 +33,7 @@ public class TagController {
 	private TagValidator tagValidator;
 	
 	@RequestMapping(value = {"/projects/{projectId}/addtag"}, method = RequestMethod.GET)
-	public String newTagForm(@PathVariable Long projectId,Model model) {
+	public String newTagForm(@PathVariable Long projectId, Model model) {
 		model.addAttribute("tagForm", new Tag());
 		model.addAttribute("projectId", projectId);
 		
@@ -43,11 +43,16 @@ public class TagController {
 	@RequestMapping(value = {"/projects/{projectId}/addtag"}, method = RequestMethod.POST)
 	public String setProjectTags(@PathVariable Long projectId, 
 			@Valid @ModelAttribute("tagForm") Tag tag,
-			BindingResult projectBindingResult, Model model) {
+			BindingResult tagBindingResult, Model model) {
+		this.tagValidator.validate(tag, tagBindingResult);
+		if(tagBindingResult.hasErrors()) {
+			model.addAttribute("projectId", projectId);
+			return "newTag";
+		}
+		
 		Project p = this.projectService.getProject(projectId);
 		p.addTag(tag);
 		this.projectService.saveProject(p);
-		
 		
 		return "redirect:/projects/" + projectId;
 	}
@@ -76,9 +81,10 @@ public class TagController {
 			@PathVariable Long tagId,
 			Model model,
 			@Valid @ModelAttribute("tagForm") Tag tag,
-			BindingResult taskBindingResult) {
-		this.tagValidator.validate(tag, taskBindingResult);
-		if(taskBindingResult.hasErrors()) {
+			BindingResult tagBindingResult) {
+		
+		this.tagValidator.validate(tag, tagBindingResult);
+		if(tagBindingResult.hasErrors()) {
 			model.addAttribute("projectId", projectId);	
 			return "editTag";
 		}
