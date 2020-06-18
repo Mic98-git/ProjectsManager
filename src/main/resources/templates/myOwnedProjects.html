@@ -21,13 +21,13 @@
 	<div th:replace="navbar :: topbar"></div>
 
 	<main class="container" style="margin-top: 30px; margin-left: 40px;">
-		<h1>Owned Projects</h1>
+		<h1>My Projects</h1>
 		<a th:href="@{/projects/add}" class="btn btn-primary">Create a new project</a>	
 
 		<nav class="nav nav-tabs">
 			<!--<a class="nav-link" th:href="@{/home}">All projects</a>-->
 			<a class="nav-link active" th:href="@{/projects}">Owned</a>
-			<a class="nav-link" th:href="@{/projects/shared}">Shared with you</a>
+			<a class="nav-link" th:href="@{/projects/shared}">Shared with me</a>
 		</nav>
 
 		<div class="media position-relative" th:each="project : ${projectsList}" style="margin-bottom: 10px; margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #999;">

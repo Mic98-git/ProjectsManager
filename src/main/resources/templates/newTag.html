@@ -27,13 +27,13 @@
 		<form th:action="@{'/projects/' + ${projectId} + '/addtag'}" method="post" th:object="${tagForm}">
 			<div>Tag name</div>
 			<input type="text" th:field="*{name}">
-
+			
 			<div>Tag color</div>
 			<input type="text" th:field="*{color}">
 
 			<div>Tag description</div>
 			<textarea th:field="*{description}"></textarea>
-
+			
 			<br>
 			<input type="submit" value="Save Tag" style="margin-top: 10px;" class="btn btn-primary">
 		</form>

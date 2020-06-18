@@ -18,6 +18,7 @@ import it.uniroma3.siw.spring.model.Tag;
 import it.uniroma3.siw.spring.model.Task;
 import it.uniroma3.siw.spring.service.ProjectService;
 import it.uniroma3.siw.spring.service.TagService;
+import it.uniroma3.siw.spring.validator.TagValidator;
 
 @Controller
 public class TagController {
@@ -27,6 +28,9 @@ public class TagController {
 	
 	@Autowired
 	private ProjectService projectService;
+	
+	@Autowired
+	private TagValidator tagValidator;
 	
 	@RequestMapping(value = {"/projects/{projectId}/addtag"}, method = RequestMethod.GET)
 	public String newTagForm(@PathVariable Long projectId,Model model) {
@@ -48,9 +52,10 @@ public class TagController {
 		return "redirect:/projects/" + projectId;
 	}
 	
-	@RequestMapping(value = {"project/{projectId}/tags/{tagId}/remove"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"projects/{projectId}/tags/{tagId}/remove"}, method = RequestMethod.POST)
 	public String removeTag(@PathVariable Long tagId, @PathVariable Long projectId) {
-		tagService.deleteTagById(tagId);
+		this.tagService.deleteTagById(tagId);
+		
 		return "redirect:/projects/" + projectId;
 	}
 	
@@ -69,7 +74,15 @@ public class TagController {
 	@PostMapping("/projects/{projectId}/tags/{tagId}/edit")
 	public String updateTag(@PathVariable Long projectId,
 			@PathVariable Long tagId,
-			@ModelAttribute Tag tag) {
+			Model model,
+			@Valid @ModelAttribute("tagForm") Tag tag,
+			BindingResult taskBindingResult) {
+		this.tagValidator.validate(tag, taskBindingResult);
+		if(taskBindingResult.hasErrors()) {
+			model.addAttribute("projectId", projectId);	
+			return "editTag";
+		}
+		
 		Tag t = this.tagService.getTagById(tagId);
 		t.setName(tag.getName());
 		t.setDescription(tag.getDescription());

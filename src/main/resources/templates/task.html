@@ -44,8 +44,7 @@
     <div role="main" class="col-md-9">
       <h1 th:text="${'Task: ' + task.name}">Task</h1>
 
-      <h3>Description</h3>
-      <div th:text="${task.description}">desc</div>
+      <h3 th:text="${'Description: ' + task.description}"></h3>
 
       <div class="my-3 p-3 bg-white rounded shadow-sm">
         <h6 class="border-bottom border-gray pb-2 mb-0">Comments</h6>
@@ -79,9 +78,10 @@
 
     <div class="col-md-3">
       <div th:text="${'ID: ' + task.id}">id</div>
-
-      <div><h5>Status</h5><span th:text="${task.Completed} ? 'Completed' : 'In progress'"></span></div>
+		<br>
+      <div><h5>Status: </h5><span th:text="${task.Completed} ? 'Completed' : 'In progress'"></span></div>
       <div style="margin-bottom: 10px;">
+      	<br>
         <h5>Tags</h5>
         <ul id="tagsList">
           <li th:each="tag : ${allTaskTags}" th:text="${tag.name} + ' - ' + ${tag.color}">          
@@ -97,13 +97,13 @@
             <input type="submit" name="" value="Add tag" class="btn btn-primary">
           </form>
       </div>
-
+	<br>
       <div style="margin-bottom: 10px;">
         <form th:if="${!task.completed}" method="post" th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/completed'}">
           <input type="submit" name="" value="Mark as completed" class="btn btn-primary">
         </form>
       </div>
-
+	<br>
       <div style="margin-bottom: 10px;">
         <form method="post" th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/delete'}">
           <input type="submit" name="" value="Delete this task" class="btn btn-primary">
@@ -111,15 +111,9 @@
       </div>
       <br>
       <div><a  class="btn btn-primary" th:href="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/edit'}">Edit task</a></div>
-
+		<br>
       <div><a th:href="@{'/projects/' + ${projectId}}">Back to project</a></div>
     </div>
-
-    <footer class="footer">
-      <div class="container">
-        <span class="text-muted">Task Manager App (SIW)</span>
-      </div>
-    </footer>
 
     <!-- Bootstrap core JavaScript
       ================================================== -->

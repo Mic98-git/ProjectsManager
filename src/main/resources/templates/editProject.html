@@ -1,24 +1,36 @@
 <html>
 <head>
-	<title>TaskManager</title>
-	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+	<title>TaskManager
+	</title>
+	
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
+
+	<!-- Bootstrap core CSS -->
+	<link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
+
+	<link href="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.css" rel="stylesheet"> 
 </head>
 
 <body>
-        <div th:replace="navbar :: topbar"></div>
+        <th:block th:replace="navbar :: topbar"></th:block>
+        <main class="container" style="margin-top: 30px; margin-left: 40px;">
     	<h1>Edit Project</h1>
+    	<br>
         <form th:object="${projectForm}" th:action="@{'/projects/' + ${projectForm.id} +'/edit'}" method="post">
         	<table>
                 <tr>
-        		  <td><label>Project Name</label></td>
+        		  <td><label>Project Name </label></td>
         		  <td><input type="text" th:field="*{name}"></td>
                 </tr>
                 <tr>
-        		  <td><label>Description</label></td>
+        		  <td><label>Description </label></td>
         		  <td><input type="text" th:field="*{description}"></td>
                 </tr>
         	</table>
-        	<input type="submit" value="Save" style="margin-top: 10px;">
+        	<input type="submit" value="Save"  class="btn btn-primary" style="margin-top: 10px">
         </form>        
     </body>
 </html>
