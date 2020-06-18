@@ -59,10 +59,21 @@ public class ProjectController {
 		
 		return "sharedProjects";
 	}
+	
+	@RequestMapping(value = {"/projects/{projectId}/members/{memberId}/delete"}, method = RequestMethod.POST)
+	public String deleteMember(@PathVariable Long projectId, @PathVariable Long memberId) {
+		Project project = this.projectService.getProject(projectId);
+		User user = this.userService.getUser(memberId);
+		project.getMembers().remove(user);
+		this.projectService.saveProject(project);
+		
+		return "redirect:/projects/" + projectId;
+	}
 		
 	@RequestMapping(value = {"/projects/{projectId}"}, method = RequestMethod.GET)
 	public String project(Model model, @PathVariable Long projectId ) {
 		Project project = projectService.getProject(projectId);
+		boolean currentUserIsOwner = project.getOwner().equals(sessionData.getLoggedUser());
 		if(project == null)
 			return "redirect:/projects";
 		User loggedUser = sessionData.getLoggedUser();
@@ -77,6 +88,7 @@ public class ProjectController {
 		model.addAttribute("project", project);
 		model.addAttribute("members", members);
 		model.addAttribute("credentialForm", new Credentials());
+		model.addAttribute("currentUserIsOwner", currentUserIsOwner);
 		
 		// SPIEGARE Java 8
 		// comando che rimuove dalle credentials tutti gli utenti già facenti
@@ -110,7 +122,7 @@ public class ProjectController {
 		p.setDescription(project.getDescription());
 		this.projectService.saveProject(p);
 		
-		return "redirect:/projects/{projectId}";
+		return "redirect:/projects/" + projectId;
 	}
 	
 	@RequestMapping(value = {"/projects/add"}, method = RequestMethod.GET)

@@ -38,10 +38,16 @@
 				<tr>
 					<th>First Name</th>
 					<th>Last Name</th>
+					<th>Action</th>
 				</tr>
 				<tr th:each="member : ${members}">
 					<td th:text ="${member.name}"></td>
 					<td th:text ="${member.lastName}"></td>
+					<td th:if="${currentUserIsOwner==true}">
+						<form method="post" th:action="@{'/projects/' + ${project.id} + '/members/' + ${member.id} +'/remove'}">
+							<button type="submit" name="submit" value="value" class="btn btn-primary">DELETE</button>
+						</form>
+					</td>
 				</tr>
 			</table>
 			
