@@ -77,7 +77,8 @@
 
     </div>
 
-    <div class="col-md-3">
+    <!-- Sidebar -->
+    <div class="col-md-3" style="border-left: 1px solid #aaa;">
       <div th:text="${'ID: ' + task.id}">id</div>
 		<br>
       <div><h5>Status: </h5><span th:text="${task.Completed} ? 'Completed' : 'In progress'"></span></div>

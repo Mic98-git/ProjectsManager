@@ -30,13 +30,13 @@ xmlns:th="http://www.thymeleaf.org">
         <form th:object="${userForm}" th:action="@{/user/profile/edit}" method="post">
             <div class="row">
                 <div class="col-md-3">
-                    <label>Name</label>
+                    <label>Name</label><br>
                     <input type="text" th:field="*{name}"><br>
                     <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:style="'color: red'"></span>
                 </div>
 				<br>
                 <div class="col-md-3">
-                    <label>Last name</label>
+                    <label>Last name</label><br>
                     <input type="text" th:field="*{lastName}"><br>
                     <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:style="'color: red'"></span>
                 </div>
