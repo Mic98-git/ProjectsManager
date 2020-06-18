@@ -101,6 +101,11 @@ public class ProjectController {
 	@RequestMapping(value= {"/projects/{projectId}/edit"}, method=RequestMethod.POST)
 	public String editProject(@Valid @ModelAttribute("projectForm") Project project, @PathVariable Long projectId, 
 								BindingResult projectBindingResult, Model model) {
+		this.projectValidator.validate(project, projectBindingResult);
+		if(projectBindingResult.hasErrors()) {
+			return "editProject";
+		}
+		
 		Project p = this.projectService.getProject(projectId);
 		p.setName(project.getName());
 		p.setDescription(project.getDescription());
