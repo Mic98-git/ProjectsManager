@@ -22,26 +22,27 @@
 
 <body>
 	<th:block th:replace="navbar :: topbar"></th:block>
-	<main class="container" style="margin-top: 30px; margin-left: 40px;">
+	<main class="container row" style="margin-top: 30px; margin-left: 40px;">
 
 		<!-- Contenuto principale -->
 		<div role="main" class="col-md-9">
 			<h1 th:text="${project.name}">...
 			</h1>
 			
-			<h5 th:text="${'Description: ' + project.description}"></h5>
+			<h3>Description</h3>
+			<div th:text="${project.description}"></div>
 			<br>
 			
 			<h3>Shared with</h3>
 			<table class="table">
-			<tr>
-				<th>First Name</th>
-				<th>Last Name</th>
-			</tr>
-			<tr th:each="member : ${members}">
-				<td th:text ="${member.name}"></td>
-				<td th:text ="${member.lastName}"></td>
-			</tr>
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+				</tr>
+				<tr th:each="member : ${members}">
+					<td th:text ="${member.name}"></td>
+					<td th:text ="${member.lastName}"></td>
+				</tr>
 			</table>
 			
 			<br>
@@ -49,20 +50,20 @@
 			<h3>Tasks</h3>
 			<a th:href="@{'/projects/' + ${project.id} + '/task/new'}">Create new Task</a>
 			<table class="table">
-			<tr>
-				<th>Name</th>
-				<th>Description</th>
-				<th>Action</th>
-			</tr>
-			<tr th:each="task : ${project.projectTasks}">
-				<td th:text="${task.name}"></td>
-				<td th:text="${task.description}"></td>
-				<td>
-					<a th:href="@{'/projects/' + ${project.id} + '/task/' + ${task.id}}" >
-					<button type="submit" name="submit" value="value" class="btn btn-primary">MORE DETAILS</button>
-					</a>
-				</td>
-			</tr>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Action</th>
+				</tr>
+				<tr th:each="task : ${project.projectTasks}">
+					<td th:text="${task.name}"></td>
+					<td th:text="${task.description}"></td>
+					<td>
+						<a th:href="@{'/projects/' + ${project.id} + '/task/' + ${task.id}}" >
+							<button type="submit" name="submit" value="value" class="btn btn-primary">MORE DETAILS</button>
+						</a>
+					</td>
+				</tr>
 			</table>
 			
 			<br>		
@@ -70,62 +71,63 @@
 			<h3>Tags</h3>
 			<a th:href="@{'/projects/' + ${project.id} + '/addtag'}">Create new Tag</a>
 			<table class="table">
-			<tr>
-				<th>Name</th>
-				<th>Color</th>
-				<th>Description</th>
-				<th>Action</th>
-			</tr>
-			<tr th:each="tag : ${project.tags}">
-				<td th:text="${tag.name}"></td>
-				<td th:text="${tag.color}"></td>
-				<td th:text="${tag.description}"></td>
-			<td>
-					<form method="post" th:action="@{'/projects/' + ${project.id} + '/tags/' + ${tag.id} +'/remove}">
-						<button type="submit" name="submit" value="value" class="btn btn-primary">DELETE</button>
-					</form>
-					<form th:action="@{'/projects/' + ${project.id} + '/tags/' + ${tag.id} +'/edit}">
-						<button type="submit" name="submit" value="value" class="btn btn-primary">EDIT</button>
-					</form>
-				</td>
-			</tr>
+				<tr>
+					<th>Name</th>
+					<th>Color</th>
+					<th>Description</th>
+					<th>Action</th>
+				</tr>
+				<tr th:each="tag : ${project.tags}">
+					<td th:text="${tag.name}"></td>
+					<td th:text="${tag.color}"></td>
+					<td th:text="${tag.description}"></td>
+					<td>
+						<form method="post" th:action="@{'/projects/' + ${project.id} + '/tags/' + ${tag.id} +'/remove}">
+							<button type="submit" name="submit" value="value" class="btn btn-primary">DELETE</button>
+						</form>
+						<a th:href="@{'/projects/' + ${project.id} + '/tags/' + ${tag.id} +'/edit'}" class="btn btn-primary">
+							EDIT
+						</a>
+					</td>
+				</tr>
 			</table>
 			<br>
 			<br>
-			</div>
-		</main>
+		</div>
 
-	<!-- SIDEBAR -->
-	<div class="col-md-3">
+		<!-- SIDEBAR -->
+		<div class="col-md-3">
 			<div style="margin-bottom: 10px;">
-			<h3>Manage members</h3>
-			<!-- Form per aggiunta di membri -->
-			<form method="post" th:action="@{'/projects/' + ${project.id} + '/members/add'}" th:object="${credentialForm}">
-				<label>Choose a member to add</label><br>
-				<select th:field="*{userName}">
-					<th:block th:each="credential : ${allCredentials}">
-					<option th:value="${credential.userName}" 
-					th:text="${credential.userName}"></option>				
-				</th:block>
-			</select><br>
+				<h3>Manage members</h3>
+				<!-- Form per aggiunta di membri -->
+				<form method="post" th:action="@{'/projects/' + ${project.id} + '/members/add'}" th:object="${credentialForm}">
+					<label>Choose a member to add</label><br>
+					<select th:field="*{userName}">
+						<th:block th:each="credential : ${allCredentials}">
+						<option th:value="${credential.userName}" 
+						th:text="${credential.userName}"></option>				
+					</th:block>
+				</select><br>
 
-			<input type="submit" name="memberButton" value="Add member" class="btn btn-primary">
-		</form>
+				<input type="submit" name="memberButton" value="Add member" class="btn btn-primary">
+			</form>
 
-	</div>
+		</div>
 
 		<div style="margin-bottom: 10px;">
-		<form method="post" th:action="@{'/projects/' + ${project.id} + '/delete'}" th:object="${projectForm}">
-			<input type="submit" name="deleteProject" value ="Delete project" class="btn btn-primary">
-		</form>
+			<form method="post" th:action="@{'/projects/' + ${project.id} + '/delete'}" th:object="${projectForm}">
+				<input type="submit" name="deleteProject" value ="Delete project" class="btn btn-primary">
+			</form>
 		</div>
 		<div style="margin-bottom: 10px;">
-		<form method="get" th:action="@{'/projects/' + ${project.id} + '/edit'}" th:object="${projectForm}">
-			<input type="submit" name="editProject" value ="Edit project" class="btn btn-primary">
-		</form>
+			<form method="get" th:action="@{'/projects/' + ${project.id} + '/edit'}" th:object="${projectForm}">
+				<input type="submit" name="editProject" value ="Edit project" class="btn btn-primary">
+			</form>
 		</div>
 		<br>
 		<div><a th:href="@{'/projects/'}">Back to my projects</a></div>
-    </div>
+	</div>
+</main>
+
 </body>
 </html>

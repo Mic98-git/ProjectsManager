@@ -85,11 +85,12 @@ public class TagController {
 		
 		Tag t = this.tagService.getTagById(tagId);
 		t.setName(tag.getName());
+		t.setColor(tag.getColor());
 		t.setDescription(tag.getDescription());
 		
 		this.tagService.saveTag(t);
 		
-		return "redirect:/projects/"+ projectId +"/tags/" + tagId;
+		return "redirect:/projects/"+ projectId;
 	}
 	
 }
