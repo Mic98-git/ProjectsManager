@@ -97,7 +97,8 @@
 
 		<!-- SIDEBAR -->
 		<div class="col-md-3" style="border-left: 1px solid #aaa;">
-			<div style="margin-bottom: 10px;">
+			<div style="margin-bottom: 10px;" th:if="${allCredentials.size() > 0}">
+
 				<h3>Manage members</h3>
 				<!-- Form per aggiunta di membri -->
 				<form method="post" th:action="@{'/projects/' + ${project.id} + '/members/add'}" th:object="${credentialForm}">
