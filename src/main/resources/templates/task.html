@@ -82,14 +82,14 @@
       <div th:text="${'ID: ' + task.id}">id</div>
 		<br>
       <div><h5>Status: </h5><span th:text="${task.Completed} ? 'Completed' : 'In progress'"></span></div>
-      <div style="margin-bottom: 10px;">
+      <div style="margin-bottom: 10px;" th:if="${currentUserIsOwner == true}">
       	<br>
         <h5>Tags</h5>
         <ul id="tagsList">
-          <li th:each="tag : ${allTaskTags}" th:text="${tag.name} + ' - ' + ${tag.color}">          
+          <li th:each="tag : ${allTaskTags}" th:text="${tag.name} + ' - ' + ${tag.color}">         
           </li>
         </ul>
-        <div th:if="${allTaskTags.size() == 0}">No tags available</div>
+        <div th:if="${allTaskTags.size() == 0}">No tags added</div>
         <form method="post" th:action="@{'/projects/' + ${projectId} + '/task/' + ${task.id} + '/addtag'}" th:object="${tagForm}" th:if="${addableTags.size() > 0}">
             <select th:field="*{id}">
               <th:block th:each="addableTag : ${addableTags}">
