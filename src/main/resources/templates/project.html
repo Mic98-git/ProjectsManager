@@ -88,12 +88,14 @@
 					<td th:text="${tag.color}"></td>
 					<td th:text="${tag.description}"></td>
 					<td>
-						<form method="post" th:action="@{'/projects/' + ${project.id} + '/tags/' + ${tag.id} +'/remove'}">
-							<button type="submit" name="submit" value="value" class="btn btn-primary">DELETE</button>
-						</form>
 						<a th:href="@{'/projects/' + ${project.id} + '/tags/' + ${tag.id} +'/edit'}" class="btn btn-primary">
 							EDIT
 						</a>
+					</td>
+					<td>
+						<form method="post" th:action="@{'/projects/' + ${project.id} + '/tags/' + ${tag.id} +'/remove'}">
+							<button type="submit" name="submit" value="value" class="btn btn-primary">DELETE</button>
+						</form>
 					</td>
 				</tr>
 			</table>
@@ -114,22 +116,23 @@
 						<option th:value="${credential.userName}" 
 						th:text="${credential.userName}"></option>				
 					</th:block>
-				</select><br>
-
+				</select>
+				<td>
 				<input type="submit" name="memberButton" value="Add member" class="btn btn-primary">
+				</td>
 			</form>
 
-		</div>
-		<br>
-		<div style="margin-bottom: 10px;">
-			<form method="post" th:action="@{'/projects/' + ${project.id} + '/delete'}" th:object="${projectForm}">
-				<input type="submit" name="deleteProject" value ="Delete project" class="btn btn-primary">
-			</form>
 		</div>
 		<br>
 		<div style="margin-bottom: 10px;">
 			<form method="get" th:action="@{'/projects/' + ${project.id} + '/edit'}" th:object="${projectForm}">
 				<input type="submit" name="editProject" value ="Edit project" class="btn btn-primary">
+			</form>
+		</div>
+		<br>
+		<div style="margin-bottom: 10px;">
+			<form method="post" th:action="@{'/projects/' + ${project.id} + '/delete'}" th:object="${projectForm}">
+				<input type="submit" name="deleteProject" value ="Delete project" class="btn btn-primary">
 			</form>
 		</div>
 		<br>
