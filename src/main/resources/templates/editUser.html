@@ -34,7 +34,7 @@ xmlns:th="http://www.thymeleaf.org">
                     <input type="text" th:field="*{name}"><br>
                     <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:style="'color: red'"></span>
                 </div>
-
+				<br>
                 <div class="col-md-3">
                     <label>Last name</label>
                     <input type="text" th:field="*{lastName}"><br>

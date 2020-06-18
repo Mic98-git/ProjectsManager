@@ -113,12 +113,13 @@
 			</form>
 
 		</div>
-
+		<br>
 		<div style="margin-bottom: 10px;">
 			<form method="post" th:action="@{'/projects/' + ${project.id} + '/delete'}" th:object="${projectForm}">
 				<input type="submit" name="deleteProject" value ="Delete project" class="btn btn-primary">
 			</form>
 		</div>
+		<br>
 		<div style="margin-bottom: 10px;">
 			<form method="get" th:action="@{'/projects/' + ${project.id} + '/edit'}" th:object="${projectForm}">
 				<input type="submit" name="editProject" value ="Edit project" class="btn btn-primary">
