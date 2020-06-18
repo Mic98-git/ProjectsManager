@@ -85,7 +85,7 @@ public class TagController {
 		tag.setId(tagId);
 		this.tagValidator.validate(tag, tagBindingResult);
 		if(tagBindingResult.hasErrors()) {
-			model.addAttribute("projectId", projectId);	
+			model.addAttribute("projectId", projectId);
 			return "editTag";
 		}
 		

@@ -60,9 +60,6 @@ progetto
 Altro
 - L'admin del sistema può visualizzare tutti gli utenti iscritti e cancellarli
 
-Bug noti
-- Un utente potrebbe raggiungere un progetto o un task di cui non fa parte ed altri aspetti legati alla sicurezza
-
 Altre note
 - E' stato usato Bootstrap
 - Implementato OAuth2 di Google. Funziona solo su localhost e modificando il file /etc/hosts (127.0.0.1 associato a me.mydomain.com). Le chiavi non sono state allegate in quanto private
