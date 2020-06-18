@@ -53,11 +53,15 @@ public class TaskController {
 	public String viewTaskDetails(@PathVariable Long projectId,
 			@PathVariable Long taskId,			
 			Model model) {
+		Project project = this.projectService.getProject(projectId);
+		boolean currentUserIsOwner = project.getOwner().equals(sessionData.getLoggedUser());
+		
 		Task task = this.taskService.getTask(taskId);
 		model.addAttribute("task",task);
 		model.addAttribute("projectId", projectId);
 		model.addAttribute("loggedUser",sessionData.getLoggedUser());
 		model.addAttribute("commentForm",new Comment());
+		model.addAttribute("currentUserIsOwner", currentUserIsOwner);
 		
 		model.addAttribute("allTaskTags",this.taskService.getTask(taskId).getTags());
 		
@@ -67,7 +71,7 @@ public class TaskController {
 		
 		model.addAttribute("tagForm",new Tag());
 		
-		//System.out.print("");
+		System.out.print("");
 		return "task";
 	}
 	
