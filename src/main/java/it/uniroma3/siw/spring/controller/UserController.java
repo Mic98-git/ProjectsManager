@@ -90,7 +90,7 @@ public class UserController {
 		
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("credentialsList", allCredentials);
-		//System.out.println();
+		System.out.println();
 		
 		return "allUsers";
 	}
